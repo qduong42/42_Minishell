@@ -1,0 +1,16 @@
+minishell
+
+# Object files
+*.o
+
+# Libraries
+*.a
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Debug files
+*.dSYM/
