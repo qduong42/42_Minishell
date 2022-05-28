@@ -26,7 +26,11 @@ exit
 access
 
 getcwd
+	-get the pathname of the current work directory
+	char *getcwd(char *buf, size_t size);
 chdir
+	-The chdir() changes the cwd to path, which can be relative to the cwd or an absolute path name.
+	-Return Value: upon success: 0 -- else: -1
 execve
 dup
 dup2
@@ -65,3 +69,9 @@ tgetstr -> not used
 tgoto -> not used
 tputs -> not used
 
+**INVESTIGATIONS**
+
+1) customize prompt color https://www.tecmint.com/customize-bash-colors-terminal-prompt-linux/
+	foreground color vs background color
+
+2)

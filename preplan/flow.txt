@@ -1,0 +1,22 @@
+Take env -> eg. shell(env)
+init sig
+create_env -> put in list?
+infinite loop
+{
+	input = readline(PROMPT)
+	if no input break
+	history
+	interpret
+	if !extract cmd
+	launch cmd
+	free(input)
+}
+
+
+
+
+
+
+
+why is PROMPT FKED? "\e[32mminishell \e[31mv1.0\e[0m $ "
+what is ENV? -> environmental variables
