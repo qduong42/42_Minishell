@@ -75,3 +75,7 @@ tputs -> not used
 	foreground color vs background color
 
 2)
+
+**BURNING QUESTIONS**
+
+1) what is env used for and why is it saved? to get path?

@@ -6,6 +6,7 @@
 
 int main(int argc, char *argv[], char *envp[])
 {
-    // while(*envp)
-    //     printf("%s\n",*envp++);
+	int i = 1;
+    while(envp[i])
+        printf("%s\n",envp[i++]);
 }

@@ -4,6 +4,8 @@ SRC = minishell.c
 
 INCLUDE = minishell.h
 
+LFT = ./lft
+
 OBJ = $(SRC:.c=.o)
 
 CC = gcc
@@ -14,8 +16,9 @@ RM = rm -f
 
 all: $(NAME)
 
-$(NAME): $(OBJ) 
-	$(CC) $(CFLAGS) -o $(NAME) -I $(HOME)/goinfre/.brew/opt/readline/include/ -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline $(OBJ)
+$(NAME): $(OBJ)
+	@make bonus -C $(LFT)
+	$(CC) $(CFLAGS) -o $(NAME) -I $(HOME)/goinfre/.brew/opt/readline/include/ -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline $(OBJ) $(LFT)/libft.a
 
 
 clean:

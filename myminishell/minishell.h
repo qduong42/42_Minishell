@@ -5,6 +5,7 @@
 **	INCLUDES
 */
 
+# include "lft/libft.h"
 # include <stdio.h> // readline, printf
 # include <stdlib.h> // malloc, free, exit, getenv, 
 # include <fcntl.h> // open
