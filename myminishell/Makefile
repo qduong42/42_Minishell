@@ -20,6 +20,8 @@ $(NAME): $(OBJ)
 	@make bonus -C $(LFT)
 	$(CC) $(CFLAGS) -o $(NAME) -I $(HOME)/goinfre/.brew/opt/readline/include/ -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline $(OBJ) $(LFT)/libft.a
 
+git add:
+	git add $(INCLUDE) $(SRC) preplan/ Makefile
 
 clean:
 	$(RM) *.o
