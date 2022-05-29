@@ -25,5 +25,8 @@
 // # include <curses.h> // tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs -> not used
 
 # define PROMPT "\e[44m小さいshell \e[42mv0.42\e[0m $ "
+# define PIPE '|'
+# define S_Q '\''
+# define D_Q '\"'
 
 #endif

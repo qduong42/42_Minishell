@@ -14,11 +14,22 @@ CFLAGS = -Wall -Werror -Wextra -g
 
 RM = rm -f
 
+UNAME_S := $(shell uname -s)
+
+LIB_MAC =  -I $(HOME)/goinfre/.brew/opt/readline/include/ -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline
+
+LIB_LINUX = -lreadline
+
 all: $(NAME)
 
 $(NAME): $(OBJ)
+ifeq ($(UNAME_S), Darwin)
 	@make bonus -C $(LFT)
 	$(CC) $(CFLAGS) -o $(NAME) -I $(HOME)/goinfre/.brew/opt/readline/include/ -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline $(OBJ) $(LFT)/libft.a
+else
+	@make bonus -C $(LFT)
+	$(CC) $(CFLAGS) -o $(NAME) $(LIBS_LINUX) $(OBJ)   $(LFT)/libft.a
+endif
 
 git add:
 	git add $(INCLUDE) $(SRC) preplan/ Makefile

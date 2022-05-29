@@ -74,8 +74,20 @@ tputs -> not used
 1) customize prompt color https://www.tecmint.com/customize-bash-colors-terminal-prompt-linux/
 	foreground color vs background color
 
-2)
+2) ENV -> see burning questions.
+
+3) 
 
 **BURNING QUESTIONS**
 
-1) what is env used for and why is it saved? to get path?
+1) what is env used for and why is it saved? -> variables environments, to get $(HOME) $(PATH) for command execution
+	-https://www.shell-tips.com/bash/environment-variables/#gsc.tab=0
+
+**TO-DO**
+
+
+
+**NOT_HANDLED**
+
+ls -la | sort >&mout -> &mout handled just as filename, while bash behavior "ignores" &
+cd -  --> should go to "previous" directory that you were in. probably - expands to old PWD.
