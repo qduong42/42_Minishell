@@ -29,4 +29,10 @@
 # define S_Q '\''
 # define D_Q '\"'
 
+typedef struct s_shell
+{
+	t_list	*env;
+	char	*line;
+}	t_shell;
+
 #endif
