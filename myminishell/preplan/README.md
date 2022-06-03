@@ -91,3 +91,4 @@ tputs -> not used
 
 ls -la | sort >&mout -> &mout handled just as filename, while bash behavior "ignores" &
 cd -  --> should go to "previous" directory that you were in. probably - expands to old PWD.
+grep ?ft -> not handled -> single letter wildcard

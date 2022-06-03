@@ -1,0 +1,12 @@
+[submodule "edhashell"]
+	path = edhashell
+	url = https://github.com/Edvinas1122/MiniShell
+[submodule "minishell_42_WOB_fix"]
+	path = minishell_42_WOB_fix
+	url = https://github.com/c8p2d01/minishell_42_WOB_fix
+[submodule "vminishell"]
+	path = vminishell
+	url = https://github.com/garadraw/minishell
+[submodule "troubleshell"]
+	path = troubleshell
+	url = https://github.com/hennneh/minishell
