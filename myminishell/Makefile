@@ -1,6 +1,6 @@
 NAME = minishell
 
-SRC = minishell.c
+SRC = minishell.c main.c
 
 INCLUDE = minishell.h
 
