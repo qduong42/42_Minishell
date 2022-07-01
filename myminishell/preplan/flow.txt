@@ -1,6 +1,6 @@
 Take env -> eg. shell(env)
 init sig
-create_env -> put in list?
+create_env -> put in list! Not split by = yet
 infinite loop
 {
 	input = readline(PROMPT)
@@ -11,12 +11,20 @@ infinite loop
 	launch cmd
 	free(input)
 }
+-1) Input is given as single null terminated line.
+0) trim space or \tnvfr in front or back of given input.
+1) interpret(Expand Variables) => Check for quotes if ' or " if ' DONT EXPAND VARIABLES.
+if " or no quotes => Expand variables. Look for variable in ENV list, replace variable with expanded text.
 
+2) Tokenize -> seperated by spaces OR | or < or > or << or >>
 
+3) Feed tokens into commands (built in or other)
 
+4) execute commands
 
+5) Clean up
 
-
+6) MUST NOT CRASH AT ANY POINT
 
 why is PROMPT FKED? "\e[32mminishell \e[31mv1.0\e[0m $ "
 what is ENV? -> environmental variables

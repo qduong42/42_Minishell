@@ -11,11 +11,11 @@ int	main(int argc, char **argv, char **envp)
 		t_shell s;
 		s.env = create_env_list(envp);
 		//print_list(s.env);
-		s.line = readline(PROMPT);
-		add_history(s.line);
+		s.input = readline(PROMPT);
+		add_history(s.input);
 		env_solver(&s);
 		// interpret(&s);
-		if (!ft_strncmp(s.line, "exit", ft_strlen(s.line)))
+		if (!ft_strncmp(s.input, "exit", ft_strlen(s.input)))
 			exit (0);
 	}
 	return (0);

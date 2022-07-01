@@ -35,9 +35,11 @@
 typedef struct s_shell
 {
 	t_list	*env;
-	char	*line;
+	char	*input;
 }	t_shell;
 
+t_list *create_env_list(char **envp);
 
+void	env_solver(t_shell* s);
 
 #endif
