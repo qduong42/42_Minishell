@@ -28,11 +28,16 @@
 # define PIPE '|'
 # define S_Q '\''
 # define D_Q '\"'
+# define IN '<'
+# define OUT '>'
+# define DOL '$'
 
 typedef struct s_shell
 {
 	t_list	*env;
 	char	*line;
 }	t_shell;
+
+
 
 #endif

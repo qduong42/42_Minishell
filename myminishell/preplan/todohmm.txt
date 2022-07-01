@@ -26,10 +26,10 @@ READ INPUT
 	-Error handling										
 		- '\''
 		- ';'
-		- dont ?interpret? unlcosed quotes ?(%2 == 0)?
+		- dont ?interpret? unclosed quotes ?(%2 == 0)?
 		- other unspecified special chars
 	-Get prompt for readline (location)					(pwd)
-	-
+
 
 ANALYZE INPUT											
 	-Working History									

@@ -27,23 +27,48 @@ t_list *create_env_list(char **envp)
 // 	printf("%s\n", current->content);
 // }
 
-int	main(int argc, char **argv, char **envp)
-{
-	(void)argc;
-	(void)argv;
-	(void)envp;
+//LEXER
+// int	is_special(int a)
+// {
+// 	if (a == PIPE)
+// 		return (1);
+// 	else if (a == IN)
+// 		return (2);
+// 	else if (a == OUT)
+// 		return (3);
+// 	else if (a == DOL)
+// 		return (4);
+// 	else
+// 		return (0);
+// }
 
-	while (69)
+// void	interpret(t_shell *s)
+// {
+// 	int i;
+
+// 	i = 0;
+// 	ft_putstr_fd(s->line, 1);
+// 	while (s->line[i]!= '\0')
+// 	{
+// 		s->line = ft_strtrim(s->line, " \v\t\f\r\n");
+// 		if (is_special(s->line[i]) == 0) // not pipe or in or out or dollar sign
+// 			while 
+// 	}
+// }
+void	env_solver(t_shell* s)
+{
+	int	i;
+	int	quote;
+	char *temp;
+
+	i = 0;
+	quote = 0;
+	while (s->line[i])
 	{
-		t_shell s;
-		s.env = create_env_list(envp);
-		//print_list(s.env);
-		s.line = readline(PROMPT);
-		add_history(s.line);
-		if (!ft_strncmp(s.line, "exit", ft_strlen(s.line)))
-			exit (0);
+		
 	}
-	return (0);
 }
 
-// add_history functionality is built in, so further work required.
+
+
+// add_history functionality is built in, so further work required.`
