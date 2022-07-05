@@ -38,9 +38,11 @@ git add:
 
 clean:
 	$(RM) *.o
+	@make clean -C $(LFT)
 
 fclean: clean
 	$(RM) $(NAME)
+	@make fclean -C $(LFT)
 
 re: fclean all
 
