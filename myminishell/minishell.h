@@ -42,4 +42,6 @@ t_list *create_env_list(char **envp);
 
 void	env_solver(t_shell* s);
 
+void	pipe_split(t_shell *s);
+
 #endif

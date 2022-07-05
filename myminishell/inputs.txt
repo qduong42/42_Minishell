@@ -1,0 +1,5 @@
+TEST env expand:
+
+     "$LANG" "$USER" $TERM  '$TERM'  |  < infile > something      
+
+"ec"ho hello|cat -e

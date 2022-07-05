@@ -14,6 +14,7 @@ int	main(int argc, char **argv, char **envp)
 		s.input = readline(PROMPT);
 		add_history(s.input);
 		env_solver(&s);
+		pipe_split(&s);
 		// interpret(&s);
 		if (!ft_strncmp(s.input, "exit", ft_strlen(s.input)))
 			exit (0);
