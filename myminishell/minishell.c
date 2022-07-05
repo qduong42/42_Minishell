@@ -40,35 +40,90 @@ int	variable_length(t_shell *s, int i)
 			break;
 		i++;
 	}
-	return len;
+	return (len);
 }
 
-void	find_env(t_shell *s, int i)
+char	*special_join(char *final, char *env, int len, int be_do)
+{
+	int		env_len;
+	char	*new_final;
+	
+	env_len = ft_strlen(env);
+	new_final = ft_calloc(1, ft_strlen(final) - len + env_len);
+	ft_strlcpy(new_final, final, be_do);
+	printf("final1%s\n", new_final);
+	ft_strlcat(new_final, env, be_do + env_len);
+	printf("final2%s\n", new_final);
+	ft_strlcat(new_final, final + be_do + len, ft_strlen(final) - len + env_len + 1);
+	printf("final3%s\n", new_final);
+	return (new_final);
+}
+
+char	*variable_name(char const *s1, char s2, int len)
+{
+	char	*newstring;
+	size_t	i;
+
+	i = 0;
+	if (!s1 || !s2)
+		return (NULL);
+	newstring = malloc(sizeof(char) * (len + 1 + 1));
+	if (!newstring)
+		return (NULL);
+	while (ft_isalnum(s1[i]) || s1[i] == '_')
+	{
+		newstring[i] = s1[i];
+		i++;
+	}
+	newstring[i] = s2;
+	i++;
+	newstring[i] = '\0';
+	return (newstring);
+}
+
+char	*find_env(t_shell *s, int i, char *final)
 {
 	int len = 0;
-	printf("input in find:%s\n", &s->input[i]);
+	// printf("input in find:%s\n", &s->input[i]);
 	len = variable_length(s, i);
-	// while (s->input[i])
-	// {
-	// 	if (ft_isalnum(s->input[i]) || s->input[i] == '_')
-	//  	y++;
-	// 	else if (!(ft_isalnum(s->input[i])) || !(s->input[i] == '_'))
-	// 		break;
-	// 	i++;
-	// 	printf("Y:%d\n", y);
-	// }
 	t_list *current;
 	current = (s->env);
-	print_list(current);
+	//print_list(current);
 	while (current->next != NULL)
 	{
-		// printf("CURRENT CONTENT:%s\n", &s->input[i]);
-		if (ft_strncmp(&s->input[i], current->content, len) == 0)
+		printf("input%s\n", &s->input[i]);
+		char *tmp2;
+		tmp2 = variable_name(&s->input[i], '=', len);
+		printf("tmp2:%s\n", tmp2);
+		if (ft_strncmp(tmp2, current->content, len + 1) == 0 /* && ft_strchr(&s->input[i + len], '=') */)
+		{
+			free(tmp2);
 			break ;
+		}
 		current = current->next;
 	}
-	// printf("env found:%s\n", current->content);
-	return ;
+	char *env;
+	env = current->content;
+	int x;
+	x = 0;
+	while (env[x])
+	{
+		if (env[x] == '=')
+		{
+			x++;
+			break;
+		}
+		x++;
+	}
+	// printf("LEN\t%dva_END_IN:%d\n", len, va_end_in - 1);
+	printf("env found:%s\n", current->content);
+	char *tmp;
+	tmp = special_join(final, &env[x], len, i);
+	free(final);
+	printf("tmp:%s\n", tmp);
+	//expand(s)
+	//LENGTH OF NEW STRING = i - 1 + LENGTH OF EXPANDED VARIABLE + count from va_end_in to END
+	return (tmp);
 }
 
 void	env_solver(t_shell *s)
@@ -76,6 +131,7 @@ void	env_solver(t_shell *s)
 	int	i;
 	int	quote;
 	char *temp;
+	// int end_index;
 
 	i = 0;
 	quote = 0;
@@ -89,7 +145,7 @@ void	env_solver(t_shell *s)
 			printf("INPUT:%s\n", s->input);
 			//write(1, "found $", 7);
 			// printf("env|_solv:I:%dYO!\n", i);
-			find_env(s, i + 1);
+			s->input = find_env(s, i + 1, s->input);
 		}
 		else if ((s->input[i] == '"' || s->input[i] == '\'') && !quote)
 		{

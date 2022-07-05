@@ -24,9 +24,11 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 ifeq ($(UNAME_S), Darwin)
+	@make -C $(LFT)
 	@make bonus -C $(LFT)
 	$(CC) $(CFLAGS) -o $(NAME) -I $(HOME)/goinfre/.brew/opt/readline/include/ -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline $(OBJ) $(LFT)/libft.a
 else
+	@make -C $(LFT)
 	@make bonus -C $(LFT)
 	$(CC) $(CFLAGS) -o $(NAME) $(LIBS_LINUX) $(OBJ)   $(LFT)/libft.a
 endif

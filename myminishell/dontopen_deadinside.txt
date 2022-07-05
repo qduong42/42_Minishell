@@ -1,0 +1,21 @@
+c2s18d110:myminishell qduong$ echo $"LOGNAME"
+LOGNAME
+c2s18d110:myminishell qduong$ echo $$"LOGNAME"
+22421LOGNAME
+c2s18d110:myminishell qduong$ echo $$$$"LOGNAME"
+2242122421LOGNAME
+c2s18d110:myminishell qduong$ echo $$$\"LOGNAME"
+> 
+c2s18d110:myminishell qduong$ echo $$\$"LOGNAME"
+22421$LOGNAME
+
+"$LANG" -> "en_US.UTF-8"
+
+QUESTIONS:
+
+1) Typecast t_list struct? For e.g (int)&(current->content) for strchr(current->content[i], '=');
+--Why doesnt it work?
+
+PROBLEMS:
+
+1) env resolver doesnt work for NAME:_ maybe it does because _env var is changed when entering program?
