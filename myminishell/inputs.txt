@@ -2,4 +2,8 @@ TEST env expand:
 
      "$LANG" "$USER" $TERM  '$TERM'  |  < infile > something      
 
-"ec"ho hello|cat -e
+"$EC"ho hello|cat -e
+
+"$EC"ho | cat -e | wc -l 
+
+$'LANG' $USER

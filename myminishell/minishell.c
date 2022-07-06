@@ -90,7 +90,6 @@ char	*find_env(t_shell *s, int i)
 		current = current->next;
 	}
 	char *env;
-	printf("CURRENT.NEXT:%p", current->next);
 	env = current->content;
 	if (current->next == NULL)
 		env = "" ;
@@ -111,7 +110,7 @@ char	*find_env(t_shell *s, int i)
 	char *tmp;
 	tmp = special_join(s->input, &env[x], len, i);
 	free(s->input);
-	// printf("tmp:%s\n", tmp);
+	printf("tmp:%s\n", tmp);
 	//expand(s)
 	//LENGTH OF NEW STRING = i - 1 + LENGTH OF EXPANDED VARIABLE + count from va_end_in to END
 	return (tmp);
@@ -133,14 +132,15 @@ void	env_solver(t_shell *s)
 	{
 		if ((!quote || quote == '"') && s->input[i] == '$')
 		{
-			// printf("INPUT:%s\n", s->input);
 			//write(1, "found $", 7);
 			// printf("env|_solv:I:%dYO!\n", i);
 			s->input = find_env(s, i + 1);
+			i = -1;
 		}
 		else if ((s->input[i] == '"' || s->input[i] == '\'') && !quote)
 		{
 			quote = s->input[i];
+			// printf("FOUND\n");
 			// printf("quote:%c\n", quote);
 		}
 		else if (quote && (!(s->input[i]) || s->input[i] == quote))

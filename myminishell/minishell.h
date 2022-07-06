@@ -44,4 +44,6 @@ void	env_solver(t_shell* s);
 
 void	pipe_split(t_shell *s);
 
+void	print_list(t_list *list);
+
 #endif

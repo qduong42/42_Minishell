@@ -2,3 +2,18 @@
 
 1) Auto close brackets means this expands to '$LANG'"$LESS$SHLVL'$PAGER'" which eliminates function of '$PAGER'
 which means all variables expand.
+
+NOT WORKING INPUT:
+$'USER'$LANG
+$'LANG' $"LANG"
+Working but why?:
+$"LANG"$USER
+
+PROBLEMS:
+
+input crashes:
+$
+
+
+INPUTS:
+ls -l -a | grep "$USER" | wc -l
