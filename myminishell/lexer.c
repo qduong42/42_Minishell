@@ -39,6 +39,8 @@ void	pipe_split(t_shell *s)
 			token = temp;
 			ft_lstadd_back(&sub, ft_lstnew(token));
 			start = i + 1;
+			if (s->input[i] == '\0')
+				break ;
 		}
 		else if ((s->input[i] == '\'' || s->input[i] == '"') && !quote)
 			quote = s->input[i];
@@ -46,8 +48,6 @@ void	pipe_split(t_shell *s)
 		{
 			quote = 0;
 		}
-		if (s->input[i] == '\0')
-			break ;
 		i++;
 	}
 	// if (s->input[i] == '\0')
@@ -62,7 +62,5 @@ void	pipe_split(t_shell *s)
 	// }
 	print_list(sub);
 }
-
-
 
 //add_history functionality is built in, so further work required.

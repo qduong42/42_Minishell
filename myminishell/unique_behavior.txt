@@ -4,12 +4,14 @@
 which means all variables expand.
 
 NOT WORKING INPUT:
+Working:
 $'USER'$LANG
 $'LANG' $"LANG"
-Working but why?:
 $"LANG"$USER
 
 PROBLEMS:
+NOT HANDLED ERRORS:
+| at end
 
 input crashes:
 $
@@ -17,3 +19,15 @@ $
 
 INPUTS:
 ls -l -a | grep "$USER" | wc -l
+
+BASH BEHAVIOR:
+bash-3.2$ $'USER'
+bash: USER: command not found
+bash-3.2$ $"USER"
+bash: USER: command not found
+bash-3.2$ $'USER'$LANG
+bash: USERen_US.UTF-8: command not found
+bash-3.2$ $"USER"$LANG
+bash: USERen_US.UTF-8: command not found
+bash-3.2$ $'USER'"$LANG"
+bash: USERen_US.UTF-8: command not found

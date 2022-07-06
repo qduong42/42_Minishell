@@ -35,6 +35,7 @@
 typedef struct s_shell
 {
 	t_list	*env;
+	t_list	*sub_pipes;
 	char	*input;
 }	t_shell;
 
