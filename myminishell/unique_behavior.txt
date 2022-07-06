@@ -31,3 +31,6 @@ bash-3.2$ $"USER"$LANG
 bash: USERen_US.UTF-8: command not found
 bash-3.2$ $'USER'"$LANG"
 bash: USERen_US.UTF-8: command not found
+
+UNIQUE BEHAVIOR = UNDEFINED BEHAVIOR:
+echo hello > outfile | grep hello

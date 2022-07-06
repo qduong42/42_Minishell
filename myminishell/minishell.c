@@ -106,7 +106,7 @@ char	*find_env(t_shell *s, int i)
 		x++;
 	}
 	// printf("LEN\t%dva_END_IN:%d\n", len, va_end_in - 1);
-	// printf("env found:%s\n", current->content);
+	printf("env found:%s\n", current->content);
 	char *tmp;
 	tmp = special_join(s->input, &env[x], len, i);
 	free(s->input);

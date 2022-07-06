@@ -26,9 +26,7 @@ void	pipe_split(t_shell *s)
 	quote = 0;
 	char *token;
 	char *temp;
-	// printf("input%s\n", s->input);
-	t_list *sub;
-	sub = NULL;
+	s->sub_pipes = NULL;
 	while (1)
 	{
 		if ((s->input[i] == PIPE && !quote) || s->input[i] == '\0')
@@ -37,7 +35,7 @@ void	pipe_split(t_shell *s)
 			temp = ft_strtrim(token, " ");
 			free(token);
 			token = temp;
-			ft_lstadd_back(&sub, ft_lstnew(token));
+			ft_lstadd_back(&(s->sub_pipes), ft_lstnew(token));
 			start = i + 1;
 			if (s->input[i] == '\0')
 				break ;
@@ -45,22 +43,10 @@ void	pipe_split(t_shell *s)
 		else if ((s->input[i] == '\'' || s->input[i] == '"') && !quote)
 			quote = s->input[i];
 		else if (quote && (!(s->input[i]) || s->input[i] == quote))
-		{
 			quote = 0;
-		}
 		i++;
 	}
-	// if (s->input[i] == '\0')
-	// {
-	// 	printf("start:%d\ti:%d\ts->input:%s\n", start, i, s->input);
-	// 	token =ft_substr(s->input, start, i - start);
-	// 	temp = ft_strtrim(token, " ");
-	// 	free(token);
-	// 	token = temp;
-	// 	printf("TOKEN:%s\n", token);
-	// 	ft_lstadd_back(&sub, ft_lstnew(token));
-	// }
-	print_list(sub);
+	print_list(s->sub_pipes);
 }
 
 //add_history functionality is built in, so further work required.

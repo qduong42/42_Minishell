@@ -7,7 +7,7 @@ void	print_list(t_list *list)
 	int i = 0;
 	while (temp)
 	{
-		printf("List:%d%s\n", i, temp->content);
+		printf("List%d:%s\n", i, temp->content);
 		temp = temp->next;
 		i++;
 	}
