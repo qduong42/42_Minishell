@@ -1,0 +1,27 @@
+what can come up 
+<
+>
+<<
+>>
+
+What constitutes next "Part"?
+PIPE |
+another < or
+another > or 
+
+
+what doesnt constitute next part:
+
+" ' SPACE 
+
+ERROR HANDLING:
+
+>>> = 
+bash-3.2$ echo a >>> ab
+bash: syntax error near unexpected token `>'
+
+> > =
+bash-3.2$ echo a > > ab
+bash: syntax error near unexpected token `>'
+
+Special signs: "     '     $     <      >      |    <<     >>   _(for variable NAME)    
