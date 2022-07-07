@@ -15,7 +15,22 @@
 // 		return (0);
 // }
 
-// void	pipe_handle(t_shell *s, int *start, int *i)
+void	pipe_handle(t_shell *s, int *start, int i)
+{
+	char *token;
+	char *temp;
+	token = ft_substr(s->input, *start, i - *start);
+	temp = ft_strtrim(token, " ");
+	free(token);
+	token = temp;
+	ft_lstadd_back(&(s->sub_pipes->sub), ft_lstnew(token));
+	*start = i + 1;
+}
+
+// void	int_red(t_shell *s)
+// {
+// 	s->sub_pipes
+// }
 
 void	pipe_split(t_shell *s)
 {
@@ -26,21 +41,14 @@ void	pipe_split(t_shell *s)
 	i = 0;
 	start = 0;
 	quote = 0;
-	char *token;
-	char *temp;
 	s->sub_pipes = malloc(sizeof(t_pipe));
-	// printf("envPOINTER%p\n", s->sub_pipes);
 	s->sub_pipes->sub = NULL;
 	while (1)
 	{
 		if ((s->input[i] == PIPE && !quote) || s->input[i] == '\0')
 		{
-			token = ft_substr(s->input, start, i - start);
-			temp = ft_strtrim(token, " ");
-			free(token);
-			token = temp;
-			ft_lstadd_back(&(s->sub_pipes->sub), ft_lstnew(token));
-			start = i + 1;
+			pipe_handle(s, &start, i);
+			int_red(s);
 			if (s->input[i] == '\0')
 				break ;
 		}
