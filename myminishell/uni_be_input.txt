@@ -19,6 +19,7 @@ $
 
 INPUTS:
 ls -l -a | grep "$USER" | wc -l
+"$LANG""$USER"$USER | cat -e | wc -c
 
 BASH BEHAVIOR:
 bash-3.2$ $'USER'

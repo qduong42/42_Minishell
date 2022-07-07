@@ -93,7 +93,7 @@ char	*find_env(t_shell *s, int i)
 	env = current->content;
 	if (current->next == NULL)
 		env = "" ;
-	printf("env:%s\n", env);
+	// printf("env:%s\n", env);
 	int x;
 	x = 0;
 	while (env[x])
@@ -106,11 +106,11 @@ char	*find_env(t_shell *s, int i)
 		x++;
 	}
 	// printf("LEN\t%dva_END_IN:%d\n", len, va_end_in - 1);
-	printf("env found:%s\n", current->content);
+	// printf("env found:%s\n", current->content);
 	char *tmp;
 	tmp = special_join(s->input, &env[x], len, i);
 	free(s->input);
-	printf("tmp:%s\n", tmp);
+	// printf("Expanded:%s\n", tmp);
 	//expand(s)
 	//LENGTH OF NEW STRING = i - 1 + LENGTH OF EXPANDED VARIABLE + count from va_end_in to END
 	return (tmp);

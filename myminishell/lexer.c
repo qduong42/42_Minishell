@@ -15,6 +15,8 @@
 // 		return (0);
 // }
 
+// void	pipe_handle(t_shell *s, int *start, int *i)
+
 void	pipe_split(t_shell *s)
 {
 	int	i;
@@ -26,7 +28,9 @@ void	pipe_split(t_shell *s)
 	quote = 0;
 	char *token;
 	char *temp;
-	s->sub_pipes = NULL;
+	s->sub_pipes = malloc(sizeof(t_pipe));
+	// printf("envPOINTER%p\n", s->sub_pipes);
+	s->sub_pipes->sub = NULL;
 	while (1)
 	{
 		if ((s->input[i] == PIPE && !quote) || s->input[i] == '\0')
@@ -35,7 +39,7 @@ void	pipe_split(t_shell *s)
 			temp = ft_strtrim(token, " ");
 			free(token);
 			token = temp;
-			ft_lstadd_back(&(s->sub_pipes), ft_lstnew(token));
+			ft_lstadd_back(&(s->sub_pipes->sub), ft_lstnew(token));
 			start = i + 1;
 			if (s->input[i] == '\0')
 				break ;
@@ -46,7 +50,6 @@ void	pipe_split(t_shell *s)
 			quote = 0;
 		i++;
 	}
-	print_list(s->sub_pipes);
 }
 
 //add_history functionality is built in, so further work required.

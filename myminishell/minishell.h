@@ -32,11 +32,22 @@
 # define OUT '>'
 # define DOL '$'
 
+// t_list	
+
+typedef struct s_pipe
+{
+	t_list			*sub;
+	t_list			*file_in;
+	t_list			*file_out;
+	char			*hd_lim;
+	char			*append;
+}					t_pipe;
+
 typedef struct s_shell
 {
-	t_list	*env;
-	t_list	*sub_pipes;
-	char	*input;
+	t_list			*env;
+	struct s_pipe	*sub_pipes;
+	char			*input;
 }	t_shell;
 
 t_list *create_env_list(char **envp);
