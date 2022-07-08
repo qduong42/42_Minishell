@@ -7,3 +7,8 @@ TEST env expand:
 "$EC"ho | cat -e | wc -l 
 
 $'LANG' $USER
+
+INPUTS:
+ls -l -a | grep "$USER" | wc -l
+
+"$LANG""$USER"$USER | cat -e | wc -c    

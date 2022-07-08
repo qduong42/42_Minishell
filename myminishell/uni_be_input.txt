@@ -4,17 +4,18 @@
 which means all variables expand.
 
 NOT WORKING INPUT:
-Working:
-$'USER'$LANG
-$'LANG' $"LANG"
-$"LANG"$USER
+$'USER'$LANG    --> Fixed, deleting $ keeping quotes expanding $LANG
+$'LANG' $"LANG" --> handled as deleting $ keeping quotes
+$"LANG"$USER    --> handled as deleting $ keeping "LANG" and expanding $USER
 
 PROBLEMS:
 NOT HANDLED ERRORS:
 | at end
+$|
 
 input crashes:
 $
+$<invalid name>
 
 
 INPUTS:

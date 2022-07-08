@@ -15,8 +15,8 @@ int	main(int argc, char **argv, char **envp)
 		add_history(s.input);
 		env_solver(&s);
 		pipe_split(&s);
+		int_red(s);
 		print_list(s.sub_pipes->sub);
-		// int_red()
 		// interpret(&s);
 		if (!ft_strncmp(s.input, "exit", ft_strlen(s.input)))
 			exit (0);

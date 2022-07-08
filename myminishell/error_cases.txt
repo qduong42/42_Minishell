@@ -1,0 +1,34 @@
+ERROR HANDLING:
+
+>>>
+bash-3.2$ echo a >>> ab
+bash: syntax error near unexpected token `>'
+
+> >
+bash-3.2$ echo a > > ab
+bash: syntax error near unexpected token `>'
+
+ls -la |
+BASH: WAITS FOR COMMAND
+IMPLEMENT: ERROR -> no valid input before/after pipe
+
+<<$
+BASH: Takes $ as LIM
+IMPLEMENT: Deletes $, treats as << with no LIM -> regular error
+
+Special signs: "     '     $     <      >      |    <<     >>   _(for variable NAME)    
+
+bash-3.2$ <<>
+bash: syntax error near unexpected token `>'
+bash-3.2$ <<|
+bash: syntax error near unexpected token `|'
+bash-3.2$ <|
+bash: syntax error near unexpected token `|'
+bash-3.2$ >|
+bash: syntax error near unexpected token `newline'
+bash-3.2$ ><
+bash: syntax error near unexpected token `<'
+bash-3.2$ >$
+bash-3.2$ <$
+bash-3.2$ |$
+bash: syntax error near unexpected token `|'

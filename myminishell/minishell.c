@@ -135,17 +135,17 @@ void	env_solver(t_shell *s)
 			//write(1, "found $", 7);
 			// printf("env|_solv:I:%dYO!\n", i);
 			s->input = find_env(s, i + 1);
-			i = -1;
+			i -= 1;
 		}
 		else if ((s->input[i] == '"' || s->input[i] == '\'') && !quote)
 		{
 			quote = s->input[i];
-			// printf("FOUND\n");
+			printf("FOUND\n");
 			// printf("quote:%c\n", quote);
 		}
 		else if (quote && (!(s->input[i]) || s->input[i] == quote))
 		{
-			// printf("Found closing bracket:%c\n", quote);
+			printf("Found closing bracket:%c\n", quote);
 			quote = 0;
 		}
 		i++;
