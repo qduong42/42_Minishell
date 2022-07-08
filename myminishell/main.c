@@ -13,10 +13,13 @@ int	main(int argc, char **argv, char **envp)
 		//print_list(s.env);
 		s.input = readline(PROMPT);
 		add_history(s.input);
+		printf("Raw Input:%s\n", s.input);
 		env_solver(&s);
+		printf("Expanded Input:%s\n", s.input);
 		pipe_split(&s);
-		int_red(s);
+		printf("Sub-pipes:\n");
 		print_list(s.sub_pipes->sub);
+		// int_red(s);
 		// interpret(&s);
 		if (!ft_strncmp(s.input, "exit", ft_strlen(s.input)))
 			exit (0);

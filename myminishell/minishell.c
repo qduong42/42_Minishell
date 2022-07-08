@@ -140,12 +140,12 @@ void	env_solver(t_shell *s)
 		else if ((s->input[i] == '"' || s->input[i] == '\'') && !quote)
 		{
 			quote = s->input[i];
-			printf("FOUND\n");
+			// printf("FOUND\n");
 			// printf("quote:%c\n", quote);
 		}
 		else if (quote && (!(s->input[i]) || s->input[i] == quote))
 		{
-			printf("Found closing bracket:%c\n", quote);
+			// printf("Found closing bracket:%c\n", quote);
 			quote = 0;
 		}
 		i++;

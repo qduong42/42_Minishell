@@ -27,19 +27,19 @@ void	pipe_handle(t_shell *s, int *start, int i)
 	*start = i + 1;
 }
 
-void	int_red(t_shell *s)
-{
-	t_list *temp;
-	temp = s->sub_pipes->sub;
-	while (temp->next != NULL)
-	{
-		temp = temp->next;
-	}
-	// int i = 0;
-	char *string;
-	// int start = 0;
-	string = temp->content;
-	printf("string:%s\n", string);
+// void	int_red(t_shell *s)
+// {
+// 	t_list *temp;
+// 	temp = s->sub_pipes->sub;
+// 	while (temp->next != NULL)
+// 	{
+// 		temp = temp->next;
+// 	}
+// 	// int i = 0;
+// 	char *string;
+// 	// int start = 0;
+// 	string = temp->content;
+// 	printf("string:%s\n", string);
 	// while (string[i])
 	// {
 	// 	if (string[i] == '<' && string[i + 1])
@@ -60,7 +60,7 @@ void	int_red(t_shell *s)
 	// 	}
 	// 	i++;
 	// }
-}
+// }
 
 void	pipe_split(t_shell *s)
 {
