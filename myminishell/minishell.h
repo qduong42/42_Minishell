@@ -30,9 +30,8 @@
 # define D_Q '\"'
 # define IN '<'
 # define OUT '>'
-# define DOL '$'
-
-// t_list	
+# define AP ">>"
+# define HD "<<"
 
 typedef struct s_pipe
 {
@@ -57,5 +56,8 @@ void	env_solver(t_shell* s);
 void	pipe_split(t_shell *s);
 
 void	print_list(t_list *list);
+
+void	int_red(t_shell *s);
+
 
 #endif

@@ -130,14 +130,14 @@ void	env_solver(t_shell *s)
 	s->input = temp;
 	while (s->input[i])
 	{
-		if ((!quote || quote == '"') && s->input[i] == '$')
+		if ((!quote || quote == D_Q) && s->input[i] == '$')
 		{
 			//write(1, "found $", 7);
 			// printf("env|_solv:I:%dYO!\n", i);
 			s->input = find_env(s, i + 1);
 			i -= 1;
 		}
-		else if ((s->input[i] == '"' || s->input[i] == '\'') && !quote)
+		else if ((s->input[i] == D_Q || s->input[i] == S_Q) && !quote)
 		{
 			quote = s->input[i];
 			// printf("FOUND\n");

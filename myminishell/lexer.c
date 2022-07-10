@@ -27,40 +27,54 @@ void	pipe_handle(t_shell *s, int *start, int i)
 	*start = i + 1;
 }
 
-// void	int_red(t_shell *s)
-// {
-// 	t_list *temp;
-// 	temp = s->sub_pipes->sub;
-// 	while (temp->next != NULL)
-// 	{
-// 		temp = temp->next;
-// 	}
-// 	// int i = 0;
-// 	char *string;
-// 	// int start = 0;
-// 	string = temp->content;
-// 	printf("string:%s\n", string);
-	// while (string[i])
-	// {
-	// 	if (string[i] == '<' && string[i + 1])
-	// 	{
-	// 		i++;
-	// 		if (string[i] == '<')
-	// 		{
-	// 			hdoc(s, &i);
-	// 		}
-	// 	}
-	// 	else if (string[i] == '>' && string[i + 1])
-	// 	{
-	// 		i++;
-	// 		if (string[i] == '>')
-	// 		{
-	// 			append(s, &i);
-	// 		}
-	// 	}
-	// 	i++;
-	// }
-// }
+void	int_red(t_shell *s)
+{
+	t_list *temp;
+	temp = s->sub_pipes->sub;
+	while (temp)
+	{
+	int i = 0;
+	char *string;
+	int quote = 0;
+	// int start = 0;
+	string = temp->content;
+	printf("string:%s\n", string);
+	while (string[i])
+	{
+		if (!quote)
+		{
+			if (string[i] == IN)
+			{
+				// printf("string[%d]:%c\n", i, string[i]);
+				if (!ft_strncmp(&string[i], HD, 2))
+				{
+					i++;
+					ft_putstr_fd("HEREDOC\n", 1);
+				}
+				else
+				ft_putstr_fd("INPUT\n", 1);
+			}
+			else if (string[i] == OUT)
+			{
+				// printf("string%d:%c\n", i, string[i]);
+				if (!ft_strncmp(&string[i], AP, 2))
+				{
+					i++;
+					ft_putstr_fd("APPEND\n", 1);
+				}
+				else
+				ft_putstr_fd("OUTPUT\n", 1);
+			}
+			else if (string[i] == S_Q || string[i] == D_Q)
+				quote = string[i];
+		}
+		else if (quote && (!string[i] || string[i] == quote))
+			quote = 0;
+		i++;
+	}
+	temp = temp->next;
+	}
+}
 
 void	pipe_split(t_shell *s)
 {
@@ -81,7 +95,7 @@ void	pipe_split(t_shell *s)
 			if (s->input[i] == '\0')
 				break ;
 		}
-		else if ((s->input[i] == '\'' || s->input[i] == '"') && !quote)
+		else if ((s->input[i] == S_Q || s->input[i] == D_Q) && !quote)
 			quote = s->input[i];
 		else if (quote && (!(s->input[i]) || s->input[i] == quote))
 			quote = 0;
