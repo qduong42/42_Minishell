@@ -1,3 +1,4 @@
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>FROM SUBJECT<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 Shell should:
 			Display a prompt when waiting for a new command.
 • Have a working history.
@@ -36,10 +37,10 @@ foreground pipeline.
 					◦ unset with no options
 					◦ env with no options or arguments
 					◦ exit with no options
-
 The readline() function can cause memory leaks. You don’t have to fix them. But
 that doesn’t mean your own code, yes the code you wrote, can have memory
 leaks.
 You should limit yourself to the subject description. Anything that
 is not asked is not required.
 If you have any doubt about a requirement, take bash as a reference.
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>END_FROM_SUBJECT<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<

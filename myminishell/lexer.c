@@ -39,6 +39,8 @@ void	int_red(t_shell *s)
 	// int start = 0;
 	string = temp->content;
 	printf("string:%s\n", string);
+	int in = 0;
+	int out = 0;
 	while (string[i])
 	{
 		if (!quote)
@@ -50,8 +52,9 @@ void	int_red(t_shell *s)
 				{
 					i++;
 					ft_putstr_fd("HEREDOC\n", 1);
+					in = 1;
 				}
-				else
+				else if (!in)
 				ft_putstr_fd("INPUT\n", 1);
 			}
 			else if (string[i] == OUT)
@@ -62,7 +65,7 @@ void	int_red(t_shell *s)
 					i++;
 					ft_putstr_fd("APPEND\n", 1);
 				}
-				else
+				else if (!out)
 				ft_putstr_fd("OUTPUT\n", 1);
 			}
 			else if (string[i] == S_Q || string[i] == D_Q)
