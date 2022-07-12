@@ -25,14 +25,14 @@ int	errors(char *line)
 	return (0);
 }
 
-int	main(void)
-{
-	char	*line;
-	while (1)
-	{
-		line = readline("minishell: ");
-		errors(line);
-		free(line);
-	}
-	return (0);
-}
+// int	main(void)
+// {
+// 	char	*line;
+// 	while (1)
+// 	{
+// 		line = readline("minishell: ");
+// 		errors(line);
+// 		free(line);
+// 	}
+// 	return (0);
+// }

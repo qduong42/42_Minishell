@@ -74,4 +74,7 @@ int		single_dollar(char *line);
 int		unexpected_newline(char *line);
 int		consecutive_specials(char *line);
 
+//			error_handeling.c
+int		errors(char *line);
+
 #endif
