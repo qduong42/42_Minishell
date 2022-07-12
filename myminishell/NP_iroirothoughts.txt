@@ -1,0 +1,67 @@
+'$LANG'"$LESS$SHLVL'$PAGER' 
+
+1) Auto close brackets means this expands to '$LANG'"$LESS$SHLVL'$PAGER'" which eliminates function of '$PAGER'
+which means all variables expand.
+
+NOT WORKING INPUT:
+$'USER'$LANG    --> Fixed, deleting $ keeping quotes expanding $LANG
+$'LANG' $"LANG" --> handled as deleting $ keeping quotes
+$"LANG"$USER    --> handled as deleting $ keeping "LANG" and expanding $USER
+
+PROBLEMS:
+long command/arguements writes over prompt -> Should go to newline and leave prompt untouched
+NOT HANDLED ERRORS:
+| at end
+$|
+-> Lets Handle unclosed quotes -> Just give error. Rest of code will still work fine. But this prevents problems later on
+
+input crashes:
+$
+$<invalid name>
+
+
+INPUTS:
+ls -l -a | grep "$USER" | wc -l
+"$LANG""$USER"$USER | cat -e | wc -c
+
+BASH BEHAVIOR:
+bash-3.2$ $'USER'
+bash: USER: command not found
+bash-3.2$ $"USER"
+bash: USER: command not found
+bash-3.2$ $'USER'$LANG
+bash: USERen_US.UTF-8: command not found
+bash-3.2$ $"USER"$LANG
+bash: USERen_US.UTF-8: command not found
+bash-3.2$ $'USER'"$LANG"
+bash: USERen_US.UTF-8: command not found
+
+UNIQUE BEHAVIOR = UNDEFINED BEHAVIOR:
+echo hello > outfile | grep hello
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>NOT IMPORTANT<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+c2s18d110:myminishell qduong$ echo $"LOGNAME"
+LOGNAME
+c2s18d110:myminishell qduong$ echo $$"LOGNAME"
+22421LOGNAME => UNDEFINED
+c2s18d110:myminishell qduong$ echo $$$$"LOGNAME"
+2242122421LOGNAME
+c2s18d110:myminishell qduong$ echo $$$\"LOGNAME"
+> 
+c2s18d110:myminishell qduong$ echo $$\$"LOGNAME"
+22421$LOGNAME
+
+QUESTIONS:
+
+1) Typecast t_list struct? For e.g (int)&(current->content) for strchr(current->content[i], '=');
+--Why doesnt it work?
+2) Why t_list * doesnt need to be allocated but t_pipe struct needs to be? Possibly because t_list pointer points to node which is allocated.
+But t_pipe * points nowhere. The size of the struct is not malloced anywhere.
+>>>t_list * is allocated in ft_lstnew so it is also allocated malloc (sizeof(t_list));
+3) Why does char *token persist even though malloc is only size of struct which is pointer, not for actual content? If token not used, 
+why free kills it? because token is malloced by ft_substr :D
+token is malloced by strtrim
+PROBLEMS:
+
+1) env resolver doesnt work for NAME:_ maybe it does because _env var is changed when entering program?
+>>Does work, expectation was something else, but expectation was wrong.
