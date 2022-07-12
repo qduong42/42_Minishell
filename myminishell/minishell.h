@@ -62,4 +62,16 @@ void	input_handle(char *string, t_shell *s);
 
 void	init_all(t_shell *s);
 
+//			bool.c
+int		special_token(char c);
+int		whitespace(char c);
+int		valid_name(char *line);
+int		unclosed_quotes(char *line);
+void	file_exists(char *filename);
+void	error_msg(char *msg);
+int		special(char *line);
+int		single_dollar(char *line);
+int		unexpected_newline(char *line);
+int		consecutive_specials(char *line);
+
 #endif
