@@ -13,7 +13,7 @@ infinite loop
 }
 -1) Input is given as single null terminated line.
 0) trim space or \tnvfr in front or back of given input.
-1) interpret(Expand Variables) => Check for quotes if ' or " if ' DONT EXPAND VARIABLES.
+1) interpret(Expand Variables) => Check for quotes if ' if ' DONT EXPAND VARIABLES.
 if " or no quotes => Expand variables. Look for variable in ENV list, replace variable with expanded text.
 
 2) Tokenize -> seperated by spaces OR | or < or > or << or >>

@@ -36,16 +36,15 @@
 typedef struct s_pipe
 {
 	t_list			*sub;
-	t_list			*file_in;
-	t_list			*file_out;
-	char			*hd_lim;
-	char			*append;
+	int				fd_in;
+	int				fd_out;
+	int				hd;
 }					t_pipe;
 
 typedef struct s_shell
 {
 	t_list			*env;
-	struct s_pipe	*sub_pipes;
+	struct s_pipe	*s_p;
 	char			*input;
 }	t_shell;
 
@@ -59,5 +58,8 @@ void	print_list(t_list *list);
 
 void	int_red(t_shell *s);
 
+void	input_handle(char *string, t_shell *s);
+
+void	init_all(t_shell *s);
 
 #endif

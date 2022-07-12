@@ -1,5 +1,16 @@
 #include "minishell.h"
 
+//-2 is used because -1 is used for open error but also errno will be set which we can see...
+//s_p = sub_pipes
+void	init_all(t_shell *s)
+{
+	s->s_p = malloc(sizeof(t_pipe));
+	s->s_p->sub = NULL;
+	s->s_p->fd_in = -2;
+	s->s_p->fd_out = -2;
+	s->s_p->hd = 0;
+}
+
 t_list *create_env_list(char **envp)
 {
 	t_list *a;

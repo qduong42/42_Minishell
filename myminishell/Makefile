@@ -1,6 +1,6 @@
 NAME = minishell
 
-SRC = minishell.c main.c lexer.c testing_utils.c
+SRC = minishell.c main.c lexer.c testing_utils.c redirection.c
 
 INCLUDE = minishell.h
 

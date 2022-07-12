@@ -24,12 +24,17 @@ bash: syntax error near unexpected token `>'
 bash-3.2$ echo a > > ab
 bash: syntax error near unexpected token `>'
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+ls -la >
+bash-3.2$ ls -la >
+bash: syntax error near unexpected token `newline'
+
 Special signs: "     '     $     <      >      |    <<     >>   _(for variable NAME)    
 
 DONT NEED TO HANDLE "special" symbols: 
 cat <         x.txt			!@#$%^&*()_+?:{},./;[]
 
-ERROR HANDLING: <<< & >>> ++ > Throw error -> Undefined.
+ERROR HANDLING: <<< & >>>  ==> Throw error ==> Undefined.
 ERROR HANDLING --> Special characters one after another like <    > or <    |
 
 TO THINK ABOUT:

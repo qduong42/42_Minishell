@@ -1,7 +1,7 @@
 '$LANG'"$LESS$SHLVL'$PAGER' 
 
 1) Auto close brackets means this expands to '$LANG'"$LESS$SHLVL'$PAGER'" which eliminates function of '$PAGER'
-which means all variables expand.
+which means all variables expand. ==> ERROR HANDLING
 
 NOT WORKING INPUT:
 $'USER'$LANG    --> Fixed, deleting $ keeping quotes expanding $LANG
