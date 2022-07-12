@@ -7,12 +7,12 @@ what can come up
 What constitutes next "Part"?
 PIPE |
 another < or
-another > or 
-
+another > or
+SPACE after first char has "begun"
 
 what doesnt constitute next part:
 
-" ' SPACE 
+" ' CONSECUTIVE SPACES
 
 ERROR HANDLING:
 
@@ -23,14 +23,19 @@ bash: syntax error near unexpected token `>'
 > > =
 bash-3.2$ echo a > > ab
 bash: syntax error near unexpected token `>'
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+ls -la >
+bash-3.2$ ls -la >
+bash: syntax error near unexpected token `newline'
 
 Special signs: "     '     $     <      >      |    <<     >>   _(for variable NAME)    
 
-DONT NEED TO HANDLED "special" symbols: 
+DONT NEED TO HANDLE "special" symbols: 
 cat <         x.txt			!@#$%^&*()_+?:{},./;[]
 
-ERROR HANDLING: <<< & >>> ++ > Throw error -> Undefined.
-Error Handling --> Special characters one after another like <    > or <    |
+ERROR HANDLING: <<< & >>>  ==> Throw error ==> Undefined.
+ERROR HANDLING --> Special characters one after another like <    > or <    |
 
 TO THINK ABOUT:
 
@@ -39,5 +44,5 @@ MULTIPLE APPEND?
 echo d >a>b>>c -> TRUNCATE A & B AND APPEND TO C
 MULTIPLE INPUT
 
-INPUT:
+Testing INPUT:
 cat -e <<LIM <a | cat -e <b > c >>c 

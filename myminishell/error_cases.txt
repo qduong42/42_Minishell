@@ -1,5 +1,9 @@
 ERROR HANDLING:
 
+>>>>
+bash-3.2$ echo a >>>>d
+bash: syntax error near unexpected token `>>'
+
 >>>
 bash-3.2$ echo a >>> ab
 bash: syntax error near unexpected token `>'
@@ -11,6 +15,10 @@ bash: syntax error near unexpected token `>'
 ls -la |
 BASH: WAITS FOR COMMAND
 IMPLEMENT: ERROR -> no valid input before/after pipe
+
+ls -la >
+bash-3.2$ ls -la >
+bash: syntax error near unexpected token `newline'
 
 <<$
 BASH: Takes $ as LIM
@@ -32,3 +40,9 @@ bash-3.2$ >$
 bash-3.2$ <$
 bash-3.2$ |$
 bash: syntax error near unexpected token `|'
+
+ERROR HANDLING <<< & >>>  ==> Throw error ==> Undefined.
+ERROR HANDLING ==> Special characters one after another like <    > or <    |
+ERROR HANDLING ==> Lets Handle unclosed quotes ==> Just give error. Rest of code will still work fine. But this prevents problems later on
+ERROR HANDLING ==> PIPE at end.
+ERROR HANDLING SPECIFIC CASE ==> $|

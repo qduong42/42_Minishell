@@ -24,8 +24,8 @@ LAUNCH SHELL						ALL
 
 READ INPUT												
 	-Error handling										
-		- '\''
-		- ';'
+		- '\'' -->Dont inteprate
+		- ';'  -->Dont inteprate
 		- dont ?interpret? unclosed quotes ?(%2 == 0)?
 		- other unspecified special chars
 	-Get prompt for readline (location)					(pwd)
