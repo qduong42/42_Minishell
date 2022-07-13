@@ -113,5 +113,19 @@ t_list	*ft_lstnew(void *content);
 t_pipe	*ft_plstnew(void *content);
 
 void	ft_plstadd_back(t_pipe **lst, t_pipe *new);
+//			bool.c
+int		special_token(char c);
+int		whitespace(char c);
+int		valid_name(char *line);
+int		unclosed_quotes(char *line);
+void	file_exists(char *filename);
+void	error_msg(char *msg);
+int		special(char *line);
+int		single_dollar(char *line);
+int		unexpected_newline(char *line);
+int		consecutive_specials(char *line);
+
+//			error_handeling.c
+int		errors(char *line);
 
 #endif
