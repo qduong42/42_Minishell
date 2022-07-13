@@ -194,12 +194,16 @@ int	consecutive_specials(char *line)
 	{
 		if (outside_quotes(line, i))
 		{
-			if(special(line + i))
+			if (line[i] == '|' && line[i + 1] == '|')
+				return (1);
+			if (line[i] == '$' && line[i + 1] == '$')
+				return (1);
+			if (special(line + i) && line[i] != '|')
 			{
 				j = i + special(line + i);
 				while (line[j] == ' ')
 					j++;
-				if (special(line + j))
+				if (special(line + j) && line[j] != '$')
 					return (1);
 			}
 		}
