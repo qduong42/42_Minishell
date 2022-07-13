@@ -5,9 +5,9 @@
 
 void	int_red(t_shell *s)
 {
-	t_list	*temp;
+	t_pipe	*temp;
 
-	temp = s->s_p->sub;
+	temp = s->s_p;
 	while (temp)
 	{
 		int		i;
@@ -15,7 +15,7 @@ void	int_red(t_shell *s)
 		i = 0;
 		int quote = 0;
 		// int start = 0;
-		string = temp->content;
+		string = temp->sub;
 		printf("string:%s\n", string);
 		int in = 0;
 		// int out = 0;
@@ -34,8 +34,8 @@ void	int_red(t_shell *s)
 					}
 					else if (!in)
 					{
-						input_handle(&string[i + 1], s);
-						ft_putstr_fd("INPUT\n", 1);
+						input_handle(&string[i + 1], temp);
+						// ft_putstr_fd("INPUT\n", 1);
 					}
 				}
 				else if (string[i] == OUT)
@@ -47,7 +47,7 @@ void	int_red(t_shell *s)
 						ft_putstr_fd("APPEND\n", 1);
 					}
 					else /* if (!out) */
-					ft_putstr_fd("OUTPUT\n", 1);
+						ft_putstr_fd("OUTPUT\n", 1);
 				}
 				else if (string[i] == S_Q || string[i] == D_Q)
 					quote = string[i];
@@ -68,7 +68,7 @@ void	pipe_handle(t_shell *s, int *start, int i)
 	temp = ft_strtrim(token, " ");
 	free(token);
 	token = temp;
-	ft_lstadd_back(&(s->s_p->sub), ft_lstnew(token));
+	ft_plstadd_back(&(s->s_p), ft_plstnew(token));
 	*start = i + 1;
 }
 

@@ -18,16 +18,15 @@ int	main(int argc, char **argv, char **envp)
 			continue ;
 		init_all(&s);
 		printf("Raw Input:%s\n", s.input);
-		ft_putendl_fd("", 1);
+		write(1, "\n", 1);
 		env_solver(&s);
 		printf("Expanded Input:%s\n", s.input);
-		ft_putendl_fd("", 1);
+		write(1, "\n", 1);
 		pipe_split(&s);
 		printf("Sub-pipes:\n");
-		print_list(s.s_p->sub);
-		ft_putendl_fd("", 1);
+		print_list(s.s_p);
+		write(1, "\n", 1);
 		int_red(&s);
-		// interpret(&s);
 		if (!ft_strncmp(s.input, "exit", ft_strlen(s.input)))
 			exit (0);
 	}

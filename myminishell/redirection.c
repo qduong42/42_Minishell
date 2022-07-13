@@ -1,7 +1,7 @@
 #include "minishell.h"
 
-void	input_handle(char *string, t_shell *s)
+void	input_handle(char *string, t_pipe *s)
 {
-	(void)s;
-	printf("STRING:%s\n", string);
+  printf("STRING%s\tYIPPE:%s\n", string, s->sub);
+
 }

@@ -1,20 +1,68 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   lists.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 20:39:33 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/06 16:47:55 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/13 00:42:48 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*current;
+
+	current = *lst;
+	if (lst)
+	{
+		if (*lst)
+		{
+			while (current -> next != NULL)
+			{
+				current = current -> next;
+			}
+			current -> next = new;
+		}
+		else
+			*lst = new;
+	}
+}
+
+t_list	*ft_lstnew(void *content)
+{
+	t_list	*new;
+
+	new = malloc(sizeof(t_list));
+	if (!new)
+		return (NULL);
+	new->content = content;
+	(*new).next = NULL;
+	return (new);
+}
+
+t_pipe	*ft_plstnew(void *content)
+{
+	t_pipe	*new;
+
+	new = malloc(sizeof(t_pipe));
+	if (!new)
+		return (NULL);
+	new->argv = NULL;
+	new->sub = content;
+	new->fd_in = -2;
+	new->fd_out = -2;
+	new->hd = 0;
+	new->next = 0;
+	return (new);
+}
+
+void	ft_plstadd_back(t_pipe **lst, t_pipe *new)
+{
+	t_pipe	*current;
 
 	current = *lst;
 	if (lst)
