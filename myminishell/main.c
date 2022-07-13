@@ -14,6 +14,8 @@ int	main(int argc, char **argv, char **envp)
 		s.input = readline(PROMPT);
 		add_history(s.input);
 		//error handling
+		if (errors(s.input))
+			continue ;
 		init_all(&s);
 		printf("Raw Input:%s\n", s.input);
 		write(1, "\n", 1);
