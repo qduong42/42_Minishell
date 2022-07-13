@@ -113,7 +113,11 @@ t_list	*ft_lstnew(void *content);
 t_pipe	*ft_plstnew(void *content);
 
 void	ft_plstadd_back(t_pipe **lst, t_pipe *new);
-//			bool.c
+
+/*
+**  Linus bool.c
+*/  
+
 int		special_token(char c);
 int		whitespace(char c);
 int		valid_name(char *line);
