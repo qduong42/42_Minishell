@@ -8,6 +8,16 @@ void	init_all(t_shell *s)
 	s->s_p = NULL;
 }
 
+char 	*copy_envp(char *envp)
+{
+	int len;
+	len = ft_strlen(envp);
+	char *copy;
+	copy = malloc(len + 1);
+	ft_strlcpy(copy, envp, len + 1);
+	return (copy);
+}
+
 t_list *create_env_list(char **envp)
 {
 	t_list *a;
@@ -17,7 +27,8 @@ t_list *create_env_list(char **envp)
 	i = 1;
 	while (envp[i])
 	{
-		ft_lstadd_back(&a, ft_lstnew(envp[i]));
+		
+		ft_lstadd_back(&a, ft_lstnew(copy_envp(envp[i])));
 		i++;
 	}
 	// print_list(a);

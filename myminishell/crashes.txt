@@ -3,3 +3,5 @@ CRASH COMMANDS: $ABC
  $ABC not existing env variable
 
  DOESNT CRASH: ls -la < $avc
+
+ Control D crashes now
