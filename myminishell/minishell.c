@@ -5,10 +5,7 @@
 void	init_all(t_shell *s)
 {
 	s->s_p = malloc(sizeof(t_pipe));
-	s->s_p->sub = NULL;
-	s->s_p->fd_in = -2;
-	s->s_p->fd_out = -2;
-	s->s_p->hd = 0;
+	s->s_p = NULL;
 }
 
 t_list *create_env_list(char **envp)

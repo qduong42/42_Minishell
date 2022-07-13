@@ -1,10 +1,8 @@
 NAME = minishell
 
-SRC = minishell.c main.c lexer.c testing_utils.c redirection.c
+SRC = minishell.c main.c lexer.c testing_utils.c redirection.c utils/libft_utils.c utils/lists.c
 
 INCLUDE = minishell.h
-
-LFT = ./lft
 
 OBJ = $(SRC:.c=.o)
 
@@ -24,13 +22,9 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 ifeq ($(UNAME_S), Darwin)
-	@make -C $(LFT)
-	@make bonus -C $(LFT)
-	$(CC) $(CFLAGS) -o $(NAME) -I $(HOME)/goinfre/.brew/opt/readline/include/ -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline $(OBJ) $(LFT)/libft.a
+	$(CC) $(CFLAGS) -o $(NAME) -I $(HOME)/goinfre/.brew/opt/readline/include/ -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline $(OBJ)
 else
-	@make -C $(LFT)
-	@make bonus -C $(LFT)
-	$(CC) $(CFLAGS) -o $(NAME) $(LIBS_LINUX) $(OBJ)   $(LFT)/libft.a
+	$(CC) $(CFLAGS) -o $(NAME) $(LIBS_LINUX) $(OBJ)   
 endif
 
 git add:
@@ -38,11 +32,9 @@ git add:
 
 clean:
 	$(RM) *.o
-	@make clean -C $(LFT)
 
 fclean: clean
 	$(RM) $(NAME)
-	@make fclean -C $(LFT)
 
 re: fclean all
 
