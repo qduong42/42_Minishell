@@ -66,7 +66,7 @@ void	print_list(t_pipe *list);
 
 void	int_red(t_shell *s);
 
-void	input_handle(char *string, t_pipe *s);
+int		input_handle(t_pipe *s, int i);
 
 void	init_all(t_shell *s);
 

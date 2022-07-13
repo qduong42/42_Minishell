@@ -16,7 +16,7 @@ void	int_red(t_shell *s)
 		int quote = 0;
 		// int start = 0;
 		string = temp->sub;
-		printf("string:%s\n", string);
+		printf("SUBPIPE_STRING:%s\n", string);
 		int in = 0;
 		// int out = 0;
 		while (string[i])
@@ -25,7 +25,7 @@ void	int_red(t_shell *s)
 			{
 				if (string[i] == IN)
 				{
-					// printf("string[%d]:%c\n", i, string[i]);
+					printf("string[%d]:%c\n", i, string[i]);
 					if (!ft_strncmp(&string[i], HD, 2) && !in)
 					{
 						i++;
@@ -34,7 +34,7 @@ void	int_red(t_shell *s)
 					}
 					else if (!in)
 					{
-						input_handle(&string[i + 1], temp);
+						i = input_handle(temp, i);
 						// ft_putstr_fd("INPUT\n", 1);
 					}
 				}

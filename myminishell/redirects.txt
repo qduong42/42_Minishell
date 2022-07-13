@@ -46,3 +46,4 @@ MULTIPLE INPUT
 
 Testing INPUT:
 cat -e <<LIM <a | cat -e <b > c >>c 
+cat -e <a<b<c
