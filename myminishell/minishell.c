@@ -10,9 +10,10 @@ void	init_all(t_shell *s)
 
 char 	*copy_envp(char *envp)
 {
-	int len;
+	int		len;
+	char	*copy;
+
 	len = ft_strlen(envp);
-	char *copy;
 	copy = malloc(len + 1);
 	ft_strlcpy(copy, envp, len + 1);
 	return (copy);
@@ -23,11 +24,11 @@ t_list *create_env_list(char **envp)
 	t_list *a;
 	int	i;
 
-	a = ft_lstnew(envp[0]);
+	a = ft_lstnew(copy_envp(envp[0]));
 	i = 1;
 	while (envp[i])
 	{
-		
+
 		ft_lstadd_back(&a, ft_lstnew(copy_envp(envp[i])));
 		i++;
 	}
@@ -53,7 +54,7 @@ char	*special_join(char *final, char *env, int len, int be_do)
 {
 	int		env_len;
 	char	*new_final;
-	
+
 	env_len = ft_strlen(env);
 	new_final = ft_calloc(1, ft_strlen(final) - len + env_len);
 	ft_strlcpy(new_final, final, be_do);
