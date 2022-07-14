@@ -79,10 +79,13 @@ int		consecutive_specials(char *line);
 //			error_handeling.c
 int		errors(char *line);
 
-//			builtins.c
+//			ft_cd.c
 int		ft_cd(char **args, t_list *env);
 int		ft_home(t_list *env);
 int		pwd();
 int		ft_oldpwd(t_list *env);
+
+//			ft_echo.c
+int		ft_echo(char **args);
 
 #endif

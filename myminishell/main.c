@@ -11,9 +11,7 @@ int	main(int argc, char **argv, char **envp)
 	while (69)
 	{
 		pwd();
-		ft_cd(argv + 1, s.env);
 		print_list(s.env);
-		pwd();
 		s.input = readline(PROMPT);
 		add_history(s.input);
 		//error handling
