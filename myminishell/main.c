@@ -12,6 +12,8 @@ int	main(int argc, char **argv, char **envp)
 	{
 		//print_list(s.env);
 		s.input = readline(PROMPT);
+		if (!s.input)
+			break ;
 		add_history(s.input);
 		//error handling
 		if (errors(s.input))
