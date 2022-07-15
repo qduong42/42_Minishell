@@ -92,4 +92,7 @@ int		ft_echo(char **args);
 int		export(char **args, t_list **env);
 char	**lst_to_strstr(t_list *env);
 
+//			unset.c
+int		unset(char	**args, t_list **env);
+
 #endif
