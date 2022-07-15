@@ -88,4 +88,8 @@ int		ft_oldpwd(t_list *env);
 //			ft_echo.c
 int		ft_echo(char **args);
 
+//			export.c
+int		export(char **args, t_list **env);
+char	**lst_to_strstr(t_list *env);
+
 #endif

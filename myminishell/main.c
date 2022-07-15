@@ -10,8 +10,8 @@ int	main(int argc, char **argv, char **envp)
 
 	while (69)
 	{
-		pwd();
-		print_list(s.env);
+
+		// print_list(s.env);
 		s.input = readline(PROMPT);
 		add_history(s.input);
 		//error handling

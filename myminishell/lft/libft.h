@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 22:56:47 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/03 23:12:05 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/15 09:11:01 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int		ft_putstr_fd(char *s, int fd);
 
 void	ft_putendl_fd(char *s, int fd);
+
+int	ft_strcmp(const char *s1, const char *s2);
 
 typedef struct s_list
 {
