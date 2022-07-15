@@ -91,6 +91,7 @@ int		ft_echo(char **args);
 //			export.c
 int		export(char **args, t_list **env);
 char	**lst_to_strstr(t_list *env);
+void	print_sorted_ev(t_list *env);
 
 //			unset.c
 int		unset(char	**args, t_list **env);
