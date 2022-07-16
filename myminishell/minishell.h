@@ -62,7 +62,7 @@ void	env_solver(t_shell* s);
 
 void	pipe_split(t_shell *s);
 
-void	print_list(t_pipe *list);
+void	print_list(t_pipe *list, int a);
 
 void	int_red(t_shell *s);
 

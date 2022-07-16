@@ -58,3 +58,5 @@ open with 0644 gives you -rw-r--r--
 https://ss64.com/bash/chmod.html
 
 >01234>>56789 0123 01
+
+cat -e <a >d | cat -e >e

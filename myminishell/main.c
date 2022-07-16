@@ -25,11 +25,13 @@ int	main(int argc, char **argv, char **envp)
 		printf("Expanded Input:%s\n", s.input);
 		write(1, "\n", 1);
 		pipe_split(&s);
-		printf("Sub-pipes:\n");
-		print_list(s.s_p);
+		printf("Sub-pipes before red:\n");
+		print_list(s.s_p, 1);
 		write(1, "\n", 1);
 		int_red(&s);
-		print_list(s.s_p);
+		printf("Sub-pipes after red:\n");
+		print_list(s.s_p, 1);
+		print_list(s.s_p, 2);
 		if (!ft_strncmp(s.input, "exit", ft_strlen(s.input)))
 			exit (0);
 	}

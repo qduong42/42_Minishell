@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 20:39:33 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/13 00:42:48 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/16 16:49:51 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ t_pipe	*ft_plstnew(void *content)
 	new->sub = content;
 	new->fd_in = -2;
 	new->fd_out = -2;
-	new->hd = 0;
-	new->next = 0;
+	new->hd = NULL;
+	new->next = NULL;
 	return (new);
 }
 
