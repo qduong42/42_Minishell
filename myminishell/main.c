@@ -24,6 +24,7 @@ int	main(int argc, char **argv, char **envp)
 		env_solver(&s);
 		printf("Expanded Input:%s\n", s.input);
 		write(1, "\n", 1);
+		free(s.input);
 		pipe_split(&s);
 		printf("Sub-pipes before red:\n");
 		print_list(s.s_p, 1);
@@ -32,6 +33,9 @@ int	main(int argc, char **argv, char **envp)
 		printf("Sub-pipes after red:\n");
 		print_list(s.s_p, 1);
 		print_list(s.s_p, 2);
+		space_split(&s);
+		remove_quotes(&s);
+		print_final_array(s.s_p);
 		if (!ft_strncmp(s.input, "exit", ft_strlen(s.input)))
 			exit (0);
 	}

@@ -16,7 +16,7 @@ void	int_red(t_shell *s)
 		int quote = 0;
 		string = temp->sub;
 		// printf("SUBPIPE_STRING:%s\n", string);
-		int in = 0;
+		// int in = 0;
 		// int start = 0;
 		// int out = 0;
 		while (string[i])
@@ -25,17 +25,17 @@ void	int_red(t_shell *s)
 			{
 				if (string[i] == IN)
 				{
-					if (!ft_strncmp(&string[i], HD, 2) && !in)
+					if (!ft_strncmp(&string[i], HD, 2) /* &&  !in */)
 					{
 						i++;
 						// ft_putstr_fd("HEREDOC\n", 1);
-						string = iohandler(temp, i, 3);
+						string = iohandler(temp, i, 3, 0);
 						i = -1;
-						in = 1;
+						// in = 1;
 					}
-					else if (!in)
+					else /* if (!in) */
 					{
-						string = iohandler(temp, i, 1);
+						string = iohandler(temp, i, 1, 1);
 						i = -1;
 						// ft_putstr_fd("INPUT\n", 1);
 					}
@@ -46,13 +46,13 @@ void	int_red(t_shell *s)
 					if (!ft_strncmp(&string[i], AP, 2))
 					{
 						i++;
-						string = iohandler(temp, i, 4);
+						string = iohandler(temp, i, 4, 0);
 						i = -1;
 						// ft_putstr_fd("APPEND\n", 1);
 					}
 					else /* if (!out) */
 					{
-						string = iohandler(temp, i, 2);
+						string = iohandler(temp, i, 2, 0);
 						i = -1;
 						// ft_putstr_fd("OUTPUT\n", 1);
 					}

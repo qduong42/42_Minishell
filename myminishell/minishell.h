@@ -67,9 +67,13 @@ void	print_list(t_pipe *list, int a);
 void	int_red(t_shell *s);
 
 // 0 for in, 1 for out, 2 for <<, 3 for >>
-char	*iohandler(t_pipe *sp, int i, int id);
+char	*iohandler(t_pipe *sp, int i, int id, int in);
 
 void	init_all(t_shell *s);
+
+void	space_split(t_shell *s);
+
+
 
 /*
 ** LIBFT FUNCTIONS
@@ -114,6 +118,10 @@ t_list	*ft_lstnew(void *content);
 t_pipe	*ft_plstnew(void *content);
 
 void	ft_plstadd_back(t_pipe **lst, t_pipe *new);
+
+void	remove_quotes(t_shell*s);
+
+void	print_final_array(t_pipe *list);
 
 /*
 **  Linus bool.c

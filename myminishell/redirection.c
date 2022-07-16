@@ -19,25 +19,27 @@ char	*del_re(char *sub, int len_fn, int end, int be_r)
 	int len;
 	len = 0;
 	len = ft_strlen(sub);
-	// printf("Len of sub:%d\n", len);
-	// printf("Len of len_fn:%d\n", len_fn);
-	// printf("End(i):%d\n", end);
-	// printf("be_r:%d\n", be_r);
+	printf("Len of sub:%d\n", len);
+	printf("Len of len_fn:%d\n", len_fn);
+	printf("End(i):%d\n", end);
+	printf("be_r:%d\n", be_r);
 	char *temp;
 	temp = ft_calloc(1, len - len_fn + 1);
 	ft_strlcpy(temp, sub, be_r);
-	// printf("temp:1:%s\n", temp);
+	printf("temp:1:%s\n", temp);
 	ft_catall(temp, sub + end);
-	// printf("temp:2:%s\n", temp);
+	printf("temp:2:%s\n", temp);
 	free(sub);
 	return (temp);
 }
 
-void	input(t_pipe *sp, char *temp)
+void	input(t_pipe *sp, char *temp, int in)
 {
 	if (sp->fd_in > 2)
 		close(sp->fd_in);
-	sp->fd_in = open(temp, O_RDONLY);
+		printf("INNUMBER:%d\n", in);
+	if (in != 0)
+		sp->fd_in = open(temp, O_RDONLY);
 	printf("fd_in:%d\n", sp->fd_in);
 	if (sp->fd_in == -1)
 		perror(temp);
@@ -61,7 +63,7 @@ void	append(t_pipe *sp, char *temp)
 		perror(temp);
 }
 
-char	*iohandler(t_pipe *sp, int i, int id)
+char	*iohandler(t_pipe *sp, int i, int id, int in)
 {
 	char fn[256];
 	int y = 0;
@@ -86,16 +88,16 @@ char	*iohandler(t_pipe *sp, int i, int id)
 	char *temp;
 	temp = ft_strtrim(fn,"\"'");
 	// printf("error handling:%p\n", temp);
-	// printf("Filename string:%s\n", temp);
+	printf("Filename string:%s\tID:%d\tIN%d\n", temp, id, in);
 	if (id == 1)
-		input(sp, temp);
+		input(sp, temp, in);
 	if (id == 2)
 		output(sp, temp);
 	if (id == 3)
 		sp->hd = temp;
 	if (id == 4)
 		append(sp, temp);
-	sp->sub = del_re(sp->sub, z, i, be_r);
+	sp->sub = del_re(sp->sub, z, i, be_r + 1);
 	if (id != 3)
 	{
 		// printf("TEMP FREED\n");
