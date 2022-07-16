@@ -45,7 +45,7 @@ typedef struct s_pipe
 	char			**argv;
 	int				fd_in;
 	int				fd_out;
-	int				hd;
+	char			*hd;
 	struct s_pipe 	*next;
 }					t_pipe;
 
@@ -66,7 +66,8 @@ void	print_list(t_pipe *list);
 
 void	int_red(t_shell *s);
 
-int		input_handle(t_pipe *s, int i);
+// 0 for in, 1 for out, 2 for <<, 3 for >>
+char	*iohandler(t_pipe *sp, int i, int id);
 
 void	init_all(t_shell *s);
 

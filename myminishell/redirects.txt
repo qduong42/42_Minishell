@@ -47,3 +47,14 @@ MULTIPLE INPUT
 Testing INPUT:
 cat -e <<LIM <a | cat -e <b > c >>c 
 cat -e <a<b<c
+
+> something < 'abcdec' cat -e
+
+>output<'a'cat-e
+LEN: 29
+z: 9
+
+open with 0644 gives you -rw-r--r--
+https://ss64.com/bash/chmod.html
+
+>01234>>56789 0123 01
