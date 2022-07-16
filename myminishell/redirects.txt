@@ -46,3 +46,33 @@ MULTIPLE INPUT
 
 Testing INPUT:
 cat -e <<LIM <a | cat -e <b > c >>c 
+cat -e <a<b<c
+
+> something < 'abcdec' cat -e
+
+>output<'a'cat-e
+LEN: 29
+z: 9
+
+open with 0644 gives you -rw-r--r--
+https://ss64.com/bash/chmod.html
+
+>01234>>56789 0123 01
+
+cat -e <a >d | cat -e >e
+
+ls -l -m -o -p ls -l -m -o -p <<LIM <a | grep a >b>c>d
+
+ls -l -m -o -p ls -l -m -o -p <<LIM <a | grep a >b>c>d
+
+"ls" "-la"|"grep" 'a'|'cat' "-e"
+
+"ls" <"b" "-la"|"grep" 'a' >'b'
+
+c2s18d110:test qduong$ "cat" <"b" "-e" | grep B>l
+c2s18d110:test qduong$ cat l
+B$
+
+c2s18d110:test qduong$ "cat" <"b" "-e" | grep B>b
+c2s18d110:test qduong$ cat b
+c2s18d110:test qduong$ 
