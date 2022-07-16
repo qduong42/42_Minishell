@@ -15,7 +15,7 @@ void	int_red(t_shell *s)
 		i = 0;
 		int quote = 0;
 		string = temp->sub;
-		printf("SUBPIPE_STRING:%s\n", string);
+		// printf("SUBPIPE_STRING:%s\n", string);
 		int in = 0;
 		// int start = 0;
 		// int out = 0;
@@ -28,7 +28,7 @@ void	int_red(t_shell *s)
 					if (!ft_strncmp(&string[i], HD, 2) && !in)
 					{
 						i++;
-						ft_putstr_fd("HEREDOC\n", 1);
+						// ft_putstr_fd("HEREDOC\n", 1);
 						string = iohandler(temp, i, 3);
 						i = -1;
 						in = 1;
@@ -37,7 +37,7 @@ void	int_red(t_shell *s)
 					{
 						string = iohandler(temp, i, 1);
 						i = -1;
-						ft_putstr_fd("INPUT\n", 1);
+						// ft_putstr_fd("INPUT\n", 1);
 					}
 				}
 				else if (string[i] == OUT)
@@ -48,15 +48,13 @@ void	int_red(t_shell *s)
 						i++;
 						string = iohandler(temp, i, 4);
 						i = -1;
-						printf("new fd:%d\n", temp->fd_out);
-						ft_putstr_fd("APPEND\n", 1);
+						// ft_putstr_fd("APPEND\n", 1);
 					}
 					else /* if (!out) */
 					{
 						string = iohandler(temp, i, 2);
 						i = -1;
-						printf("old fd:%d\n", temp->fd_out);
-						ft_putstr_fd("OUTPUT\n", 1);
+						// ft_putstr_fd("OUTPUT\n", 1);
 					}
 				}
 				else if (string[i] == S_Q || string[i] == D_Q)

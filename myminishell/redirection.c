@@ -26,9 +26,9 @@ char	*del_re(char *sub, int len_fn, int end, int be_r)
 	char *temp;
 	temp = ft_calloc(1, len - len_fn + 1);
 	ft_strlcpy(temp, sub, be_r);
-	printf("temp:1:%s\n", temp);
+	// printf("temp:1:%s\n", temp);
 	ft_catall(temp, sub + end);
-	printf("temp:2:%s\n", temp);
+	// printf("temp:2:%s\n", temp);
 	free(sub);
 	return (temp);
 }
@@ -98,7 +98,7 @@ char	*iohandler(t_pipe *sp, int i, int id)
 	sp->sub = del_re(sp->sub, z, i, be_r);
 	if (id != 3)
 	{
-		printf("TEMP FREED\n");
+		// printf("TEMP FREED\n");
 		free (temp);
 	}
 	return (sp->sub);

@@ -19,15 +19,15 @@ int	main(int argc, char **argv, char **envp)
 		if (errors(s.input))
 			continue ;
 		init_all(&s);
-		// printf("Raw Input:%s\n", s.input);
-		// write(1, "\n", 1);
+		printf("Raw Input:%s\n", s.input);
+		write(1, "\n", 1);
 		env_solver(&s);
-		// printf("Expanded Input:%s\n", s.input);
-		// write(1, "\n", 1);
+		printf("Expanded Input:%s\n", s.input);
+		write(1, "\n", 1);
 		pipe_split(&s);
-		// printf("Sub-pipes:\n");
-		// print_list(s.s_p);
-		// write(1, "\n", 1);
+		printf("Sub-pipes:\n");
+		print_list(s.s_p);
+		write(1, "\n", 1);
 		int_red(&s);
 		print_list(s.s_p);
 		if (!ft_strncmp(s.input, "exit", ft_strlen(s.input)))
