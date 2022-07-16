@@ -1,4 +1,7 @@
-CRASH COMMANDS: $ABC
+CRASH COMMANDS: 
+$ABC
+<b
+cat -e <b crashes on consecutive inputs.
 
  $ABC not existing env variable
 

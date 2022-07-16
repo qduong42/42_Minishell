@@ -19,13 +19,12 @@ char	*del_re(char *sub, int len_fn, int end, int be_r)
 	int len;
 	len = 0;
 	len = ft_strlen(sub);
-	printf("Len of sub:%d\n", len);
-	printf("Len of len_fn:%d\n", len_fn);
-	printf("End(i):%d\n", end);
-	printf("be_r:%d\n", be_r);
+	// printf("Len of sub:%d\n", len);
+	// printf("Len of len_fn:%d\n", len_fn);
+	// printf("End(i):%d\n", end);
+	// printf("be_r:%d\n", be_r);
 	char *temp;
 	temp = ft_calloc(1, len - len_fn + 1);
-	printf("SUB%s\n", sub);
 	ft_strlcpy(temp, sub, be_r);
 	printf("temp:1:%s\n", temp);
 	ft_catall(temp, sub + end);
@@ -86,19 +85,21 @@ char	*iohandler(t_pipe *sp, int i, int id)
 	fn[y] = '\0';
 	char *temp;
 	temp = ft_strtrim(fn,"\"'");
-	printf("error handling:%p\n", temp);
-	printf("Filename string:%s\n", temp);
+	// printf("error handling:%p\n", temp);
+	// printf("Filename string:%s\n", temp);
 	if (id == 1)
 		input(sp, temp);
 	if (id == 2)
 		output(sp, temp);
 	if (id == 3)
 		sp->hd = temp;
-	printf("INSIDE SP%s\n", sp->hd);
 	if (id == 4)
 		append(sp, temp);
 	sp->sub = del_re(sp->sub, z, i, be_r);
 	if (id != 3)
+	{
+		printf("TEMP FREED\n");
 		free (temp);
+	}
 	return (sp->sub);
 }
