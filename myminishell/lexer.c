@@ -48,12 +48,16 @@ void	int_red(t_shell *s)
 						i++;
 						string = iohandler(temp, i, 4);
 						i = -1;
+						printf("new fd:%d\n", temp->fd_out);
 						ft_putstr_fd("APPEND\n", 1);
 					}
 					else /* if (!out) */
+					{
 						string = iohandler(temp, i, 2);
 						i = -1;
+						printf("old fd:%d\n", temp->fd_out);
 						ft_putstr_fd("OUTPUT\n", 1);
+					}
 				}
 				else if (string[i] == S_Q || string[i] == D_Q)
 					quote = string[i];
