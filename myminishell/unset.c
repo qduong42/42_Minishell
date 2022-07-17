@@ -25,7 +25,7 @@ int	unset(char **args, t_list **env)
 						*env = tmp->next;
 					else
 						dragging->next = tmp->next;
-					// free(tmp->content);
+					free(tmp->content);
 					free(tmp);
 					break ;
 				}

@@ -23,6 +23,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <errno.h>
+# include "lft/libft.h"
 // # include <termios.h> // tcsetattr, tcgetattr -> not used
 // # include <curses.h> // tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs -> not used
 
@@ -34,12 +35,6 @@
 # define OUT '>'
 # define AP ">>"
 # define HD "<<"
-
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}					t_list;
 
 typedef struct s_pipe
 {
@@ -90,10 +85,6 @@ char	*ft_strtrim(char const *s1, char const *set);
 
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 
-int		ft_putstr_fd(char *s, int fd);
-
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-
 void	*ft_memset(void *s, int c, size_t n);
 
 void	ft_bzero(void *s, size_t n);
@@ -134,13 +125,13 @@ int		consecutive_specials(char *line);
 //			error_handeling.c
 int		errors(char *line);
 
-//			ft_cd.c
+//			cd.c
 int		ft_cd(char **args, t_list *env);
 int		ft_home(t_list *env);
 int		pwd();
 int		ft_oldpwd(t_list *env);
 
-//			ft_echo.c
+//			echo.c
 int		ft_echo(char **args);
 
 //			export.c
@@ -150,5 +141,8 @@ void	print_sorted_ev(t_list *env);
 
 //			unset.c
 int		unset(char	**args, t_list **env);
+
+//			utils/ft_strcmp.c
+int		ft_strcmp(const char *s1, const char *s2);
 
 #endif

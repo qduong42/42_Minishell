@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/15 09:07:24 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/17 17:18:42 by ljahn            ###   ########.fr       */
+/*   Created: 2022/05/02 10:24:25 by ljahn             #+#    #+#             */
+/*   Updated: 2022/05/03 17:48:34 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strcmp(const char *s1, const char *s2)
+int	ft_strncmp(char const *s1, char const *s2, unsigned int n)
 {
-	int	i;
+	unsigned char	a;
+	unsigned char	b;
+	int				index;
 
-	i = 0;
-	while (s1[i] && s2[i])
+	index = 0;
+	if (n == 0)
+		return (0);
+	while (s1[index] && (s1[index] == s2[index]) && n - 1)
 	{
-		if (s1[i] == s2[i])
-			i++;
-		else if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		index++;
+		n--;
 	}
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	a = (unsigned char) s1[index];
+	b = (unsigned char) s2[index];
+	return (a - b);
 }

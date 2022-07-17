@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/15 09:07:24 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/17 17:18:42 by ljahn            ###   ########.fr       */
+/*   Created: 2022/05/02 10:23:29 by ljahn             #+#    #+#             */
+/*   Updated: 2022/05/02 10:23:30 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strcmp(const char *s1, const char *s2)
-{
-	int	i;
+#include "libft.h"
+#include <stdio.h>
+#include <fcntl.h>
 
-	i = 0;
-	while (s1[i] && s2[i])
+void	ft_putstr_fd(char *s, int fd)
+{
+	if (!s)
+		return ;
+	while (*s)
 	{
-		if (s1[i] == s2[i])
-			i++;
-		else if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		write(fd, s++, 1);
 	}
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
+
+// int	main(void)
+// {
+// 	int	fd;
+
+// 	fd = open("LAAL", O_RDWR | O_CREAT | O_RDWR | O_TRUNC, 0777);
+// 	ft_putstr_fd("Hello", fd);
+// 	close(fd);
+// }

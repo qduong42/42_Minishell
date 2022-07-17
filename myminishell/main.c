@@ -10,15 +10,10 @@ int	main(int argc, char **argv, char **envp)
 
 	while (69)
 	{
-
-		print_list(s.env);
-		unset(argv + 1, &s.env);
-		print_list(s.env);
 		s.input = readline(PROMPT);
 		if (!s.input)
 			break ;
 		add_history(s.input);
-		//error handling
 		if (errors(s.input))
 			continue ;
 		init_all(&s);

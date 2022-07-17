@@ -1,6 +1,6 @@
 NAME = minishell
 
-SRC = minishell.c main.c lexer.c testing_utils.c redirection.c utils/libft_utils.c utils/lists.c bool.c error_handeling.c cd.c echo.c export.c unset.c env.c
+SRC = minishell.c main.c lexer.c testing_utils.c redirection.c utils/libft_utils.c utils/lists.c utils/ft_strcmp.c bool.c error_handeling.c cd.c echo.c export.c unset.c lft/libft.a
 
 INCLUDE = minishell.h
 
@@ -22,8 +22,10 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 ifeq ($(UNAME_S), Darwin)
+	$(MAKE) -C lft
 	$(CC) $(CFLAGS) -o $(NAME) -I $(HOME)/goinfre/.brew/opt/readline/include/ -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline $(OBJ)
 else
+	$(MAKE) -C lft
 	$(CC) $(CFLAGS) -o $(NAME) $(LIBS_LINUX) $(OBJ)   
 endif
 

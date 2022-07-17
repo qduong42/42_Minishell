@@ -15,7 +15,7 @@ static void	replace_content(t_list *env, char *new1, char *new2)
 	int	len;
 
 	len = ft_strlen(new1) + ft_strlen(new2) + 1;
-	// free(env->content);
+	free(env->content);
 	env->content = malloc(sizeof(char) * len);
 	ft_bzero(env->content, len);
 	ft_strlcpy(env->content, new1, len);
