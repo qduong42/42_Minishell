@@ -1,6 +1,6 @@
 NAME = minishell
 
-SRC = minishell.c main.c lexer.c testing_utils.c redirection.c utils/libft_utils.c utils/lists.c bool.c error_handeling.c
+SRC = minishell.c main.c lexer.c testing_utils.c redirection.c utils/libft_utils.c utils/lists.c bool.c error_handeling.c cd.c echo.c export.c unset.c env.c
 
 INCLUDE = minishell.h
 
@@ -8,7 +8,7 @@ OBJ = $(SRC:.c=.o)
 
 CC = gcc
 
-CFLAGS = -Wall -Werror -Wextra -g
+CFLAGS = -g
 
 RM = rm -f
 
