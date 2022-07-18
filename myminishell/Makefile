@@ -1,6 +1,6 @@
 NAME = minishell
 
-SRC =  main.c utils/lists.c bool.c error_handeling.c utils/testing_utils.c
+SRC =  main.c utils/lists.c bool.c error_handeling.c
 
 DIRS = PIPEX/libft/libft.a PIPEX/get_next_line/get_next_line.a PIPEX/pipex.a
 
