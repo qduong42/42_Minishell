@@ -1,8 +1,14 @@
 NAME = minishell
 
-SRC = minishell.c main.c lexer.c testing_utils.c redirection.c utils/lists.c bool.c error_handeling.c tokenize.c
+SRC =  main.c utils/lists.c bool.c error_handeling.c utils/testing_utils.c
 
 DIRS = PIPEX/libft/libft.a PIPEX/get_next_line/get_next_line.a PIPEX/pipex.a
+
+#Parser files#
+PARSER_SRC = tokenize.c lexer.c minishell.c redirection.c
+PARSER_DIR = parser/
+PARSER = $(addprefix $(PARSER_DIR),$(PARSER_SRC))
+PARSER_OBJ = $(PARSER_SRC:.c=.o)
 
 INCLUDE = minishell.h
 
@@ -22,14 +28,17 @@ LIB_LINUX = -lreadline
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(PARSER_OBJ): $(PARSER)
+	$(CC) $(FLAGS) -c $(PARSER)
+
+$(NAME): $(OBJ) $(PARSER_OBJ)
 ifeq ($(UNAME_S), Darwin)
 
 	$(MAKE) -C PIPEX
-	$(CC) $(CFLAGS) $(DIRS) -o $(NAME) -I $(HOME)/goinfre/.brew/opt/readline/include/ -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline $(OBJ)
+	$(CC) $(CFLAGS) $(DIRS) -o $(NAME) -I $(HOME)/goinfre/.brew/opt/readline/include/ -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline $(OBJ) $(PARSER_OBJ)
 else
 	$(MAKE) -C PIPEX
-	$(CC) $(CFLAGS) $(DIRS) -o $(NAME) $(LIBS_LINUX) $(OBJ)   
+	$(CC) $(CFLAGS) $(DIRS) -o $(NAME) $(LIBS_LINUX) $(OBJ) $(PARSER_OBJ)
 
 endif
 
