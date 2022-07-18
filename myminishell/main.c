@@ -1,5 +1,23 @@
 #include "minishell.h"
 
+void	print_my_info(t_pipe *s_p)
+{
+	int	i;
+
+	printf("SUB: %s\n", s_p->sub);
+	printf("\n");
+	i = 0;
+	while (s_p->argv[i])
+	{
+		printf("ARGV[%d]: %s\n", i, s_p->argv[i]);
+		i++;
+	}
+	printf("\n");
+	printf("FD_IN: %d\n", s_p->fd_in);
+	printf("FD_OUT: %d\n", s_p->fd_out);
+	printf("HEREDOC: %s\n", s_p->hd);
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	(void)argc;

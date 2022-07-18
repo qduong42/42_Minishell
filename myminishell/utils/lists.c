@@ -3,46 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lists.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 20:39:33 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/16 16:49:51 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/18 10:38:52 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	ft_lstadd_back(t_list **lst, t_list *new)
-{
-	t_list	*current;
-
-	current = *lst;
-	if (lst)
-	{
-		if (*lst)
-		{
-			while (current -> next != NULL)
-			{
-				current = current -> next;
-			}
-			current -> next = new;
-		}
-		else
-			*lst = new;
-	}
-}
-
-t_list	*ft_lstnew(void *content)
-{
-	t_list	*new;
-
-	new = malloc(sizeof(t_list));
-	if (!new)
-		return (NULL);
-	new->content = content;
-	(*new).next = NULL;
-	return (new);
-}
 
 t_pipe	*ft_plstnew(void *content)
 {

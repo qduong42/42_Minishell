@@ -1,6 +1,6 @@
 NAME = minishell
 
-SRC = minishell.c main.c lexer.c testing_utils.c redirection.c utils/libft_utils.c utils/lists.c bool.c error_handeling.c tokenize.c
+SRC = minishell.c main.c lexer.c testing_utils.c redirection.c utils/lists.c bool.c error_handeling.c tokenize.c PIPEX/libft/libft.a
 
 INCLUDE = minishell.h
 
