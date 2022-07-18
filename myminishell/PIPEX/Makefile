@@ -14,7 +14,7 @@ DEPS = pipex.h # only direct dependency
 $(NAME): $(OBJS)
 	$(MAKE) -C libft
 	$(MAKE) -C get_next_line
-	ar -rcs $(NAME) $(OBJS)
+	ar -rcs $(NAME) $(OBJS) $(DIRS)
 
 all:	$(NAME)
 
@@ -22,6 +22,6 @@ clean:
 	rm -f $(wildcard *.o)
 
 fclean:	clean
-	rm -f pipex
+	rm -f pipex.a
 
 re:	fclean all

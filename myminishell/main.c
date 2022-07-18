@@ -1,21 +1,27 @@
 #include "minishell.h"
 
-void	print_my_info(t_pipe *s_p)
+char	**lst_to_strstr(t_list *env)
 {
-	int	i;
+	char	**ret;
+	int		i;
+	t_list	*tmp;
 
-	printf("SUB: %s\n", s_p->sub);
-	printf("\n");
+	ret = malloc(sizeof(char *) * (ft_lstsize(env) + 1));
 	i = 0;
-	while (s_p->argv[i])
+	tmp = env;
+	while (1)
 	{
-		printf("ARGV[%d]: %s\n", i, s_p->argv[i]);
+		if (i == ft_lstsize(env))
+		{
+			ret[i] = NULL;
+			return (ret);
+		}
+		ret[i] = malloc(sizeof(char) * (ft_strlen(tmp->content) + 1));
+		ft_strlcpy(ret[i], tmp->content, ft_strlen(tmp->content) + 1);
 		i++;
+		tmp = tmp->next;
 	}
-	printf("\n");
-	printf("FD_IN: %d\n", s_p->fd_in);
-	printf("FD_OUT: %d\n", s_p->fd_out);
-	printf("HEREDOC: %s\n", s_p->hd);
+	return (NULL);
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -56,6 +62,7 @@ int	main(int argc, char **argv, char **envp)
 		print_final_array(s.s_p);
 		if (!ft_strncmp(s.input, "exit", ft_strlen(s.input)))
 			exit (0);
+		pipex(s.s_p, lst_to_strstr(s.env));
 	}
 	return (0);
 }

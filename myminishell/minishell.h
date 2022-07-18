@@ -88,4 +88,7 @@ int		consecutive_specials(char *line);
 //			error_handeling.c
 int		errors(char *line);
 
+//			PIPEX/main.c
+int		pipex(t_pipe *cmd, char **env);
+
 #endif
