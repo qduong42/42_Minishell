@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/18 10:34:19 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/18 11:22:16 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,8 @@ typedef struct s_pipe
 char	*get_path(char *cmd, char **env);
 void	free_all(char **to_free);
 void	conditions(t_vars *vars);
+
+//			main.c
+int		pipex(t_pipe *cmd, char **env);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/18 11:38:43 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/18 14:29:45 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,45 +45,87 @@ void	closing_freeing(t_vars *vars)
 	free_all(vars->spliters);
 }
 
-void	carry_over(t_vars *vars)
-{
-	if (vars->i > 2 && !vars->here_doc)//If it isn't the first command
-		vars->carry[0] = vars->working[0];
-	else if (vars->i > 3 && vars->here_doc) // If it isn't the first command
-		vars->carry[0] = vars->working[0];
-	pipe(vars->working);
-}
-
 // int	main(int ac, char **av, char **env)
 // {
-// 	t_vars	vars;
+	// t_vars	vars;
 
-// 	init_all(&vars, ac, av, env);
-// 	while (vars.i < vars.last_cmd + 1)
-// 	{
-// 		carry_over(&vars);
-// 		vars.spliters = ft_split(vars.av[vars.i], ' ');
-// 		vars.path = get_path(vars.spliters[0], vars.env);
-// 		vars.pid = fork();
-// 		if (!vars.pid)
-// 		{
-// 			assign_stdfds(&vars);
-// 			if (execve(vars.path, vars.spliters, vars.env))
-// 			{
-// 				perror("execve()");
-// 				exit(-1);
-// 			}
-// 		}
-// 		waitpid(vars.pid, NULL, 0);
-// 		closing_freeing(&vars);
-// 		vars.i++;
-// 	}
-// 	close(vars.working[0]);
-// 	close(vars.outfile);
+	// init_all(&vars, ac, av, env);
+	// while (vars.i < vars.last_cmd + 1)
+	// {
+	// 	carry_over(&vars);
+	// 	vars.spliters = ft_split(vars.av[vars.i], ' ');
+	// 	vars.path = get_path(vars.spliters[0], vars.env);
+	// 	vars.pid = fork();
+	// 	if (!vars.pid)
+	// 	{
+	// 		assign_stdfds(&vars);
+	// 		if (execve(vars.path, vars.spliters, vars.env))
+	// 		{
+	// 			perror("execve()");
+	// 			exit(-1);
+	// 		}
+	// 	}
+	// 	waitpid(vars.pid, NULL, 0);
+	// 	closing_freeing(&vars);
+	// 	vars.i++;
+	// }
+	// close(vars.working[0]);
+	// close(vars.outfile);
 // }
 
-int	pipex(t_pipe *lst)
+void	print_strstr(char **strstr)
 {
-	(void) lst;
+	int	i;
+
+	i = 0;
+	while(strstr[i])
+	{
+		printf("STRSTR: %s\n", strstr[i]);
+		i++;
+	}
+}
+
+int	pipex(t_pipe *cmd, char **env)
+{
+	t_vars	vars;
+	int		carry;
+
+	carry = 0;
+	if (cmd->fd_in > 0)
+		carry = cmd->fd_in;
+	while (cmd)
+	{
+		pipe(vars.working);
+		vars.path = get_path(cmd->argv[0], env);
+		vars.pid = fork();
+		if (!vars.pid)
+		{
+			dup2(carry, 0);
+			if (!cmd->next)
+				dup2(1, 1);
+			else
+				dup2(vars.working[1], 1);
+			if (execve(vars.path, cmd->argv, env))
+			{
+				perror("execve()");
+				exit(-1);
+			}
+		}
+		waitpid(vars.pid, NULL, 0);
+		if (carry)
+			close(carry);
+		if (cmd->fd_in < 0)
+			carry = vars.working[0];
+		else
+		{
+			close(vars.working[0]);
+			carry = cmd->fd_in;
+		}
+		close(vars.working[1]);
+		cmd = cmd->next;
+	}
+	if (carry)
+		close(carry);
+	close(vars.outfile);
 	return (0);
 }

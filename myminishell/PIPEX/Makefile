@@ -14,7 +14,7 @@ DEPS = pipex.h # only direct dependency
 $(NAME): $(OBJS)
 	$(MAKE) -C libft
 	$(MAKE) -C get_next_line
-	ar -rcs $(NAME) $(OBJS)
+	ar -rcs $(NAME) $(OBJS) $(DIRS)
 
 all:	$(NAME)
 

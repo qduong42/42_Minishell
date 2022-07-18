@@ -1,6 +1,8 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# define PATH_MAX 69
+
 /*
 **	INCLUDES
 */
@@ -87,5 +89,28 @@ int		consecutive_specials(char *line);
 
 //			error_handeling.c
 int		errors(char *line);
+
+//			cd.c
+int		ft_cd(char **args, t_list *env);
+int		ft_home(t_list *env);
+int		pwd();
+int		ft_oldpwd(t_list *env);
+
+//			echo.c
+int		ft_echo(char **args);
+
+//			export.c
+int		export(char **args, t_list **env);
+char	**lst_to_strstr(t_list *env);
+void	print_sorted_ev(t_list *env);
+
+//			unset.c
+int		unset(char	**args, t_list **env);
+
+//			utils/ft_strcmp.c
+int		ft_strcmp(const char *s1, const char *s2);
+
+//			PIPEX/main.c
+int		pipex(t_pipe *cmd, char **env);
 
 #endif
