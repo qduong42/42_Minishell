@@ -46,7 +46,6 @@ int	main(int argc, char **argv, char **envp)
 		env_solver(&s);
 		printf("Expanded Input:%s\n", s.input);
 		write(1, "\n", 1);
-		free(s.input);
 		pipe_split(&s);
 		printf("Sub-pipes before red:\n");
 		print_list(s.s_p, 1);
