@@ -60,6 +60,20 @@ void	init_all(t_shell *s);
 
 void	space_split(t_shell *s);
 
+//redirection.c
+// char	*del_re(char *sub, int len_fn, int end, int be_r);
+
+// void	ft_catall(char *dst, const char *src);
+
+// void	input(t_pipe *sp, char *temp, int in);
+
+// void	output(t_pipe *sp, char *temp);
+
+// void	append(t_pipe *sp, char *temp);
+
+// char	*iohandler(t_pipe *sp, int i, int id, int in);
+
+
 /*
 ** LIBFT FUNCTIONS
 */
