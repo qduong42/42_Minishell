@@ -6,11 +6,12 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:23:44 by ljahn             #+#    #+#             */
-/*   Updated: 2022/05/04 07:16:52 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/05/02 15:32:54 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <malloc/malloc.h>
 
 static int	counter(char const *s, char c)
 {

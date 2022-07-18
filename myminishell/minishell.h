@@ -23,7 +23,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <errno.h>
-# include "lft/libft.h"
+# include "PIPEX/pipex.h"
 // # include <termios.h> // tcsetattr, tcgetattr -> not used
 // # include <curses.h> // tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs -> not used
 
@@ -35,16 +35,6 @@
 # define OUT '>'
 # define AP ">>"
 # define HD "<<"
-
-typedef struct s_pipe
-{
-	char			*sub;
-	char			**argv;
-	int				fd_in;
-	int				fd_out;
-	int				hd;
-	struct s_pipe 	*next;
-}					t_pipe;
 
 typedef struct s_shell
 {
@@ -59,53 +49,28 @@ void	env_solver(t_shell* s);
 
 void	pipe_split(t_shell *s);
 
-void	print_list(t_pipe *list);
+void	print_list(t_pipe *list, int a);
 
 void	int_red(t_shell *s);
 
-void	input_handle(char *string, t_pipe *s);
+// 0 for in, 1 for out, 2 for <<, 3 for >>
+char	*iohandler(t_pipe *sp, int i, int id, int in);
 
 void	init_all(t_shell *s);
+
+void	space_split(t_shell *s);
 
 /*
 ** LIBFT FUNCTIONS
 */
 
-size_t	ft_strlen(const char *s);
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t size);
-
-size_t	ft_strlcat(char *dst, const char *src, size_t size);
-
-void	*ft_calloc(size_t nmemb, size_t size);
-
-int		ft_isalnum(int c);
-
-char	*ft_strtrim(char const *s1, char const *set);
-
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-
-void	*ft_memset(void *s, int c, size_t n);
-
-void	ft_bzero(void *s, size_t n);
-
-int		ft_isalpha(int c);
-
-int		ft_isdigit(int c);
-
-void	ft_putchar_fd(char c, int fd);
-
-char	*ft_strchr(const char *s, int c);
-
-char	*ft_strdup(const char *s);
-
-void	ft_lstadd_back(t_list **lst, t_list *new);
-
-t_list	*ft_lstnew(void *content);
-
 t_pipe	*ft_plstnew(void *content);
 
 void	ft_plstadd_back(t_pipe **lst, t_pipe *new);
+
+void	remove_quotes(t_shell*s);
+
+void	print_final_array(t_pipe *list);
 
 /*
 **  Linus bool.c
@@ -144,5 +109,8 @@ int		unset(char	**args, t_list **env);
 
 //			utils/ft_strcmp.c
 int		ft_strcmp(const char *s1, const char *s2);
+
+//			PIPEX/main.c
+int		pipex(t_pipe *cmd, char **env);
 
 #endif

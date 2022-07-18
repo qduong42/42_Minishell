@@ -1,38 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/02 10:22:19 by ljahn             #+#    #+#             */
-/*   Updated: 2022/05/04 07:15:46 by ljahn            ###   ########.fr       */
+/*   Created: 2022/05/02 10:25:13 by ljahn             #+#    #+#             */
+/*   Updated: 2022/05/02 10:49:00 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	void			*ptr;
-	unsigned long	total;
+	unsigned int	i;
+	char			*res;
 
-	total = count * size;
-	if (count && total/count != size)
-		return (NULL);
-	ptr = malloc(count * size);
-	if (!ptr)
-		return (NULL);
-	ft_bzero(ptr, count * size);
-	return (ptr);
+	if (!s)
+		return (0);
+	if (start >= ft_strlen(s))
+		return (ft_strdup(""));
+	res = malloc(len * sizeof(char) + 1);
+	if (res == 0)
+		return (0);
+	i = 0;
+	while (i < len)
+	{
+		res[i] = s[start + i];
+		i++;
+	}
+	res[i] = 0;
+	return (res);
 }
-
-// int	main(void)
-// {
-// 	void	*ret;
-
-// 	ret = ft_calloc(SIZE_MAX, SIZE_MAX);
-// 	if (!ret)
-// 		printf("You can't allocate that much");
-// }

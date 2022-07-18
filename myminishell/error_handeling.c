@@ -9,7 +9,7 @@ int	errors(char *line)
 	}
 	if (unexpected_newline(line))
 	{
-		error_msg("Error: unexpected newilne\n");
+		error_msg("Error: unexpected newline\n");
 		return (1);
 	}
 	if (single_dollar(line))

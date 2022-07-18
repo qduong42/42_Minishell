@@ -1,6 +1,8 @@
 NAME = minishell
 
-SRC = minishell.c main.c lexer.c testing_utils.c redirection.c utils/libft_utils.c utils/lists.c utils/ft_strcmp.c bool.c error_handeling.c cd.c echo.c export.c unset.c lft/libft.a
+SRC = minishell.c main.c lexer.c testing_utils.c redirection.c utils/lists.c bool.c error_handeling.c tokenize.c
+
+DIRS = PIPEX/libft/libft.a PIPEX/get_next_line/get_next_line.a PIPEX/pipex.a
 
 INCLUDE = minishell.h
 
@@ -22,11 +24,11 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 ifeq ($(UNAME_S), Darwin)
-	$(MAKE) -C lft
-	$(CC) $(CFLAGS) -o $(NAME) -I $(HOME)/goinfre/.brew/opt/readline/include/ -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline $(OBJ)
+	$(MAKE) -C PIPEX
+	$(CC) $(CFLAGS) $(DIRS) -o $(NAME) -I $(HOME)/goinfre/.brew/opt/readline/include/ -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline $(OBJ)
 else
-	$(MAKE) -C lft
-	$(CC) $(CFLAGS) -o $(NAME) $(LIBS_LINUX) $(OBJ)   
+	$(MAKE) -C PIPEX
+	$(CC) $(CFLAGS) $(DIRS) -o $(NAME) $(LIBS_LINUX) $(OBJ)   
 endif
 
 git add:
@@ -37,6 +39,8 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
+	$(MAKE) clean -C PIPEX
+	$(MAKE) fclean -C PIPEX
 
 re: fclean all
 
