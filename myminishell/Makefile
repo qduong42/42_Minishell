@@ -22,8 +22,10 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 ifeq ($(UNAME_S), Darwin)
+	$(MAKE) -C PIPEX/
 	$(CC) $(CFLAGS) -o $(NAME) -I $(HOME)/goinfre/.brew/opt/readline/include/ -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline $(OBJ)
 else
+	$(MAKE) -C PIPEX/
 	$(CC) $(CFLAGS) -o $(NAME) $(LIBS_LINUX) $(OBJ)   
 endif
 
@@ -32,8 +34,10 @@ git add:
 
 clean:
 	$(RM) *.o
+	$(MAKE) clean -C PIPEX/ 
 
 fclean: clean
+	$(MAKE) fclean -C PIPEX/ 
 	$(RM) $(NAME)
 
 re: fclean all

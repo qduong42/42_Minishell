@@ -22,6 +22,6 @@ clean:
 	rm -f $(wildcard *.o)
 
 fclean:	clean
-	rm -f pipex
+	rm -f pipex.a
 
 re:	fclean all
