@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "../pipex.h"
 
 static char	*get_pwd()
 {
@@ -118,7 +118,6 @@ int	ft_oldpwd(t_list *env)
 int	ft_cd(char **args, t_list *env)
 {
 	int		cd_ret;
-	t_list	*tmp;
 	char	*to_free;
 
 	if (!args[1])

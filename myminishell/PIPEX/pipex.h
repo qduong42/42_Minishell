@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/18 11:22:16 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/18 17:05:54 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,26 @@ void	free_all(char **to_free);
 void	conditions(t_vars *vars);
 
 //			main.c
-int		pipex(t_pipe *cmd, char **env);
+int		pipex(t_pipe *cmd, t_list **env_lst);
+char	**lst_to_strstr(t_list *env);
+
+//			cd.c
+int		ft_cd(char **args, t_list *env);
+int		ft_home(t_list *env);
+int		pwd();
+int		ft_oldpwd(t_list *env);
+
+//			echo.c
+int		ft_echo(char **args);
+
+//			export.c
+int		export(char **args, t_list **env);
+char	**lst_to_strstr(t_list *env);
+void	print_sorted_ev(t_list *env);
+
+//			unset.c
+int		unset(char	**args, t_list **env);
+
+# include "../minishell.h"
 
 #endif

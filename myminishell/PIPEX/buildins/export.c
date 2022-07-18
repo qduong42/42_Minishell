@@ -1,4 +1,19 @@
-#include "minishell.h"
+#include "../pipex.h"
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] && s2[i])
+	{
+		if (s1[i] == s2[i])
+			i++;
+		else if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	}
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
 
 void	free_splitters(char **splitters)
 {
@@ -11,30 +26,6 @@ void	free_splitters(char **splitters)
 		i++;
 	}
 	free(splitters);
-}
-
-char	**lst_to_strstr(t_list *env)
-{
-	char	**ret;
-	int		i;
-	t_list	*tmp;
-
-	ret = malloc(sizeof(char *) * (ft_lstsize(env) + 1));
-	i = 0;
-	tmp = env;
-	while (1)
-	{
-		if (i == ft_lstsize(env))
-		{
-			ret[i] = NULL;
-			return (ret);
-		}
-		ret[i] = malloc(sizeof(char) * (ft_strlen(tmp->content) + 1));
-		ft_strlcpy(ret[i], tmp->content, ft_strlen(tmp->content) + 1);
-		i++;
-		tmp = tmp->next;
-	}
-	return (NULL);
 }
 
 void	sort_strstr(char **strstr)

@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "../pipex.h"
 
 static int	strstrlen(char **strstr)
 {

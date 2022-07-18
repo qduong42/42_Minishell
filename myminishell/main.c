@@ -1,29 +1,5 @@
 #include "minishell.h"
 
-char	**lst_to_strstr(t_list *env)
-{
-	char	**ret;
-	int		i;
-	t_list	*tmp;
-
-	ret = malloc(sizeof(char *) * (ft_lstsize(env) + 1));
-	i = 0;
-	tmp = env;
-	while (1)
-	{
-		if (i == ft_lstsize(env))
-		{
-			ret[i] = NULL;
-			return (ret);
-		}
-		ret[i] = malloc(sizeof(char) * (ft_strlen(tmp->content) + 1));
-		ft_strlcpy(ret[i], tmp->content, ft_strlen(tmp->content) + 1);
-		i++;
-		tmp = tmp->next;
-	}
-	return (NULL);
-}
-
 int	main(int argc, char **argv, char **envp)
 {
 	(void)argc;
@@ -59,7 +35,7 @@ int	main(int argc, char **argv, char **envp)
 		print_final_array(s.s_p);
 		if (!ft_strncmp(s.input, "exit", ft_strlen(s.input)))
 			exit (0);
-		pipex(s.s_p, lst_to_strstr(s.env));
+		pipex(s.s_p, &s.env);
 	}
 	return (0);
 }
