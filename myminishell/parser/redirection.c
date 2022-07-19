@@ -37,10 +37,10 @@ void	input(t_pipe *sp, char *temp, int in)
 {
 	if (sp->fd_in > 2)
 		close(sp->fd_in);
-		printf("INNUMBER:%d\n", in);
+		// printf("INNUMBER:%d\n", in);
 	if (in != 0)
 		sp->fd_in = open(temp, O_RDONLY);
-	printf("fd_in:%d\n", sp->fd_in);
+	// printf("fd_in:%d\n", sp->fd_in);
 	if (sp->fd_in == -1)
 		perror(temp);
 }
