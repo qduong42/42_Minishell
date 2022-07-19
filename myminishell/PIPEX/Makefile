@@ -1,7 +1,7 @@
 NAME := pipex.a
 
-SRCS = buildins/cd.c buildins/echo.c buildins/export.c buildins/unset.c main.c ignore.c
-OBJS = cd.o echo.o export.o unset.o main.o ignore.o
+SRCS = buildins/cd.c buildins/echo.c buildins/export.c buildins/unset.c ignore.c pipex.c
+OBJS = cd.o echo.o export.o unset.o ignore.o pipex.o
 DIRS = libft/libft.a get_next_line/get_next_line.a
 
 #	compilation
@@ -23,7 +23,8 @@ all:	$(NAME)
 clean:
 	rm -f $(wildcard *.o)
 
-fclean:	clean
+fclean:
+	rm -f $(wildcard *.o)
 	rm -f pipex.a
 
 re:	fclean all

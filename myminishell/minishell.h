@@ -1,8 +1,6 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define PATH_MAX 69
-
 /*
 **	INCLUDES
 */
@@ -95,7 +93,6 @@ int		whitespace(char c);
 int		valid_name(char *line);
 int		unclosed_quotes(char *line);
 void	file_exists(char *filename);
-void	error_msg(char *msg);
 int		special(char *line);
 int		single_dollar(char *line);
 int		unexpected_newline(char *line);

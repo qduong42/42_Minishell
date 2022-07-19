@@ -6,12 +6,14 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/18 17:05:54 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/19 12:08:52 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
+
+# define PATH_MAX 69
 
 # include "libft/libft.h"
 # include "get_next_line/get_next_line.h"
@@ -68,8 +70,9 @@ typedef struct s_pipe
 char	*get_path(char *cmd, char **env);
 void	free_all(char **to_free);
 void	conditions(t_vars *vars);
+void	error_msg(char *msg);
 
-//			main.c
+//			pipex.c
 int		pipex(t_pipe *cmd, t_list **env_lst);
 char	**lst_to_strstr(t_list *env);
 
@@ -89,7 +92,5 @@ void	print_sorted_ev(t_list *env);
 
 //			unset.c
 int		unset(char	**args, t_list **env);
-
-# include "../minishell.h"
 
 #endif

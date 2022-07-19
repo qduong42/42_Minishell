@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:39 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/18 10:46:40 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/19 12:05:35 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,4 +123,9 @@ char	*get_path(char *cmd, char **env)
 	}
 	free_all(path.prefix);
 	return (cmd);
+}
+
+void	error_msg(char *msg)
+{
+	ft_putstr_fd(msg, 2);
 }
