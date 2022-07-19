@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/19 11:26:41 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/19 13:13:18 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,13 @@ int	buildin(t_pipe *cmd, t_list **env_lst)
 	else if (!ft_strncmp(cmd->argv[0], "cd", ft_strlen(cmd->argv[0])))
 		ft_cd(cmd->argv, *env_lst);
 	else if (!ft_strncmp(cmd->argv[0], "pwd", ft_strlen(cmd->argv[0])))
-		printf("NO PWD YET\n");
+		pwd();
 	else if (!ft_strncmp(cmd->argv[0], "export", ft_strlen(cmd->argv[0])))
 		export(cmd->argv, env_lst);
 	else if (!ft_strncmp(cmd->argv[0], "unset", ft_strlen(cmd->argv[0])))
 		unset(cmd->argv, env_lst);
 	else if (!ft_strncmp(cmd->argv[0], "env", ft_strlen(cmd->argv[0])))
-		printf("NO ENV YET\n");
+		ft_env(*env_lst);
 	else if (!ft_strncmp(cmd->argv[0], "exit", ft_strlen(cmd->argv[0])))
 		printf("NO EXIT YET\n");
 	else
