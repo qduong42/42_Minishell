@@ -34,6 +34,16 @@
 # define AP ">>"
 # define HD "<<"
 
+typedef struct s_pipe
+{
+	char			*sub;
+	char			**argv;
+	int				fd_in;
+	int				fd_out;
+	char			*hd;
+	struct s_pipe 	*next;
+}					t_pipe;
+
 typedef struct s_shell
 {
 	struct s_list	*env;

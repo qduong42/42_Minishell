@@ -1,9 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirection.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/19 13:09:37 by qduong            #+#    #+#             */
+/*   Updated: 2022/07/19 13:39:28 by qduong           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 void	ft_catall(char *dst, const char *src)
 {
-	int i = 0;
-	int dest_len = ft_strlen(dst);
+	int	i;
+	int	dest_len;
+
+	dest_len = ft_strlen(dst);
+	i = 0;
 	while (src[i])
 	{
 		dst[i + dest_len] = src[i];
@@ -16,14 +31,15 @@ void	ft_catall(char *dst, const char *src)
 //fixed to work with ' && " by trimming, frees the allocated string after open.
 char	*del_re(char *sub, int len_fn, int end, int be_r)
 {
-	int len;
+	int		len;
+	char	*temp;
+
 	len = 0;
 	len = ft_strlen(sub);
 	printf("Len of sub:%d\n", len);
 	printf("Len of len_fn:%d\n", len_fn);
 	printf("End(i):%d\n", end);
 	printf("be_r:%d\n", be_r);
-	char *temp;
 	temp = ft_calloc(1, len - len_fn + 1);
 	ft_strlcpy(temp, sub, be_r);
 	printf("temp:1:%s\n", temp);
@@ -37,7 +53,6 @@ void	input(t_pipe *sp, char *temp, int in)
 {
 	if (sp->fd_in > 2)
 		close(sp->fd_in);
-		printf("INNUMBER:%d\n", in);
 	if (in != 0)
 		sp->fd_in = open(temp, O_RDONLY);
 	printf("fd_in:%d\n", sp->fd_in);
@@ -63,30 +78,61 @@ void	append(t_pipe *sp, char *temp)
 		perror(temp);
 }
 
-char	*iohandler(t_pipe *sp, int i, int id, int in)
+char	*filename(t_pipe *sp, int *i, int *z)
 {
-	char fn[256];
-	int y = 0;
-	int z = 1;
-	int be_r = i;
-	if (id == 3 || id == 4)
-		z++;
-	i++;
-	while (sp->sub[i] && sp->sub[i] == ' ')
+	char	*fn;
+	int		y;
+
+	y = 0;
+	fn = malloc(256);
+	*i ++;
+	while (sp->sub[*i] && sp->sub[*i] == ' ')
 	{
-		z++;
-		i++;
+		*z++;
+		*i++;
 	}
-	while (sp->sub[i] && sp->sub[i] != ' ' && sp->sub[i] != '<' && sp->sub[i] != '>')
+	while (sp->sub[*i] && sp->sub[*i] != ' ' && sp->sub[*i] != '<' && sp->sub[*i] != '>')
 	{
-		fn[y] = sp->sub[i];
-		i++;
+		fn[y] = sp->sub[*i];
+		*i++;
 		y++;
-		z++;
+		*z++;
 	}
 	fn[y] = '\0';
-	char *temp;
-	temp = ft_strtrim(fn,"\"'");
+	return (fn);
+}
+
+char	*iohandler(t_pipe *sp, int i, int id, int in)
+{
+	// char	fn[256];
+	int		y;
+	int		z;
+	int		be_r;
+
+	y = 0;
+	z = 1;
+	be_r = i;
+	if (id == 3 || id == 4)
+		z++;
+	// i++;
+	// while (sp->sub[i] && sp->sub[i] == ' ')
+	// {
+	// 	z++;
+	// 	i++;
+	// }
+	// while (sp->sub[i] && sp->sub[i] != ' ' && sp->sub[i] != '<' && sp->sub[i] != '>')
+	// {
+	// 	fn[y] = sp->sub[i];
+	// 	i++;
+	// 	y++;
+	// 	z++;
+	// }
+	// fn[y] = '\0';
+	char	*temp;
+	char	*fn;
+	fn = filename(sp, &i, &z);
+	temp = ft_strtrim(fn, "\"'");
+	free (fn);
 	// printf("error handling:%p\n", temp);
 	printf("Filename string:%s\tID:%d\tIN%d\n", temp, id, in);
 	if (id == 1)
@@ -99,9 +145,6 @@ char	*iohandler(t_pipe *sp, int i, int id, int in)
 		append(sp, temp);
 	sp->sub = del_re(sp->sub, z, i, be_r + 1);
 	if (id != 3)
-	{
-		// printf("TEMP FREED\n");
 		free (temp);
-	}
 	return (sp->sub);
 }
