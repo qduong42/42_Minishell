@@ -11,8 +11,8 @@ int	main(int argc, char **argv, char **envp)
 	while (69)
 	{
 		s.input = readline(PROMPT);
-		if (!s.input)
-			break ;
+		if (!s.input[0])
+			continue ;
 		add_history(s.input);
 		if (errors(s.input))
 			continue ;
