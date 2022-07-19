@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/18 21:57:09 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/19 11:26:41 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,8 +109,6 @@ int	pipex(t_pipe *cmd, t_list **env_lst)
 	char	**env;
 
 	vars.outfile = 1;
-	if (cmd->fd_out > 0)
-		vars.outfile = cmd->fd_out;
 	env = lst_to_strstr(*env_lst);
 	carry = 0;
 	printf("FD_IN: %d\n", cmd->fd_in);
@@ -118,11 +116,11 @@ int	pipex(t_pipe *cmd, t_list **env_lst)
 		carry = cmd->fd_in;
 	while (cmd)
 	{
+		if (cmd->fd_out > 0)
+			vars.outfile = cmd->fd_out;
 		if (buildin(cmd, env_lst))
 		{
-			printf("YOU HIT A BUILDIN\n");
 			cmd = cmd->next;
-			printf("NEXT ITERATION: %p\n", cmd);
 			continue ;
 		}
 		pipe(vars.working);
@@ -146,11 +144,8 @@ int	pipex(t_pipe *cmd, t_list **env_lst)
 			close(carry);
 		if (cmd->next)
 		{
-			if ((cmd->next)->fd_in < 0)
-			{
-				printf("IS EXECUTED\n");
+			if ((cmd->next)->fd_in < 0)// Look if carry should be fd or pipe content
 				carry = vars.working[0];
-			}
 			else
 			{
 				close(vars.working[0]);
@@ -158,7 +153,7 @@ int	pipex(t_pipe *cmd, t_list **env_lst)
 			}
 		}
 		else
-			close(vars.working[0]);
+			close(vars.working[0]); //don't forget to close the pipe if that's it.
 		close(vars.working[1]);
 		cmd = cmd->next;
 	}
