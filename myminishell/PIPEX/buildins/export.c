@@ -57,13 +57,23 @@ void	print_sorted_ev(t_list *env)
 {
 	char	**splitters;
 	int		i;
+	int		j;
 
 	splitters = lst_to_strstr(env);
 	sort_strstr(splitters);
 	i = 0;
 	while (splitters[i])
 	{
-		printf("%s\n", splitters[i]);
+		ft_putstr_fd("declare -x ", 1);
+		j = 0;
+		while(splitters[i][j])
+		{
+			ft_putchar_fd(splitters[i][j], 1);
+			if (splitters[i][j] == '=')
+				ft_putchar_fd('\"', 1);
+			j++;
+		}
+		ft_putstr_fd("\"\n", 1);
 		i++;
 	}
 	free_splitters(splitters);

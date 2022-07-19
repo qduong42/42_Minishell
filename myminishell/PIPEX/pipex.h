@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/19 13:58:01 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/19 17:21:11 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # include "libft/libft.h"
 # include "get_next_line/get_next_line.h"
+# include "../minishell.h"
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -55,6 +56,8 @@ typedef struct s_path
 	char		*temp;
 	char		**prefix;
 }	t_path;
+
+typedef struct s_pipe t_pipe;
 
 //			ignore.c
 char	*get_path(char *cmd, char **env);
