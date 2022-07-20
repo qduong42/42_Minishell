@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/20 23:18:50 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/20 23:20:03 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/21 00:48:58 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,29 @@
 
 // LEXER
 
+int		in_or_out(t_pipe *temp, int i)
+{
+		if (!ft_strncmp(&temp->sub[i], HD, 2))
+		{
+			i++;
+			i = iohandler(temp, i + 1, 3, 0);
+		}
+		else
+			i = iohandler(temp, i + 1, 1, 1);
+	return (i);
+}
+
+int		out_or_app(t_pipe *temp, int i)
+{
+	if (!ft_strncmp(&temp->sub[i], AP, 2))
+	{
+		i++;
+		i = iohandler(temp, i + 1, 4, 0);
+	}
+	else
+		i = iohandler(temp, i + 1, 2, 0);
+	return (i);
+}
 void	int_red(t_shell *s)
 {
 	t_pipe	*temp;
@@ -30,25 +53,9 @@ void	int_red(t_shell *s)
 			if (!quote)
 			{
 				if (temp->sub[i] == IN)
-				{
-					if (!ft_strncmp(&temp->sub[i], HD, 2))
-					{
-						i++;
-						i = iohandler(temp, i, 3, 0);
-					}
-					else
-						i = iohandler(temp, i, 1, 1);
-				}
+					i = in_or_out(temp, i);
 				else if (temp->sub[i] == OUT)
-				{
-					if (!ft_strncmp(&temp->sub[i], AP, 2))
-					{
-						i++;
-						i = iohandler(temp, i, 4, 0);
-					}
-					else
-						i = iohandler(temp, i, 2, 0);
-				}
+					i = out_or_app(temp, i);
 				else if (temp->sub[i] == S_Q || temp->sub[i] == D_Q)
 					quote = temp->sub[i];
 			}
