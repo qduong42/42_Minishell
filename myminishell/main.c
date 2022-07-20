@@ -1,5 +1,7 @@
 #include "minishell.h"
 
+int exit_status = 0;
+
 int	main(int argc, char **argv, char **envp)
 {
 	(void)argc;
@@ -10,6 +12,7 @@ int	main(int argc, char **argv, char **envp)
 
 	while (69)
 	{
+		printf("EXIT STATUS: %d\n", exit_status);
 		s.input = readline(PROMPT);
 		if (!s.input[0])
 			continue ;

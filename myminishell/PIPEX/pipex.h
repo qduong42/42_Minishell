@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/20 17:34:02 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/20 17:55:41 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 
 # include "libft/libft.h"
 # include "get_next_line/get_next_line.h"
+# include "../minishell.h"
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -79,7 +80,7 @@ int		ft_oldpwd(t_list *env);
 int		ft_echo(char **args);
 
 //			export.c
-int		export(char **args, t_list **env);
+int		ft_export(char **args, t_list **env);
 char	**lst_to_strstr(t_list *env);
 void	print_sorted_ev(t_list *env);
 
@@ -87,6 +88,6 @@ void	print_sorted_ev(t_list *env);
 int		unset(char	**args, t_list **env);
 
 //			env.c
-void	ft_env(t_list *env);
+int		ft_env(t_list *env);
 
 #endif

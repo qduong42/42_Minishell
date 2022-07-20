@@ -1,6 +1,8 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+extern int exit_status;
+
 /*
 **	INCLUDES
 */
