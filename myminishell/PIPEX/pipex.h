@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/19 13:58:01 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/20 17:34:02 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include "../minishell.h"
 
 # define FIRST_NOT_HERE_DOC 2
 # define FIRST_HERE_DOC 3
@@ -55,6 +56,8 @@ typedef struct s_path
 	char		*temp;
 	char		**prefix;
 }	t_path;
+
+typedef struct s_pipe t_pipe;
 
 //			ignore.c
 char	*get_path(char *cmd, char **env);
