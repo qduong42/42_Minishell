@@ -124,11 +124,6 @@ void	file_exists(char *filename)
 	close(fd);
 }
 
-void	error_msg(char *msg)
-{
-	ft_putstr_fd(msg, 2);
-}
-
 int	special(char *line)
 {
 	if (line[0])

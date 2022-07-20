@@ -21,6 +21,7 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <errno.h>
+# include "PIPEX/pipex.h"
 // # include <termios.h> // tcsetattr, tcgetattr -> not used
 // # include <curses.h> // tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs -> not used
 
@@ -32,12 +33,6 @@
 # define OUT '>'
 # define AP ">>"
 # define HD "<<"
-
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}					t_list;
 
 typedef struct s_pipe
 {
@@ -73,47 +68,23 @@ void	init_all(t_shell *s);
 
 void	space_split(t_shell *s);
 
+//redirection.c
+// char	*del_re(char *sub, int len_fn, int end, int be_r);
+
+// void	ft_catall(char *dst, const char *src);
+
+// void	input(t_pipe *sp, char *temp, int in);
+
+// void	output(t_pipe *sp, char *temp);
+
+// void	append(t_pipe *sp, char *temp);
+
+// char	*iohandler(t_pipe *sp, int i, int id, int in);
 
 
 /*
 ** LIBFT FUNCTIONS
 */
-
-size_t	ft_strlen(const char *s);
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t size);
-
-size_t	ft_strlcat(char *dst, const char *src, size_t size);
-
-void	*ft_calloc(size_t nmemb, size_t size);
-
-int		ft_isalnum(int c);
-
-char	*ft_strtrim(char const *s1, char const *set);
-
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-
-int		ft_putstr_fd(char *s, int fd);
-
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-
-void	*ft_memset(void *s, int c, size_t n);
-
-void	ft_bzero(void *s, size_t n);
-
-int		ft_isalpha(int c);
-
-int		ft_isdigit(int c);
-
-void	ft_putchar_fd(char c, int fd);
-
-char	*ft_strchr(const char *s, int c);
-
-char	*ft_strdup(const char *s);
-
-void	ft_lstadd_back(t_list **lst, t_list *new);
-
-t_list	*ft_lstnew(void *content);
 
 t_pipe	*ft_plstnew(void *content);
 
@@ -132,7 +103,6 @@ int		whitespace(char c);
 int		valid_name(char *line);
 int		unclosed_quotes(char *line);
 void	file_exists(char *filename);
-void	error_msg(char *msg);
 int		special(char *line);
 int		single_dollar(char *line);
 int		unexpected_newline(char *line);
@@ -140,5 +110,8 @@ int		consecutive_specials(char *line);
 
 //			error_handeling.c
 int		errors(char *line);
+
+//			utils/ft_strcmp.c
+int		ft_strcmp(const char *s1, const char *s2);
 
 #endif

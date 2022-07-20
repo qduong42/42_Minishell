@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "../minishell.h"
 
 //-2 is used because -1 is used for open error but also errno will be set which we can see...
 //s_p = sub_pipes

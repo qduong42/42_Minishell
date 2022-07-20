@@ -4,7 +4,7 @@ int	errors(char *line)
 {
 	if (unclosed_quotes(line))
 	{
-		error_msg("Error: unenclosed quotes\n");
+		error_msg("Error: unclosed quotes\n");
 		return (1);
 	}
 	if (unexpected_newline(line))

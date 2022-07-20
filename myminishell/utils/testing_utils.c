@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "../minishell.h"
 
 void	print_list(t_pipe *list, int a)
 {
@@ -26,10 +26,10 @@ void	print_list(t_pipe *list, int a)
 
 void	print_final_array(t_pipe *list)
 {
-	t_pipe *temp;
-	temp = list;
+	t_pipe	*temp;
 	int i = 0;
 	int y = 1;
+	temp = list;
 	while (temp)
 	{
 		i = 0;
