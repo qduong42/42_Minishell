@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:09:37 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/20 22:51:57 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/21 00:37:30 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,28 +25,6 @@ void	ft_catall(char *dst, const char *src)
 		i++;
 	}
 	dst[i + dest_len] = '\0';
-}
-
-//string is everything after '<' s is for whole sub_string
-//fixed to work with ' && " by trimming, frees the allocated string after open.
-char	*del_re(char *sub, int len_fn, int end, int be_r)
-{
-	int		len;
-	char	*temp;
-
-	len = 0;
-	len = ft_strlen(sub);
-	printf("Len of sub:%d\n", len);
-	printf("Len of len_fn:%d\n", len_fn);
-	printf("End(i):%d\n", end);
-	printf("be_r:%d\n", be_r);
-	temp = ft_calloc(1, len - len_fn + 1);
-	ft_strlcpy(temp, sub, be_r);
-	printf("temp:1:%s\n", temp);
-	ft_catall(temp, sub + end);
-	printf("temp:2:%s\n", temp);
-	free(sub);
-	return (temp);
 }
 
 void	input(t_pipe *sp, char *temp, int in)
@@ -104,6 +82,28 @@ void	append(t_pipe *sp, char *temp)
 // 	return (fn);
 // }
 
+//string is everything after '<' s is for whole sub_string
+//fixed to work with ' && " by trimming, frees the allocated string after open.
+char	*del_re(char *sub, int len_fn, int end, int be_r)
+{
+	int		len;
+	char	*temp;
+
+	len = 0;
+	len = ft_strlen(sub);
+	printf("Len of sub:%d\n", len);
+	printf("Len of len_fn:%d\n", len_fn);
+	printf("End(i):%d\n", end);
+	printf("be_r:%d\n", be_r);
+	temp = ft_calloc(1, len - len_fn + 1);
+	ft_strlcpy(temp, sub, be_r);
+	printf("temp:1:%s\n", temp);
+	ft_catall(temp, sub + end);
+	printf("temp:2:%s\n", temp);
+	free(sub);
+	return (temp);
+}
+
 int	iohandler(t_pipe *sp, int i, int id, int in)
 {
 	char	fn[256];
@@ -113,10 +113,11 @@ int	iohandler(t_pipe *sp, int i, int id, int in)
 
 	y = 0;
 	z = 1;
-	be_r = i;
+	be_r = i - 1;
+	if (id == 3 || id == 4)
+		be_r --;
 	if (id == 3 || id == 4)
 		z++;
-	i++;
 	while (sp->sub[i] && sp->sub[i] == ' ')
 	{
 		z++;
