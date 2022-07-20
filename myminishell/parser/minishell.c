@@ -135,12 +135,41 @@ char	*find_env(t_shell *s, int i)
 	//LENGTH OF NEW STRING = i - 1 + LENGTH OF EXPANDED VARIABLE + count from va_end_in to END
 	return (tmp);
 }
+int digit_len(int a)
+{
+	int i = 1;
+	while (a)
+	{
+		a /= 10;
+		i++;
+	}
+	return i;
+}
+char *replace_d_q(t_shell *s, int i)
+{
+	int		exit_status_len;
+	char	*replaced_str;
+	char	*itoa_res;
+
+	itoa_res = ft_itoa(exit_status);
+	exit_status_len = digit_len(exit_status);
+	replaced_str = ft_calloc(1, exit_status_len + ft_strlen(s->input) - 2);
+	ft_strlcpy(replaced_str, s->input, i);
+	printf("replaced string1%s\n", replaced_str);
+	ft_strlcat(replaced_str, itoa_res, i + exit_status_len);
+	printf("replaced string2%s\n", replaced_str);
+	ft_strlcat(replaced_str, &(s->input[i + 1]), i + ft_strlen(&(s->input[i + 1])) + 1 + exit_status_len);
+	printf("replaced string2%s\n", replaced_str);
+	free(itoa_res);
+	free(s->input);
+	return (replaced_str);
+}
 
 void	env_solver(t_shell *s)
 {
-	int	i;
-	int	quote;
-	char *temp;
+	int		i;
+	int		quote;
+	char	*temp;
 	// int end_index;
 
 	i = 0;
@@ -152,6 +181,10 @@ void	env_solver(t_shell *s)
 	{
 		if ((!quote || quote == D_Q) && s->input[i] == '$')
 		{
+			printf("STRING%s\n", s->input);
+			if (s->input[i + 1] == '?')
+				s->input = replace_d_q(s, i + 1);
+			printf("STRING%s\n", s->input);
 			//write(1, "found $", 7);
 			// printf("env|_solv:I:%dYO!\n", i);
 			s->input = find_env(s, i + 1);
