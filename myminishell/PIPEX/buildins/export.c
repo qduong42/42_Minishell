@@ -105,7 +105,7 @@ int	valid_env(char *var)
  * @param env 
  * @return 1 indicates an invalid variable format
  */
-int	export(char **args, t_list **env)
+int	ft_export(char **args, t_list **env)
 {
 	int	i;
 	int	error;

@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/19 17:21:11 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/20 14:09:34 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PIPEX_H
 
 # define PATH_MAX 69
+extern int exit_status;
 
 # include "libft/libft.h"
 # include "get_next_line/get_next_line.h"
@@ -79,7 +80,7 @@ int		ft_oldpwd(t_list *env);
 int		ft_echo(char **args);
 
 //			export.c
-int		export(char **args, t_list **env);
+int		ft_export(char **args, t_list **env);
 char	**lst_to_strstr(t_list *env);
 void	print_sorted_ev(t_list *env);
 
@@ -87,6 +88,6 @@ void	print_sorted_ev(t_list *env);
 int		unset(char	**args, t_list **env);
 
 //			env.c
-void	ft_env(t_list *env);
+int		ft_env(t_list *env);
 
 #endif
