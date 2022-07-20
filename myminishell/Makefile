@@ -42,8 +42,8 @@ else
 
 endif
 
-git add:
-	git add $(INCLUDE) $(SRC) preplan/ Makefile
+norm:
+	norminette $(INCLUDE) $(SRC) $(PARSER)
 
 clean:
 	$(RM) *.o

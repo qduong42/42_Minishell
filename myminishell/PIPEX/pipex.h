@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/19 13:04:23 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/19 13:58:01 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,16 +55,6 @@ typedef struct s_path
 	char		*temp;
 	char		**prefix;
 }	t_path;
-
-typedef struct s_pipe
-{
-	char			*sub;
-	char			**argv;
-	int				fd_in;
-	int				fd_out;
-	char			*hd;
-	struct s_pipe 	*next;
-}					t_pipe;
 
 //			ignore.c
 char	*get_path(char *cmd, char **env);
