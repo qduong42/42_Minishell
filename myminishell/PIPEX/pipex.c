@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/20 17:45:05 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/20 21:54:43 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,26 @@ char	**lst_to_strstr(t_list *env)
 	return (NULL);
 }
 
+int	fucked_cat(t_pipe *cmd)
+{
+	int	i;
+
+	i = 1;
+	if (!ft_strncmp(cmd->argv[0], "cat", ft_strlen(cmd->argv[0])))
+	{
+		while (cmd->argv[i])
+		{
+			if (ft_strncmp(cmd->argv[i], "-e", 2))
+				break ;
+			i++;
+		}
+		if (cmd->argv[i] || cmd->fd_in > 0)
+			return (0);
+		return (1);
+	}
+	return (0);
+}
+
 int	pipex(t_pipe *cmd, t_list **env_lst)
 {
 	t_vars		vars;
@@ -117,6 +137,12 @@ int	pipex(t_pipe *cmd, t_list **env_lst)
 		carry = cmd->fd_in;
 	while (cmd)
 	{
+		if (fucked_cat(cmd))
+		{
+			cmd = cmd->next;
+			error_msg("You fuck too many cats\n");
+			continue ;
+		}
 		if (cmd->fd_out > 0)
 			vars.outfile = cmd->fd_out;
 		if (buildin(cmd, env_lst))
