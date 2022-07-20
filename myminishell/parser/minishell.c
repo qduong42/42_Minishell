@@ -155,11 +155,11 @@ char *replace_d_q(t_shell *s, int i)
 	exit_status_len = digit_len(exit_status);
 	replaced_str = ft_calloc(1, exit_status_len + ft_strlen(s->input) - 2);
 	ft_strlcpy(replaced_str, s->input, i);
-	printf("replaced string1%s\n", replaced_str);
+	printf("replaced string1:%s\n", replaced_str);
 	ft_strlcat(replaced_str, itoa_res, i + exit_status_len);
-	printf("replaced string2%s\n", replaced_str);
+	printf("replaced string2:%s\n", replaced_str);
 	ft_strlcat(replaced_str, &(s->input[i + 1]), i + ft_strlen(&(s->input[i + 1])) + 1 + exit_status_len);
-	printf("replaced string2%s\n", replaced_str);
+	printf("replaced string2:%s\n", replaced_str);
 	free(itoa_res);
 	free(s->input);
 	return (replaced_str);
@@ -183,7 +183,10 @@ void	env_solver(t_shell *s)
 		{
 			printf("STRING%s\n", s->input);
 			if (s->input[i + 1] == '?')
+			{
 				s->input = replace_d_q(s, i + 1);
+				continue ;
+			}
 			printf("STRING%s\n", s->input);
 			//write(1, "found $", 7);
 			// printf("env|_solv:I:%dYO!\n", i);

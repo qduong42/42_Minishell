@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:09:37 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/20 17:36:03 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/20 20:27:25 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,10 @@ void	input(t_pipe *sp, char *temp, int in)
 		sp->fd_in = open(temp, O_RDONLY);
 	// printf("fd_in:%d\n", sp->fd_in);
 	if (sp->fd_in == -1)
+	{
 		perror(temp);
+		exit_status = 1;
+	}
 }
 
 void	output(t_pipe *sp, char *temp)

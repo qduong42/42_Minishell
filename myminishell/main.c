@@ -12,6 +12,7 @@ int	main(int argc, char **argv, char **envp)
 
 	while (69)
 	{
+		exit_status = 9001;
 		printf("EXIT STATUS: %d\n", exit_status);
 		s.input = readline(PROMPT);
 		if (!s.input[0])
@@ -34,7 +35,7 @@ int	main(int argc, char **argv, char **envp)
 		remove_quotes(&s);
 		if (!ft_strncmp(s.input, "exit", ft_strlen(s.input)))
 			exit (0);
-		pipex(s.s_p, &s.env);
+		// pipex(s.s_p, &s.env);
 	}
 	return (0);
 }
