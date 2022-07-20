@@ -1,5 +1,18 @@
 #include "../pipex.h"
 
+static int	env_name(char *name)
+{
+	int	i;
+
+	i = 0;
+	while (name[i])
+	{
+		if (!((name[i] >= 'A' && name[i] <= 'Z') || name[i] == '_'))
+			return (0);
+		i++;
+	}
+	return (1);
+}
 int	unset(char **args, t_list **env)
 {
 	int	i;
@@ -13,12 +26,17 @@ int	unset(char **args, t_list **env)
 		i = 1;
 		while (args[i])
 		{
+			if (!env_name(args[i]))
+			{
+				error_msg("Unset: invalid env variable name\n");
+				return (1);
+			}
 			tmp = *env;
 			dragging = NULL;
 			while (1)
 			{
 				if (!tmp)
-					return (1);
+					break;
 				if (!ft_strncmp(tmp->content, args[i], ft_strlen(args[i])))
 				{
 					if (!dragging)

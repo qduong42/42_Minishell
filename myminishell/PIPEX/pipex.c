@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/19 13:13:18 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/20 17:45:05 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,19 +60,19 @@ void	print_strstr(char **strstr)
 int	buildin(t_pipe *cmd, t_list **env_lst)
 {
 	if (!ft_strncmp(cmd->argv[0], "echo", ft_strlen(cmd->argv[0])))
-		ft_echo(cmd->argv);
+		exit_status = ft_echo(cmd->argv);
 	else if (!ft_strncmp(cmd->argv[0], "cd", ft_strlen(cmd->argv[0])))
-		ft_cd(cmd->argv, *env_lst);
+		exit_status = ft_cd(cmd->argv, *env_lst);
 	else if (!ft_strncmp(cmd->argv[0], "pwd", ft_strlen(cmd->argv[0])))
-		pwd();
+		exit_status = pwd();
 	else if (!ft_strncmp(cmd->argv[0], "export", ft_strlen(cmd->argv[0])))
-		export(cmd->argv, env_lst);
+		exit_status = ft_export(cmd->argv, env_lst);
 	else if (!ft_strncmp(cmd->argv[0], "unset", ft_strlen(cmd->argv[0])))
-		unset(cmd->argv, env_lst);
+		exit_status = unset(cmd->argv, env_lst);
 	else if (!ft_strncmp(cmd->argv[0], "env", ft_strlen(cmd->argv[0])))
-		ft_env(*env_lst);
+		exit_status = ft_env(*env_lst);
 	else if (!ft_strncmp(cmd->argv[0], "exit", ft_strlen(cmd->argv[0])))
-		printf("NO EXIT YET\n");
+		exit(0);
 	else
 		return (0);
 	return (1);
@@ -104,9 +104,10 @@ char	**lst_to_strstr(t_list *env)
 
 int	pipex(t_pipe *cmd, t_list **env_lst)
 {
-	t_vars	vars;
-	int		carry;
-	char	**env;
+	t_vars		vars;
+	int			local;
+	int			carry;
+	char		**env;
 
 	vars.outfile = 1;
 	env = lst_to_strstr(*env_lst);
@@ -139,7 +140,10 @@ int	pipex(t_pipe *cmd, t_list **env_lst)
 				exit(-1);
 			}
 		}
-		waitpid(vars.pid, NULL, 0);
+		waitpid(vars.pid, &local, 0);
+		exit_status = WEXITSTATUS(local);
+		if (exit_status == 255)
+			exit_status = 127;
 		if (carry)
 			close(carry);
 		if (cmd->next)

@@ -78,7 +78,10 @@ int	ft_home(t_list *env)
 				update_env(to_free, NULL, env);
 			}
 			else
+			{
 				error_msg("ERROR: the home env variable is not properly defined\n");
+				cd_ret = 1;
+			}
 			free(to_free);
 		}
 		tmp = tmp->next;
@@ -107,7 +110,10 @@ int	ft_oldpwd(t_list *env)
 				update_env(to_free, NULL, env);
 			}
 			else
+			{
 				error_msg("ERROR: the OLPWD is corrupted\n");
+				cd_ret = 1;
+			}
 			free(to_free);
 		}
 		tmp = tmp->next;
@@ -136,7 +142,10 @@ int	ft_cd(char **args, t_list *env)
 			update_env(to_free, NULL, env);
 		}
 		else
+		{
 			error_msg("ERROR: the given argument is not a valid directory\n");
+			cd_ret = 1;
+		}
 		free(to_free);
 	}
 	return (cd_ret);
