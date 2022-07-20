@@ -64,7 +64,7 @@ void	print_list(t_pipe *list, int a);
 void	int_red(t_shell *s);
 
 // 0 for in, 1 for out, 2 for <<, 3 for >>
-char	*iohandler(t_pipe *sp, int i, int id, int in);
+int		iohandler(t_pipe *sp, int i, int id, int in);
 
 void	init_all(t_shell *s);
 

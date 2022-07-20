@@ -29,12 +29,13 @@ int	main(int argc, char **argv, char **envp)
 		// printf("Sub-pipes before red:\n");
 		// write(1, "\n", 1);
 		int_red(&s);
-		// printf("Sub-pipes after red:\n");
+		printf("Sub-pipes after red:\n");
+		print_list(s.s_p, 1);
 		space_split(&s);
 		remove_quotes(&s);
 		if (!ft_strncmp(s.input, "exit", ft_strlen(s.input)))
 			exit (0);
-		pipex(s.s_p, &s.env);
+		// pipex(s.s_p, &s.env);
 	}
 	return (0);
 }

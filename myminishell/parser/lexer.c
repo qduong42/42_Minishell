@@ -1,66 +1,58 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lexer.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/20 23:18:50 by qduong            #+#    #+#             */
+/*   Updated: 2022/07/20 23:20:03 by qduong           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 // LEXER
 
-
 void	int_red(t_shell *s)
 {
 	t_pipe	*temp;
+	int		i;
+	int		quote;
 
 	temp = s->s_p;
 	while (temp)
 	{
-		int		i;
-		char	*string;
 		i = 0;
-		int quote = 0;
-		string = temp->sub;
-		// printf("SUBPIPE_STRING:%s\n", string);
-		// int in = 0;
-		// int start = 0;
-		// int out = 0;
-		while (string[i])
+		quote = 0;
+		while (temp->sub[i])
 		{
 			if (!quote)
 			{
-				if (string[i] == IN)
+				if (temp->sub[i] == IN)
 				{
-					if (!ft_strncmp(&string[i], HD, 2) /* &&  !in */)
+					if (!ft_strncmp(&temp->sub[i], HD, 2))
 					{
 						i++;
-						// ft_putstr_fd("HEREDOC\n", 1);
-						string = iohandler(temp, i, 3, 0);
-						i = -1;
-						// in = 1;
+						i = iohandler(temp, i, 3, 0);
 					}
-					else /* if (!in) */
-					{
-						string = iohandler(temp, i, 1, 1);
-						i = -1;
-						// ft_putstr_fd("INPUT\n", 1);
-					}
+					else
+						i = iohandler(temp, i, 1, 1);
 				}
-				else if (string[i] == OUT)
+				else if (temp->sub[i] == OUT)
 				{
-					// printf("string%d:%c\n", i, string[i]);
-					if (!ft_strncmp(&string[i], AP, 2))
+					if (!ft_strncmp(&temp->sub[i], AP, 2))
 					{
 						i++;
-						string = iohandler(temp, i, 4, 0);
-						i = -1;
-						// ft_putstr_fd("APPEND\n", 1);
+						i = iohandler(temp, i, 4, 0);
 					}
-					else /* if (!out) */
-					{
-						string = iohandler(temp, i, 2, 0);
-						i = -1;
-						// ft_putstr_fd("OUTPUT\n", 1);
-					}
+					else
+						i = iohandler(temp, i, 2, 0);
 				}
-				else if (string[i] == S_Q || string[i] == D_Q)
-					quote = string[i];
+				else if (temp->sub[i] == S_Q || temp->sub[i] == D_Q)
+					quote = temp->sub[i];
 			}
-			else if (quote && (!string[i] || string[i] == quote))
+			else if (quote && (!temp->sub[i] || temp->sub[i] == quote))
 				quote = 0;
 			i++;
 		}
@@ -70,8 +62,9 @@ void	int_red(t_shell *s)
 
 void	pipe_handle(t_shell *s, int *start, int i)
 {
-	char *token;
-	char *temp;
+	char	*token;
+	char	*temp;
+
 	token = ft_substr(s->input, *start, i - *start);
 	temp = ft_strtrim(token, " ");
 	free(token);

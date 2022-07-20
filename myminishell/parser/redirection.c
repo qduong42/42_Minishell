@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:09:37 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/20 17:36:03 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/20 22:51:57 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,9 @@ void	input(t_pipe *sp, char *temp, int in)
 		sp->fd_in = open(temp, O_RDONLY);
 	// printf("fd_in:%d\n", sp->fd_in);
 	if (sp->fd_in == -1)
+	{
 		perror(temp);
+	}
 }
 
 void	output(t_pipe *sp, char *temp)
@@ -102,7 +104,7 @@ void	append(t_pipe *sp, char *temp)
 // 	return (fn);
 // }
 
-char	*iohandler(t_pipe *sp, int i, int id, int in)
+int	iohandler(t_pipe *sp, int i, int id, int in)
 {
 	char	fn[256];
 	int		y;
@@ -146,5 +148,5 @@ char	*iohandler(t_pipe *sp, int i, int id, int in)
 	sp->sub = del_re(sp->sub, z, i, be_r + 1);
 	if (id != 3)
 		free (temp);
-	return (sp->sub);
+	return (-1);
 }
