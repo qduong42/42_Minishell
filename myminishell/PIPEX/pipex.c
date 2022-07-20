@@ -6,13 +6,11 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/20 16:46:54 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/20 17:45:05 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-int exit_status = 0;
 
 void	assign_stdfds(t_vars *vars)
 {
@@ -143,6 +141,9 @@ int	pipex(t_pipe *cmd, t_list **env_lst)
 			}
 		}
 		waitpid(vars.pid, &local, 0);
+		exit_status = WEXITSTATUS(local);
+		if (exit_status == 255)
+			exit_status = 127;
 		if (carry)
 			close(carry);
 		if (cmd->next)
@@ -164,8 +165,5 @@ int	pipex(t_pipe *cmd, t_list **env_lst)
 		close(carry);
 	if (vars.outfile != 1)
 		close(vars.outfile);
-	exit_status = WEXITSTATUS(local);
-	if (exit_status == 255)
-		exit_status = 127;
 	return (0);
 }
