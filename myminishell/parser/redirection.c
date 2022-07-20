@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:09:37 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/19 13:39:28 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/20 17:36:03 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	input(t_pipe *sp, char *temp, int in)
 		close(sp->fd_in);
 	if (in != 0)
 		sp->fd_in = open(temp, O_RDONLY);
-	printf("fd_in:%d\n", sp->fd_in);
+	// printf("fd_in:%d\n", sp->fd_in);
 	if (sp->fd_in == -1)
 		perror(temp);
 }
@@ -78,33 +78,33 @@ void	append(t_pipe *sp, char *temp)
 		perror(temp);
 }
 
-char	*filename(t_pipe *sp, int *i, int *z)
-{
-	char	*fn;
-	int		y;
+// char	*filename(t_pipe *sp, int *i, int *z)
+// {
+// 	char	*fn;
+// 	int		y;
 
-	y = 0;
-	fn = malloc(256);
-	*i ++;
-	while (sp->sub[*i] && sp->sub[*i] == ' ')
-	{
-		*z++;
-		*i++;
-	}
-	while (sp->sub[*i] && sp->sub[*i] != ' ' && sp->sub[*i] != '<' && sp->sub[*i] != '>')
-	{
-		fn[y] = sp->sub[*i];
-		*i++;
-		y++;
-		*z++;
-	}
-	fn[y] = '\0';
-	return (fn);
-}
+// 	y = 0;
+// 	fn = malloc(256);
+// 	*i ++;
+// 	while (sp->sub[*i] && sp->sub[*i] == ' ')
+// 	{
+// 		*z++;
+// 		*i++;
+// 	}
+// 	while (sp->sub[*i] && sp->sub[*i] != ' ' && sp->sub[*i] != '<' && sp->sub[*i] != '>')
+// 	{
+// 		fn[y] = sp->sub[*i];
+// 		*i++;
+// 		y++;
+// 		*z++;
+// 	}
+// 	fn[y] = '\0';
+// 	return (fn);
+// }
 
 char	*iohandler(t_pipe *sp, int i, int id, int in)
 {
-	// char	fn[256];
+	char	fn[256];
 	int		y;
 	int		z;
 	int		be_r;
@@ -114,25 +114,25 @@ char	*iohandler(t_pipe *sp, int i, int id, int in)
 	be_r = i;
 	if (id == 3 || id == 4)
 		z++;
-	// i++;
-	// while (sp->sub[i] && sp->sub[i] == ' ')
-	// {
-	// 	z++;
-	// 	i++;
-	// }
-	// while (sp->sub[i] && sp->sub[i] != ' ' && sp->sub[i] != '<' && sp->sub[i] != '>')
-	// {
-	// 	fn[y] = sp->sub[i];
-	// 	i++;
-	// 	y++;
-	// 	z++;
-	// }
-	// fn[y] = '\0';
+	i++;
+	while (sp->sub[i] && sp->sub[i] == ' ')
+	{
+		z++;
+		i++;
+	}
+	while (sp->sub[i] && sp->sub[i] != ' ' && sp->sub[i] != '<' && sp->sub[i] != '>')
+	{
+		fn[y] = sp->sub[i];
+		i++;
+		y++;
+		z++;
+	}
+	fn[y] = '\0';
 	char	*temp;
-	char	*fn;
-	fn = filename(sp, &i, &z);
+	// char	*fn;
+	// fn = filename(sp, &i, &z);
 	temp = ft_strtrim(fn, "\"'");
-	free (fn);
+	// free (fn);
 	// printf("error handling:%p\n", temp);
 	printf("Filename string:%s\tID:%d\tIN%d\n", temp, id, in);
 	if (id == 1)

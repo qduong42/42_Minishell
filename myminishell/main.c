@@ -26,10 +26,10 @@ int	main(int argc, char **argv, char **envp)
 		printf("Expanded Input:%s\n", s.input);
 		write(1, "\n", 1);
 		pipe_split(&s);
-		printf("Sub-pipes before red:\n");
-		write(1, "\n", 1);
+		// printf("Sub-pipes before red:\n");
+		// write(1, "\n", 1);
 		int_red(&s);
-		printf("Sub-pipes after red:\n");
+		// printf("Sub-pipes after red:\n");
 		space_split(&s);
 		remove_quotes(&s);
 		if (!ft_strncmp(s.input, "exit", ft_strlen(s.input)))

@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/20 16:54:51 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/20 17:55:41 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include "../minishell.h"
 
 # define FIRST_NOT_HERE_DOC 2
 # define FIRST_HERE_DOC 3
