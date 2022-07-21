@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:09:37 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/20 17:36:03 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/21 22:10:53 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,9 @@ char	*del_re(char *sub, int len_fn, int end, int be_r)
 
 	len = 0;
 	len = ft_strlen(sub);
-	printf("Len of sub:%d\n", len);
-	printf("Len of len_fn:%d\n", len_fn);
-	printf("End(i):%d\n", end);
-	printf("be_r:%d\n", be_r);
 	temp = ft_calloc(1, len - len_fn + 1);
 	ft_strlcpy(temp, sub, be_r);
-	printf("temp:1:%s\n", temp);
 	ft_catall(temp, sub + end);
-	printf("temp:2:%s\n", temp);
 	free(sub);
 	return (temp);
 }
@@ -55,7 +49,6 @@ void	input(t_pipe *sp, char *temp, int in)
 		close(sp->fd_in);
 	if (in != 0)
 		sp->fd_in = open(temp, O_RDONLY);
-	// printf("fd_in:%d\n", sp->fd_in);
 	if (sp->fd_in == -1)
 		perror(temp);
 }
@@ -102,7 +95,7 @@ void	append(t_pipe *sp, char *temp)
 // 	return (fn);
 // }
 
-char	*iohandler(t_pipe *sp, int i, int id, int in)
+int	iohandler(t_pipe *sp, int i, int id, int in)
 {
 	char	fn[256];
 	int		y;
@@ -111,10 +104,12 @@ char	*iohandler(t_pipe *sp, int i, int id, int in)
 
 	y = 0;
 	z = 1;
+	i++;
 	be_r = i;
 	if (id == 3 || id == 4)
 		z++;
-	i++;
+	if (id == 3 || id == 4)
+		be_r--;
 	while (sp->sub[i] && sp->sub[i] == ' ')
 	{
 		z++;
@@ -122,10 +117,10 @@ char	*iohandler(t_pipe *sp, int i, int id, int in)
 	}
 	while (sp->sub[i] && sp->sub[i] != ' ' && sp->sub[i] != '<' && sp->sub[i] != '>')
 	{
+		z++;
 		fn[y] = sp->sub[i];
 		i++;
 		y++;
-		z++;
 	}
 	fn[y] = '\0';
 	char	*temp;
@@ -143,8 +138,8 @@ char	*iohandler(t_pipe *sp, int i, int id, int in)
 		sp->hd = temp;
 	if (id == 4)
 		append(sp, temp);
-	sp->sub = del_re(sp->sub, z, i, be_r + 1);
+	sp->sub = del_re(sp->sub, z, i, be_r);
 	if (id != 3)
 		free (temp);
-	return (sp->sub);
+	return (-1);
 }
