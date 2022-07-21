@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tokenize.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/21 22:23:48 by qduong            #+#    #+#             */
+/*   Updated: 2022/07/21 22:28:31 by qduong           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 static int	strcount(char const *s, char c)
@@ -63,18 +75,19 @@ void	space_split(t_shell *s)
 		temp->argv = ft_split(temp->sub, ' ');
 		while (temp->argv[i])
 		{
-		printf("%s\n", temp->argv[i]);
 		i++;
 		}
-		printf("\n");
 		temp = temp->next;
 	}
 }
 
 int	get_len(char *str)
 {
-	int len = 0;
-	int i = 0;
+	int	len;
+	int	i;
+
+	len = 0;
+	i = 0;
 	while (str[i])
 	{
 		if (str[i] == S_Q || str[i] == D_Q)
@@ -90,7 +103,7 @@ int	get_len(char *str)
 	return (len);
 }
 
-char 	*strcpywithout(char	*src, int len)
+char	*strcpywithout(char	*src, int len)
 {
 	char	*temp2;
 	int		i;
@@ -119,16 +132,16 @@ void	remove_quotes(t_shell	*s)
 	t_pipe	*temp;
 	int		i;
 	char	*temp2;
+	int		len;
 
 	temp = s->s_p;
-	int len = 0;
+	len = 0;
 	while (temp)
 	{
 		i = 0;
 		while (temp->argv[i])
 		{
 			len = get_len(temp->argv[i]);
-			// printf("temp2OUTside:%p\n", temp2);
 			temp2 = strcpywithout(temp->argv[i], len);
 			free(temp->argv[i]);
 			temp->argv[i] = temp2;
