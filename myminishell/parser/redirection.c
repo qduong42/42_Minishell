@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:09:37 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/21 22:10:53 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/21 22:32:25 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,8 @@ void	append(t_pipe *sp, char *temp)
 // 		*z++;
 // 		*i++;
 // 	}
-// 	while (sp->sub[*i] && sp->sub[*i] != ' ' && sp->sub[*i] != '<' && sp->sub[*i] != '>')
+// 	while (sp->sub[*i] && sp->sub[*i] != ' ' 
+//&& sp->sub[*i] != '<' && sp->sub[*i] != '>')
 // 	{
 // 		fn[y] = sp->sub[*i];
 // 		*i++;
@@ -101,6 +102,7 @@ int	iohandler(t_pipe *sp, int i, int id, int in)
 	int		y;
 	int		z;
 	int		be_r;
+	char	*temp;
 
 	y = 0;
 	z = 1;
@@ -115,7 +117,8 @@ int	iohandler(t_pipe *sp, int i, int id, int in)
 		z++;
 		i++;
 	}
-	while (sp->sub[i] && sp->sub[i] != ' ' && sp->sub[i] != '<' && sp->sub[i] != '>')
+	while (sp->sub[i] && sp->sub[i] != ' ' && \
+	sp->sub[i] != '<' && sp->sub[i] != '>')
 	{
 		z++;
 		fn[y] = sp->sub[i];
@@ -123,7 +126,6 @@ int	iohandler(t_pipe *sp, int i, int id, int in)
 		y++;
 	}
 	fn[y] = '\0';
-	char	*temp;
 	// char	*fn;
 	// fn = filename(sp, &i, &z);
 	temp = ft_strtrim(fn, "\"'");
