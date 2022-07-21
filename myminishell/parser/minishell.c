@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/21 22:42:23 by qduong            #+#    #+#             */
+/*   Updated: 2022/07/21 22:42:35 by qduong           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
-//-2 is used because -1 is used for open error but also errno will be set which we can see...
+//-2 is used because -1 is used for open error 
+//but also errno will be set which we can see...
 //s_p = sub_pipes
 void	init_all(t_shell *s)
 {
@@ -8,7 +21,7 @@ void	init_all(t_shell *s)
 	s->s_p = NULL;
 }
 
-char 	*copy_envp(char *envp)
+char	*copy_envp(char *envp)
 {
 	int		len;
 	char	*copy;
@@ -19,16 +32,15 @@ char 	*copy_envp(char *envp)
 	return (copy);
 }
 
-t_list *create_env_list(char **envp)
+t_list	*create_env_list(char **envp)
 {
-	t_list *a;
-	int	i;
+	t_list	*a;
+	int		i;
 
 	a = ft_lstnew(copy_envp(envp[0]));
 	i = 1;
 	while (envp[i])
 	{
-
 		ft_lstadd_back(&a, ft_lstnew(copy_envp(envp[i])));
 		i++;
 	}
@@ -37,13 +49,15 @@ t_list *create_env_list(char **envp)
 
 int	variable_length(t_shell *s, int i)
 {
-	int len = 0;
+	int	len;
+
+	len = 0;
 	while (s->input[i])
 	{
 		if (ft_isalnum(s->input[i]) || s->input[i] == '_')
-	 		len++;
+			len++;
 		else if (!(ft_isalnum(s->input[i])) && !(s->input[i] == '_'))
-			break;
+			break ;
 		i++;
 	}
 	return (len);
@@ -58,7 +72,8 @@ char	*special_join(char *final, char *env, int len, int be_do)
 	new_final = ft_calloc(1, ft_strlen(final) - len + env_len);
 	ft_strlcpy(new_final, final, be_do);
 	ft_strlcat(new_final, env, be_do + env_len);
-	ft_strlcat(new_final, final + be_do + len, ft_strlen(final) - len + env_len + 1);
+	ft_strlcat(new_final, final + be_do + len, \
+	ft_strlen(final) - len + env_len + 1);
 	return (new_final);
 }
 
@@ -84,41 +99,44 @@ char	*variable_name(char const *s1, char s2, int len)
 	return (newstring);
 }
 
-char	*find_env(t_shell *s, int i)
+int	env_len(char *env)
 {
-	int		len;
-	t_list	*current;
+	int	x;
 
-	len = variable_length(s, i);
-	current = (s->env);
-	while (current->next != NULL)
-	{
-		char *tmp2;
-		tmp2 = variable_name(&s->input[i], '=', len);
-		if (ft_strncmp(tmp2, current->content, len + 1) == 0)
-		{
-			free(tmp2);
-			break ;
-		}
-		current = current->next;
-	}
-	char *env;
-	env = current->content;
-	if (current->next == NULL)
-		env = "" ;
-	int x;
 	x = 0;
 	while (env[x])
 	{
 		if (env[x] == '=')
 		{
 			x++;
-			break;
+			break ;
 		}
 		x++;
 	}
-	char *tmp;
-	tmp = special_join(s->input, &env[x], len, i);
+	return (x);
+}
+
+char	*find_env(t_shell *s, int i)
+{
+	int		len;
+	t_list	*current;
+	char	*tmp;
+	int		e_len;
+
+	len = variable_length(s, i);
+	tmp = variable_name(&s->input[i], '=', len);
+	current = (s->env);
+	while (current->next != NULL)
+	{
+		if (ft_strncmp(tmp, current->content, len + 1) == 0)
+			break ;
+		current = current->next;
+	}
+	free(tmp);
+	if (current->next == NULL)
+		current->content = "" ;
+	e_len = env_len(current->content);
+	tmp = special_join(s->input, &(current->content[e_len]), len, i);
 	free(s->input);
 	return (tmp);
 }
