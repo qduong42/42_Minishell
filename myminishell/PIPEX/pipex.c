@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/22 17:40:55 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/22 18:45:59 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,9 @@ int	pipex(t_pipe *cmd, t_list **env_lst)
 				exit(-1);
 			}
 		}
+		sigignore(SIGINT);
 		waitpid(vars.pid, &local, 0);
+		signal(SIGINT, show_prompt);
 		exit_status = WEXITSTATUS(local);
 		if (exit_status == 255)
 			exit_status = 127;

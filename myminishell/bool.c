@@ -19,7 +19,7 @@ int	special_token(char c)
 	return (0);
 }
 
-int	whitespace(char c)
+int	ft_whitespace(char c)
 {
 	char	white[5];
 	int		i;

@@ -2,6 +2,17 @@
 
 int exit_status = 0;
 
+void	show_prompt(int sig)
+{
+	if (sig == SIGINT)
+	{
+		write(1, "\n", 1);
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
+	}
+}
+
 int	main(int argc, char **argv, char **envp)
 {
 	(void)argc;
@@ -9,13 +20,15 @@ int	main(int argc, char **argv, char **envp)
 	(void)envp;
 	t_shell s;
 	s.env = create_env_list(envp);
+	signal(SIGINT, show_prompt);
+	sigignore(SIGABRT);
 
 	while (69)
 	{
 		printf("EXIT STATUS: %d\n", exit_status);
 		s.input = readline(PROMPT);
-		if (!s.input[0])
-			continue ;
+		if (!s.input)
+			break ;
 		add_history(s.input);
 		if (errors(s.input))
 			continue ;

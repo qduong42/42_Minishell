@@ -101,7 +101,7 @@ void	print_final_array(t_pipe *list);
 */  
 
 int		special_token(char c);
-int		whitespace(char c);
+int		ft_whitespace(char c);
 int		valid_name(char *line);
 int		unclosed_quotes(char *line);
 void	file_exists(char *filename);
@@ -115,5 +115,8 @@ int		errors(char *line);
 
 //			utils/ft_strcmp.c
 int		ft_strcmp(const char *s1, const char *s2);
+
+//			pipex_stuff
+void	show_prompt(int sig);
 
 #endif
