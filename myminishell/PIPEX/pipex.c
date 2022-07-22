@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/20 21:54:43 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/22 17:40:55 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,25 +57,41 @@ void	print_strstr(char **strstr)
 	}
 }
 
-int	buildin(t_pipe *cmd, t_list **env_lst)
+int	is_buildin(t_pipe *cmd)
 {
 	if (!ft_strncmp(cmd->argv[0], "echo", ft_strlen(cmd->argv[0])))
-		exit_status = ft_echo(cmd->argv);
+		return(1);
 	else if (!ft_strncmp(cmd->argv[0], "cd", ft_strlen(cmd->argv[0])))
-		exit_status = ft_cd(cmd->argv, *env_lst);
+		return(1);
 	else if (!ft_strncmp(cmd->argv[0], "pwd", ft_strlen(cmd->argv[0])))
-		exit_status = pwd();
+		return(1);
 	else if (!ft_strncmp(cmd->argv[0], "export", ft_strlen(cmd->argv[0])))
-		exit_status = ft_export(cmd->argv, env_lst);
+		return(1);
 	else if (!ft_strncmp(cmd->argv[0], "unset", ft_strlen(cmd->argv[0])))
-		exit_status = unset(cmd->argv, env_lst);
+		return(1);
 	else if (!ft_strncmp(cmd->argv[0], "env", ft_strlen(cmd->argv[0])))
-		exit_status = ft_env(*env_lst);
+		return(1);
+	else if (!ft_strncmp(cmd->argv[0], "exit", ft_strlen(cmd->argv[0])))
+		return(1);
+	return (0);
+}
+
+void	exec_buildin(t_pipe *cmd, t_list **env_lst)
+{
+	if (!ft_strncmp(cmd->argv[0], "echo", ft_strlen(cmd->argv[0])))
+		ft_echo(cmd->argv);
+	else if (!ft_strncmp(cmd->argv[0], "cd", ft_strlen(cmd->argv[0])))
+		ft_cd(cmd->argv, *env_lst);
+	else if (!ft_strncmp(cmd->argv[0], "pwd", ft_strlen(cmd->argv[0])))
+		pwd();
+	else if (!ft_strncmp(cmd->argv[0], "export", ft_strlen(cmd->argv[0])))
+		ft_export(cmd->argv, env_lst);
+	else if (!ft_strncmp(cmd->argv[0], "unset", ft_strlen(cmd->argv[0])))
+		unset(cmd->argv, env_lst);
+	else if (!ft_strncmp(cmd->argv[0], "env", ft_strlen(cmd->argv[0])))
+		ft_env(*env_lst);
 	else if (!ft_strncmp(cmd->argv[0], "exit", ft_strlen(cmd->argv[0])))
 		exit(0);
-	else
-		return (0);
-	return (1);
 }
 
 char	**lst_to_strstr(t_list *env)
@@ -137,19 +153,8 @@ int	pipex(t_pipe *cmd, t_list **env_lst)
 		carry = cmd->fd_in;
 	while (cmd)
 	{
-		if (fucked_cat(cmd))
-		{
-			cmd = cmd->next;
-			error_msg("You fuck too many cats\n");
-			continue ;
-		}
 		if (cmd->fd_out > 0)
 			vars.outfile = cmd->fd_out;
-		if (buildin(cmd, env_lst))
-		{
-			cmd = cmd->next;
-			continue ;
-		}
 		pipe(vars.working);
 		vars.path = get_path(cmd->argv[0], env);
 		vars.pid = fork();
@@ -160,7 +165,12 @@ int	pipex(t_pipe *cmd, t_list **env_lst)
 				dup2(vars.outfile, 1);
 			else
 				dup2(vars.working[1], 1);
-			if (execve(vars.path, cmd->argv, env))
+			if (is_buildin(cmd))
+			{
+				exec_buildin(cmd, env_lst);
+				exit(0);
+			}
+			else if (execve(vars.path, cmd->argv, env))
 			{
 				perror("execve()");
 				exit(-1);
