@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/22 18:45:59 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/22 19:24:01 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,19 @@ int	fucked_cat(t_pipe *cmd)
 		return (1);
 	}
 	return (0);
+}
+
+void	print_shit(t_pipe *cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd->argv[i])
+	{
+		printf("SHIT %s\n", cmd->argv[i]);
+		i++;
+	}
+	printf("ALLAHUABK: %s\n", cmd->hd);
 }
 
 int	pipex(t_pipe *cmd, t_list **env_lst)

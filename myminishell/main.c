@@ -28,7 +28,10 @@ int	main(int argc, char **argv, char **envp)
 		printf("EXIT STATUS: %d\n", exit_status);
 		s.input = readline(PROMPT);
 		if (!s.input)
+		{
+			ft_putstr_fd("exit\n", 1);
 			break ;
+		}
 		add_history(s.input);
 		if (errors(s.input))
 			continue ;
