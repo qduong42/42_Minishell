@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/22 19:24:01 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/23 15:33:06 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,28 @@ void	print_shit(t_pipe *cmd)
 	printf("ALLAHUABK: %s\n", cmd->hd);
 }
 
+int		create_hd(char *delim)
+{
+	int		fd;
+	char	*line;
+
+	while (1)
+	{
+		fd = open("temp_doc", O_CREAT | O_RDWR | O_APPEND, 0777);
+		ft_putstr_fd("> ", 1);
+		line = get_next_line(0);
+		if (!ft_strncmp(line, delim, ft_strlen(line) - 1))
+		{
+			free(line);
+			break ;
+		}
+		ft_putstr_fd(line, fd);
+		free(line);
+		close(fd);
+	}
+	return (fd);
+}
+
 int	pipex(t_pipe *cmd, t_list **env_lst)
 {
 	t_vars		vars;
@@ -166,14 +188,22 @@ int	pipex(t_pipe *cmd, t_list **env_lst)
 		carry = cmd->fd_in;
 	while (cmd)
 	{
+		if (cmd->hd)
+		{
+
+		}
 		if (cmd->fd_out > 0)
 			vars.outfile = cmd->fd_out;
 		pipe(vars.working);
 		vars.path = get_path(cmd->argv[0], env);
+		printf("PATH: %s\n", vars.path);
+		printf("ARG: %s\n", cmd->argv[1]);
 		vars.pid = fork();
 		if (!vars.pid)
 		{
 			dup2(carry, 0);
+			if (cmd->hd)
+				dup2(create_hd(cmd->hd), 0);
 			if (!cmd->next)
 				dup2(vars.outfile, 1);
 			else
@@ -210,6 +240,8 @@ int	pipex(t_pipe *cmd, t_list **env_lst)
 		else
 			close(vars.working[0]); //don't forget to close the pipe if that's it.
 		close(vars.working[1]);
+		if (cmd->hd)
+			unlink(".temp_doc");
 		cmd = cmd->next;
 	}
 	if (carry)
