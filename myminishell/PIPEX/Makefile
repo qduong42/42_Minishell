@@ -1,7 +1,7 @@
 NAME := pipex.a
 
-SRCS = builtins/cd.c builtins/echo.c builtins/export.c builtins/unset.c builtins/env.c ignore.c pipex.c
-OBJS = cd.o echo.o export.o unset.o ignore.o pipex.o env.o
+SRCS = builtins/cd.c builtins/echo.c builtins/export.c builtins/unset.c builtins/env.c ignore.c pipex.c from_pipex/else_if.c from_pipex/abstractable.c from_pipex/debugging.c
+OBJS = cd.o echo.o export.o unset.o ignore.o pipex.o env.o else_if.o abstractable.o debugging.o
 DIRS = libft/libft.a get_next_line/get_next_line.a
 
 #	compilation

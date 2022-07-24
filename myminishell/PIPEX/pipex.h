@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/20 18:29:34 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/24 19:29:55 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@
 
 typedef struct s_vars
 {
+	int		tmp;
+	int		carry;
 	int		upper_exclu;
 	int		outfile;
 	int		infile;
@@ -40,7 +42,6 @@ typedef struct s_vars
 	char	**env;
 	pid_t	pid;
 	int		i;
-	int		carry[1];
 	int		working[2];
 	char	*path;
 	char	**spliters;
@@ -89,5 +90,19 @@ int		unset(char	**args, t_list **env);
 
 //			env.c
 int		ft_env(t_list *env);
+
+//			else_if.c
+int		is_buildin(t_pipe *cmd);
+void	exec_buildin(t_pipe *cmd, t_list **env_lst);
+int		is_parent(t_pipe *cmd);
+void	exec_parent(t_pipe *cmd, t_list **env_lst);
+
+//			abstractable.c
+char	**lst_to_strstr(t_list *env);
+int		create_hd(char *delim);
+
+//			debugging.c
+void	print_strstr(char **strstr);
+void	print_shit(t_pipe *cmd);
 
 #endif
