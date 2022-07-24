@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/24 21:49:39 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/24 22:00:16 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ int	pipex(t_pipe *cmd, t_list **env_lst)
 	vars.env = lst_to_strstr(*env_lst); // FORMATING -- freed
 	while (cmd)// Execution loop
 	{
-		if (vars.outfile > 2)
-			close(vars.outfile);
+		// if (vars.outfile > 2)
+		// 	close(vars.outfile);
 		if (is_parent(cmd))//BUILDINS IN THE PARENT (cmd, carry, env_lst)
 		{
 			if (vars.carry > 2)// -- carry freed in this stroke, execpt last iteration
@@ -44,15 +44,18 @@ int	pipex(t_pipe *cmd, t_list **env_lst)
 				close(vars.carry);
 			vars.carry = cmd->fd_in;
 		}
-		if (cmd->fd_out > 2)
+		// if (cmd->fd_out > 2)
+		// {
+		// 	if(vars.outfile > 2)
+		// 		close(vars.outfile);
+		// 	vars.outfile = cmd->fd_out;
+		// }
+		if (vars.outfile > 2)// CRUCIAL AFTER PIPE
 		{
-			if(vars.outfile > 2)
-				close(vars.outfile);
-			vars.outfile = cmd->fd_out;
+			close(vars.outfile);
+			vars.outfile = 1;
 		}
 		pipe(vars.working);// Can be made implicit
-		if (vars.outfile > 2)
-			close(vars.outfile);
 		if (cmd->next) // A pipe has precendence over an outfile.
 		{
 			vars.outfile = vars.working[1];
