@@ -54,17 +54,3 @@ int	main(int argc, char **argv, char **envp)
 	}
 	return (0);
 }
-
-// int	main(int ac, char **av, char **env)
-// {
-// 	char *args[3] = {"cd", "..", NULL};
-// 	t_shell	s;
-// 	(void)(ac);
-// 	(void)(av);
-
-// 	s.env = create_env_list(env);
-
-// 	pwd();
-// 	ft_cd(args, s.env);
-// 	pwd();
-// }

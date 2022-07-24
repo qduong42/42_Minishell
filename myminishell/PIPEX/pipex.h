@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/24 19:29:55 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/24 20:56:47 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,12 @@ typedef struct s_vars
 {
 	int		tmp;
 	int		carry;
-	int		upper_exclu;
 	int		outfile;
-	int		infile;
-	int		temp;
-	int		temp_doc;
-	int		ac;
-	char	**av;
 	char	**env;
 	pid_t	pid;
-	int		i;
 	int		working[2];
 	char	*path;
-	char	**spliters;
-	int		here_doc;
-	int		last_cmd;
-	int		is_outfile;
+	char	**spliters;// You might need that later for freeing
 }	t_vars;
 
 typedef struct s_path
@@ -60,12 +50,6 @@ typedef struct s_path
 }	t_path;
 
 typedef struct s_pipe t_pipe;
-
-//			ignore.c
-char	*get_path(char *cmd, char **env);
-void	free_all(char **to_free);
-void	conditions(t_vars *vars);
-void	error_msg(char *msg);
 
 //			pipex.c
 int		pipex(t_pipe *cmd, t_list **env_lst);
@@ -93,13 +77,16 @@ int		ft_env(t_list *env);
 
 //			else_if.c
 int		is_buildin(t_pipe *cmd);
-void	exec_buildin(t_pipe *cmd, t_list **env_lst);
+int		exec_buildin(t_pipe *cmd, t_list **env_lst);
 int		is_parent(t_pipe *cmd);
 void	exec_parent(t_pipe *cmd, t_list **env_lst);
 
 //			abstractable.c
 char	**lst_to_strstr(t_list *env);
 int		create_hd(char *delim);
+void	free_all(char **to_free);
+void	error_msg(char *msg);
+char	*get_path(char *cmd, char **env);
 
 //			debugging.c
 void	print_strstr(char **strstr);

@@ -13,16 +13,17 @@ int	is_buildin(t_pipe *cmd)
 	return (0);
 }
 
-void	exec_buildin(t_pipe *cmd, t_list **env_lst)
+int	exec_buildin(t_pipe *cmd, t_list **env_lst)
 {
 	if (!ft_strncmp(cmd->argv[0], "echo", ft_strlen(cmd->argv[0])))
-		ft_echo(cmd->argv);
+		return (ft_echo(cmd->argv));
 	else if (!ft_strncmp(cmd->argv[0], "pwd", ft_strlen(cmd->argv[0])))
-		pwd();
+		return (pwd());
 	else if (!ft_strncmp(cmd->argv[0], "export", ft_strlen(cmd->argv[0])) && !cmd->argv[1])
-		ft_export(cmd->argv, env_lst);
+		return (ft_export(cmd->argv, env_lst));
 	else if (!ft_strncmp(cmd->argv[0], "env", ft_strlen(cmd->argv[0])))
-		ft_env(*env_lst);
+		return (ft_env(*env_lst));
+	return (187);
 }
 
 int	is_parent(t_pipe *cmd)

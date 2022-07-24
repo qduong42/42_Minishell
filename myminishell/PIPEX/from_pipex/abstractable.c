@@ -1,5 +1,31 @@
 #include "../pipex.h"
 
+char	*get_path(char *cmd, char **env)
+{
+	t_path	path;
+
+	path.i = 0;
+	while (ft_strncmp(env[path.i], "PATH=", 5))
+		path.i++;
+	path.prefix = ft_split(env[path.i] + 5, ':');
+	path.i_pre = 0;
+	while (path.prefix[path.i_pre])
+	{
+		path.temp = ft_strjoin(path.prefix[path.i_pre], "/");
+		path.joined = ft_strjoin(path.temp, cmd);
+		free(path.temp);
+		if (!access(path.joined, F_OK))
+		{
+			free_all(path.prefix);
+			return (path.joined);
+		}
+		free(path.joined);
+		path.i_pre++;
+	}
+	free_all(path.prefix);
+	return (cmd);
+}
+
 char	**lst_to_strstr(t_list *env)
 {
 	char	**ret;
@@ -44,4 +70,22 @@ int		create_hd(char *delim)
 		close(fd);
 	}
 	return (fd);
+}
+
+void	free_all(char **to_free)
+{
+	int	i;
+
+	i = 0;
+	while (to_free[i])
+	{
+		free(to_free[i]);
+		i++;
+	}
+	free(to_free);
+}
+
+void	error_msg(char *msg)
+{
+	ft_putstr_fd(msg, 2);
 }
