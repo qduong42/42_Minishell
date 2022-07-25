@@ -23,6 +23,7 @@ extern int exit_status;
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <errno.h>
+# include <sys/stat.h>
 # include "PIPEX/pipex.h"
 // # include <termios.h> // tcsetattr, tcgetattr -> not used
 // # include <curses.h> // tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs -> not used
