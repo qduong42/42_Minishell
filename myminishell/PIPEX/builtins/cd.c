@@ -43,17 +43,19 @@ static void	update_env(char *pwd, char *oldpwd, t_list *env)
 	}
 }
 
-int	pwd()
+int	pwd(t_pipe *cmd)
 {
 	char	cwd[PATH_MAX];
 
+	if (cmd->argv[1] != NULL)
+		return (1);
 	if (getcwd(cwd, PATH_MAX))
 	{
 		ft_putstr_fd(cwd, 1);
 		ft_putstr_fd("\n", 1);
 		return (0);
 	}
-	return (1);
+	return (2);
 }
 
 

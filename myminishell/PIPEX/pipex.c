@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/25 09:36:57 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/25 10:08:55 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	while_stroke(t_pipe **cmd, t_vars *vars, t_list **env_lst)
 	{
 		if (vars->carry > 2)// -- carry freed in this stroke, execpt last iteration
 			close(vars->carry);
-		exec_parent(*cmd, env_lst);
+		exit_status = exec_parent(*cmd, env_lst);
 		*cmd = (*cmd)->next;//PREPARING NEXT ITERATION
 		return (1) ;
 	}

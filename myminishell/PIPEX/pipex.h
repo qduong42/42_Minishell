@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/25 09:36:01 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/25 10:20:21 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,11 @@ typedef struct s_pipe t_pipe;
 
 //			pipex.c
 void	pipex(t_pipe *cmd, t_list **env_lst);
-char	**lst_to_strstr(t_list *env);
 
 //			cd.c
 int		ft_cd(char **args, t_list *env);
 int		ft_home(t_list *env);
-int		pwd();
+int		pwd(t_pipe *cmd);
 int		ft_oldpwd(t_list *env);
 
 //			echo.c
@@ -73,13 +72,13 @@ void	print_sorted_ev(t_list *env);
 int		unset(char	**args, t_list **env);
 
 //			env.c
-int		ft_env(t_list *env);
+int		ft_env(t_pipe *cmd, t_list *env);
 
 //			else_if.c
 int		is_buildin(t_pipe *cmd);
 int		exec_buildin(t_pipe *cmd, t_list **env_lst);
 int		is_parent(t_pipe *cmd);
-void	exec_parent(t_pipe *cmd, t_list **env_lst);
+int		exec_parent(t_pipe *cmd, t_list **env_lst);
 
 //			abstractable.c
 char	**lst_to_strstr(t_list *env);

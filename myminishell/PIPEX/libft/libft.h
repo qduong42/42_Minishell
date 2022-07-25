@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 16:57:29 by ljahn             #+#    #+#             */
-/*   Updated: 2022/05/03 17:51:36 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/25 10:31:31 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,7 @@ void	ft_lstclear(t_list	**lst, void (*del) (void *));
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstiter(t_list *lst, void (*f) (void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f) (void *), void (*del) (void *));
+int		ft_strstrlen(char **strstr);
+int		ft_isnum(char *str);
 
 #endif

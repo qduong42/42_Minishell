@@ -24,6 +24,8 @@ clean:
 	rm -f $(wildcard *.o)
 
 fclean:
+	$(MAKE) fclean -C libft
+	$(MAKE) fclean -C get_next_line
 	rm -f $(wildcard *.o)
 	rm -f pipex.a
 
