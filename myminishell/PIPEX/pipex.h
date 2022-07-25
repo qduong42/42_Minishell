@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/24 20:56:47 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/25 09:36:01 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_path
 typedef struct s_pipe t_pipe;
 
 //			pipex.c
-int		pipex(t_pipe *cmd, t_list **env_lst);
+void	pipex(t_pipe *cmd, t_list **env_lst);
 char	**lst_to_strstr(t_list *env);
 
 //			cd.c
