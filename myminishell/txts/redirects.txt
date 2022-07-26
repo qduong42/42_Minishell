@@ -76,13 +76,3 @@ B$
 c2s18d110:test qduong$ "cat" <"b" "-e" | grep B>b
 c2s18d110:test qduong$ cat b
 c2s18d110:test qduong$ 
-
-Filename string:HD      ID:3    IN0
-Len of sub:12
-Len of len_fn:5
-End(i):12
-be_r:9
-temp:1:cat -e <
-temp:2:cat -e <
-
-`cat -e << HD | cat -e >> A`

@@ -7,6 +7,4 @@ cat -e <b crashes on consecutive inputs.
 
  DOESNT CRASH: ls -la < $avc
 
- Control D crashes now still
-
- nonexisting files not working still -> need to exit to main and continue loop
+ Control D crashes now

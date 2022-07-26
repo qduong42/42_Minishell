@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/20 21:17:41 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/23 15:33:06 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,25 +57,41 @@ void	print_strstr(char **strstr)
 	}
 }
 
-int	buildin(t_pipe *cmd, t_list **env_lst)
+int	is_buildin(t_pipe *cmd)
 {
 	if (!ft_strncmp(cmd->argv[0], "echo", ft_strlen(cmd->argv[0])))
-		exit_status = ft_echo(cmd->argv);
+		return(1);
 	else if (!ft_strncmp(cmd->argv[0], "cd", ft_strlen(cmd->argv[0])))
-		exit_status = ft_cd(cmd->argv, *env_lst);
+		return(1);
 	else if (!ft_strncmp(cmd->argv[0], "pwd", ft_strlen(cmd->argv[0])))
-		exit_status = pwd();
+		return(1);
 	else if (!ft_strncmp(cmd->argv[0], "export", ft_strlen(cmd->argv[0])))
-		exit_status = ft_export(cmd->argv, env_lst);
+		return(1);
 	else if (!ft_strncmp(cmd->argv[0], "unset", ft_strlen(cmd->argv[0])))
-		exit_status = unset(cmd->argv, env_lst);
+		return(1);
 	else if (!ft_strncmp(cmd->argv[0], "env", ft_strlen(cmd->argv[0])))
-		exit_status = ft_env(*env_lst);
+		return(1);
+	else if (!ft_strncmp(cmd->argv[0], "exit", ft_strlen(cmd->argv[0])))
+		return(1);
+	return (0);
+}
+
+void	exec_buildin(t_pipe *cmd, t_list **env_lst)
+{
+	if (!ft_strncmp(cmd->argv[0], "echo", ft_strlen(cmd->argv[0])))
+		ft_echo(cmd->argv);
+	else if (!ft_strncmp(cmd->argv[0], "cd", ft_strlen(cmd->argv[0])))
+		ft_cd(cmd->argv, *env_lst);
+	else if (!ft_strncmp(cmd->argv[0], "pwd", ft_strlen(cmd->argv[0])))
+		pwd();
+	else if (!ft_strncmp(cmd->argv[0], "export", ft_strlen(cmd->argv[0])))
+		ft_export(cmd->argv, env_lst);
+	else if (!ft_strncmp(cmd->argv[0], "unset", ft_strlen(cmd->argv[0])))
+		unset(cmd->argv, env_lst);
+	else if (!ft_strncmp(cmd->argv[0], "env", ft_strlen(cmd->argv[0])))
+		ft_env(*env_lst);
 	else if (!ft_strncmp(cmd->argv[0], "exit", ft_strlen(cmd->argv[0])))
 		exit(0);
-	else
-		return (0);
-	return (1);
 }
 
 char	**lst_to_strstr(t_list *env)
@@ -102,6 +118,61 @@ char	**lst_to_strstr(t_list *env)
 	return (NULL);
 }
 
+int	fucked_cat(t_pipe *cmd)
+{
+	int	i;
+
+	i = 1;
+	if (!ft_strncmp(cmd->argv[0], "cat", ft_strlen(cmd->argv[0])))
+	{
+		while (cmd->argv[i])
+		{
+			if (ft_strncmp(cmd->argv[i], "-e", 2))
+				break ;
+			i++;
+		}
+		if (cmd->argv[i] || cmd->fd_in > 0)
+			return (0);
+		return (1);
+	}
+	return (0);
+}
+
+void	print_shit(t_pipe *cmd)
+{
+	int	i;
+
+	i = 0;
+	while (cmd->argv[i])
+	{
+		printf("SHIT %s\n", cmd->argv[i]);
+		i++;
+	}
+	printf("ALLAHUABK: %s\n", cmd->hd);
+}
+
+int		create_hd(char *delim)
+{
+	int		fd;
+	char	*line;
+
+	while (1)
+	{
+		fd = open("temp_doc", O_CREAT | O_RDWR | O_APPEND, 0777);
+		ft_putstr_fd("> ", 1);
+		line = get_next_line(0);
+		if (!ft_strncmp(line, delim, ft_strlen(line) - 1))
+		{
+			free(line);
+			break ;
+		}
+		ft_putstr_fd(line, fd);
+		free(line);
+		close(fd);
+	}
+	return (fd);
+}
+
 int	pipex(t_pipe *cmd, t_list **env_lst)
 {
 	t_vars		vars;
@@ -117,30 +188,40 @@ int	pipex(t_pipe *cmd, t_list **env_lst)
 		carry = cmd->fd_in;
 	while (cmd)
 	{
+		if (cmd->hd)
+		{
+
+		}
 		if (cmd->fd_out > 0)
 			vars.outfile = cmd->fd_out;
-		if (buildin(cmd, env_lst))
-		{
-			cmd = cmd->next;
-			continue ;
-		}
 		pipe(vars.working);
 		vars.path = get_path(cmd->argv[0], env);
+		printf("PATH: %s\n", vars.path);
+		printf("ARG: %s\n", cmd->argv[1]);
 		vars.pid = fork();
 		if (!vars.pid)
 		{
 			dup2(carry, 0);
+			if (cmd->hd)
+				dup2(create_hd(cmd->hd), 0);
 			if (!cmd->next)
 				dup2(vars.outfile, 1);
 			else
 				dup2(vars.working[1], 1);
-			if (execve(vars.path, cmd->argv, env))
+			if (is_buildin(cmd))
+			{
+				exec_buildin(cmd, env_lst);
+				exit(0);
+			}
+			else if (execve(vars.path, cmd->argv, env))
 			{
 				perror("execve()");
 				exit(-1);
 			}
 		}
+		sigignore(SIGINT);
 		waitpid(vars.pid, &local, 0);
+		signal(SIGINT, show_prompt);
 		exit_status = WEXITSTATUS(local);
 		if (exit_status == 255)
 			exit_status = 127;
@@ -159,6 +240,8 @@ int	pipex(t_pipe *cmd, t_list **env_lst)
 		else
 			close(vars.working[0]); //don't forget to close the pipe if that's it.
 		close(vars.working[1]);
+		if (cmd->hd)
+			unlink(".temp_doc");
 		cmd = cmd->next;
 	}
 	if (carry)

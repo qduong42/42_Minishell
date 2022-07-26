@@ -5,15 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/20 22:58:17 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/20 23:17:11 by qduong           ###   ########.fr       */
+/*   Created: 2022/07/21 22:42:23 by qduong            #+#    #+#             */
+/*   Updated: 2022/07/21 22:42:35 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-//-2 is used because -1 is used for open error but 
-//also errno will be set which we can see...
+//-2 is used because -1 is used for open error 
+//but also errno will be set which we can see...
 //s_p = sub_pipes
 void	init_all(t_shell *s)
 {
@@ -119,24 +119,24 @@ int	env_len(char *env)
 char	*find_env(t_shell *s, int i)
 {
 	int		len;
-	int		e_len;
-	char	*tmp;
 	t_list	*current;
+	char	*tmp;
+	int		e_len;
 
 	len = variable_length(s, i);
-	current = (s->env);
 	tmp = variable_name(&s->input[i], '=', len);
+	current = (s->env);
 	while (current->next != NULL)
 	{
 		if (ft_strncmp(tmp, current->content, len + 1) == 0)
 			break ;
 		current = current->next;
 	}
-	free (tmp);
+	free(tmp);
 	if (current->next == NULL)
 		current->content = "" ;
 	e_len = env_len(current->content);
-	tmp = special_join(s->input, &current->content[e_len], len, i);
+	tmp = special_join(s->input, &(current->content[e_len]), len, i);
 	free(s->input);
 	return (tmp);
 }
