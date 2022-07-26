@@ -25,6 +25,7 @@ int	main(int argc, char **argv, char **envp)
 
 	while (69)
 	{
+		exit_status = 9001;
 		printf("EXIT STATUS: %d\n", exit_status);
 		s.input = readline(PROMPT);
 		if (!s.input)
