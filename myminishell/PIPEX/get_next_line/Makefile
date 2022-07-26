@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ekraujin <ekraujin@student.42.fr>          +#+  +:+       +#+         #
+#    By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/13 14:08:47 by ekraujin          #+#    #+#              #
-#    Updated: 2022/01/10 21:40:16 by ekraujin         ###   ########.fr        #
+#    Updated: 2022/07/22 20:41:52 by ljahn            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ BONUS_OBJ = $(SRC_BONUS:.c=.o)
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -D BUFFER_SIZE
+CFLAGS = -Wall -Wextra -Werror -D BUFFER_SIZE -g
 
 $(NAME): $(OBJ) 
 	ar rcs $(NAME) $(OBJ)

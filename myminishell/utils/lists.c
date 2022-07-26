@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lists.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 20:39:33 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/18 10:38:52 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/26 11:08:51 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_pipe	*ft_plstnew(void *content)
 	new->fd_out = -2;
 	new->hd = NULL;
 	new->next = NULL;
+	new->last = 0;
 	return (new);
 }
 

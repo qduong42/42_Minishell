@@ -16,7 +16,7 @@ OBJ = $(SRC:.c=.o)
 
 CC = gcc
 
-CFLAGS = -g
+CFLAGS = -g -I $(HOME)/goinfre/.brew/opt/readline/include/ -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline
 
 RM = rm -f
 

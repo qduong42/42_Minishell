@@ -36,6 +36,9 @@ extern int exit_status;
 # define AP ">>"
 # define HD "<<"
 
+//last signifies if HD last or INPUT last, it takes last input 
+//source and cleans HD or fd
+//1 for input and 0 for HD
 typedef struct s_pipe
 {
 	char			*sub;
@@ -43,6 +46,7 @@ typedef struct s_pipe
 	int				fd_in;
 	int				fd_out;
 	char			*hd;
+	int				last;
 	struct s_pipe 	*next;
 }					t_pipe;
 
@@ -64,7 +68,7 @@ void	print_list(t_pipe *list, int a);
 void	int_red(t_shell *s);
 
 // 0 for in, 1 for out, 2 for <<, 3 for >>
-char	*iohandler(t_pipe *sp, int i, int id, int in);
+int		iohandler(t_pipe *sp, int i, int id);
 
 void	init_all(t_shell *s);
 
@@ -101,7 +105,7 @@ void	print_final_array(t_pipe *list);
 */  
 
 int		special_token(char c);
-int		whitespace(char c);
+int		ft_whitespace(char c);
 int		valid_name(char *line);
 int		unclosed_quotes(char *line);
 void	file_exists(char *filename);
@@ -115,5 +119,8 @@ int		errors(char *line);
 
 //			utils/ft_strcmp.c
 int		ft_strcmp(const char *s1, const char *s2);
+
+//			pipex_stuff
+void	show_prompt(int sig);
 
 #endif

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekraujin <ekraujin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 14:01:18 by ekraujin          #+#    #+#             */
-/*   Updated: 2022/01/10 21:56:13 by ekraujin         ###   ########.fr       */
+/*   Updated: 2022/07/23 09:22:30 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 static char	*ft_strchr(const char *s, int c)
 {
@@ -66,6 +67,10 @@ char	*get_next_line(int fd)
 		if (rs < 0 || !buf[0])
 		{
 			free(line);
+			printf("THIS FUCKER\n");
+			printf("CAUSE ONE: %d\n", rs);
+			printf("CAUSE TWO: %s\n", buf);
+			perror("read()");
 			return (NULL);
 		}
 		buf[rs] = '\0';

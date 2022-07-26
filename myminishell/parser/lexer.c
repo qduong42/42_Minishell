@@ -1,77 +1,92 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lexer.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/21 22:19:42 by qduong            #+#    #+#             */
+/*   Updated: 2022/07/26 11:28:40 by qduong           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../minishell.h"
 
 // LEXER
+int	in_or_hd(t_pipe *temp, int i)
+{
+	if (!ft_strncmp(&(temp->sub[i]), HD, 2))
+	{
+		i = iohandler(temp, i + 1, 3);
+	}
+	else
+	{
+		i = iohandler(temp, i, 1);
+	}
+	return (i);
+}
 
+int	out_or_app(t_pipe *temp, int i)
+{
+	if (!ft_strncmp(&temp->sub[i], AP, 2))
+		i = iohandler(temp, i + 1, 4);
+	else
+		i = iohandler(temp, i, 2);
+	return (i);
+}
+
+void	clean_fd_hd(t_pipe *temp)
+{
+	if (temp->last == 1)
+	{
+		if (temp->hd)
+		{
+			free(temp->hd);
+			temp->hd = NULL;
+		}
+	}
+	if (temp->last == 0)
+	{
+		if (temp->fd_in > 2)
+			close (temp->fd_in);
+		temp->fd_in = -2;
+	}
+}
 
 void	int_red(t_shell *s)
 {
-	t_pipe	*temp;
+	t_pipe			*temp;
+	int				i;
+	int				quote;
 
 	temp = s->s_p;
 	while (temp)
 	{
-		int		i;
-		char	*string;
 		i = 0;
-		int quote = 0;
-		string = temp->sub;
-		// printf("SUBPIPE_STRING:%s\n", string);
-		// int in = 0;
-		// int start = 0;
-		// int out = 0;
-		while (string[i])
+		quote = 0;
+		while (temp->sub[i])
 		{
-			if (!quote)
-			{
-				if (string[i] == IN)
-				{
-					if (!ft_strncmp(&string[i], HD, 2) /* &&  !in */)
-					{
-						i++;
-						// ft_putstr_fd("HEREDOC\n", 1);
-						string = iohandler(temp, i, 3, 0);
-						i = -1;
-						// in = 1;
-					}
-					else /* if (!in) */
-					{
-						string = iohandler(temp, i, 1, 1);
-						i = -1;
-						// ft_putstr_fd("INPUT\n", 1);
-					}
-				}
-				else if (string[i] == OUT)
-				{
-					// printf("string%d:%c\n", i, string[i]);
-					if (!ft_strncmp(&string[i], AP, 2))
-					{
-						i++;
-						string = iohandler(temp, i, 4, 0);
-						i = -1;
-						// ft_putstr_fd("APPEND\n", 1);
-					}
-					else /* if (!out) */
-					{
-						string = iohandler(temp, i, 2, 0);
-						i = -1;
-						// ft_putstr_fd("OUTPUT\n", 1);
-					}
-				}
-				else if (string[i] == S_Q || string[i] == D_Q)
-					quote = string[i];
-			}
-			else if (quote && (!string[i] || string[i] == quote))
+			if (!quote && temp->sub[i] == IN)
+				i = in_or_hd(temp, i);
+			else if (!quote && temp->sub[i] == OUT)
+				i = out_or_app(temp, i);
+			else if (temp->sub[i] == S_Q || temp->sub[i] == D_Q)
+				quote = temp->sub[i];
+			else if (quote && (!temp->sub[i] || temp->sub[i] == quote))
 				quote = 0;
 			i++;
 		}
+		clean_fd_hd(temp);
+		printf("END HEREDOC:%s\t:END FD_IN:%d\n", temp->hd, temp->fd_in);
 		temp = temp->next;
 	}
 }
 
 void	pipe_handle(t_shell *s, int *start, int i)
 {
-	char *token;
-	char *temp;
+	char	*token;
+	char	*temp;
+
 	token = ft_substr(s->input, *start, i - *start);
 	temp = ft_strtrim(token, " ");
 	free(token);
@@ -84,7 +99,7 @@ void	pipe_split(t_shell *s)
 {
 	int	i;
 	int	quote;
-	int start;
+	int	start;
 
 	i = 0;
 	start = 0;
