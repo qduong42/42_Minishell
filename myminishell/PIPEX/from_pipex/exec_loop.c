@@ -1,4 +1,5 @@
 #include "../pipex.h"
+#include <sys/wait.h>
 
 int	while_stroke(t_pipe **cmd, t_vars *vars, t_list **env_lst)
 {
@@ -15,12 +16,11 @@ int	while_stroke(t_pipe **cmd, t_vars *vars, t_list **env_lst)
 
 void	assign_outfile(t_vars *vars, t_pipe *cmd)
 {
+	if (vars->outfile > 2)
+		close(vars->outfile);
 	pipe(vars->working);
 	if (vars->outfile > 2)// CRUCIAL AFTER PIPE
-	{
-		close(vars->outfile);
 		vars->outfile = 1;
-	}
 	if (cmd->fd_out > 2)
 		vars->outfile = cmd->fd_out;
 	if (cmd->next) // A pipe has precendence over an outfile.

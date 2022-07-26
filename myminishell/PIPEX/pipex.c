@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/25 10:45:11 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/26 19:36:19 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	pipex(t_pipe *cmd, t_list **env_lst)
 		{
 			duping(&vars, cmd);
 			if (is_buildin(cmd))
-				exit(exec_buildin(cmd, env_lst)); // DOES NOT WORK AS INTENDED.
+				exit(exec_buildin(cmd, env_lst));
 			else if (execve(vars.path, cmd->argv, vars.env))
 			{
 				perror("execve()");
