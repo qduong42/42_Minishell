@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:09:37 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/26 15:41:31 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/26 18:21:37 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ void	input(t_pipe *sp, char *temp)
 	if (sp->fd_in == -1)
 	{
 		perror(temp);
-	sp->last = 1;
 	}
+	sp->last = 1;
 }
 
 void	output(t_pipe *sp, char *temp)
