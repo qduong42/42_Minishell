@@ -1,52 +1,8 @@
 #include "../pipex.h"
 
-char	*merge_splitters(char **splitters, int i)
-{
-	int		j;
-	int		space;
-	char	*merged;
-
-	j = 0;
-	space = 0;
-	while (j <= i)
-	{
-		space += ft_strlen(splitters[j]);
-		j++;
-	}
-	merged = malloc(space * sizeof(char));
-	ft_bzero(merged, space);
-	j = 0;
-	while (j <= i)
-	{
-		ft_strlcat(merged, splitters[j], space);
-		j++;
-	}
-	return (merged);
-}
-
-void	pwd_tracker(char *cwd)
-{
-	char		**splitters;
-	struct		stat buf;
-	int			i;
-
-	if (cwd[0] == '/')// Absolute path
-	{
-		splitters = ft_split(cwd, '/');
-		i = 0;
-		while (splitters[i])
-		{
-			merge_splitters(splitters, i);
-			i++;
-		}
-		free_all(splitters)
-	}
-}
-
 static char	*get_pwd()
 {
 	char		*cwd;
-	static char	*sym_path;
 
 	cwd = malloc(sizeof(char) * PATH_MAX);
 	if (getcwd(cwd, PATH_MAX))
