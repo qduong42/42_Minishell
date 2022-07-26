@@ -55,6 +55,7 @@ int	pwd(t_pipe *cmd)
 		ft_putstr_fd("\n", 1);
 		return (0);
 	}
+	perror("getcwd()");
 	return (2);
 }
 
