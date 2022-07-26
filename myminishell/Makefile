@@ -16,13 +16,13 @@ OBJ = $(SRC:.c=.o)
 
 CC = gcc
 
-CFLAGS = -g -I $(HOME)/goinfre/.brew/opt/readline/include/ -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline
+CFLAGS = -Wall -Wextra -Werror -g -I $(HOME)/goinfre/.brew/opt/readline/include/
 
 RM = rm -f
 
 UNAME_S := $(shell uname -s)
 
-LIB_MAC =  -I $(HOME)/goinfre/.brew/opt/readline/include/ -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline
+LIB_MAC =  -I $(HOME)/goinfre/.brew/opt/readline/include/
 
 LIB_LINUX = -lreadline
 
@@ -50,10 +50,9 @@ clean:
 	$(MAKE) clean -C PIPEX/ 
 
 fclean: clean
+	$(MAKE) clean -C PIPEX
 	$(MAKE) fclean -C PIPEX/ 
 	$(RM) $(NAME)
-	$(MAKE) clean -C PIPEX
-	$(MAKE) fclean -C PIPEX
 
 re: fclean all
 
