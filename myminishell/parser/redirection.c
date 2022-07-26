@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:09:37 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/26 18:21:37 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/26 19:52:21 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ char	*del_re(char *sub, int len_fn, int end, int be_r)
 	temp = ft_calloc(1, len - len_fn + 1);
 	ft_strlcpy(temp, sub, be_r);
 	ft_catall(temp, sub + end);
-	free(sub);
+	if (sub)
+		free(sub);
 	return (temp);
 }
 
@@ -153,6 +154,9 @@ int	iohandler(t_pipe *sp, int i, int id)
 		append(sp, temp);
 	sp->sub = del_re(sp->sub, z, i, be_r);
 	if (id != 3)
-		free (temp);
+	{
+		if (temp)
+			free (temp);
+	}
 	return (-1);
 }

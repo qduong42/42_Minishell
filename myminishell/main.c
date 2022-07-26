@@ -42,6 +42,7 @@ void	free_pipes(t_pipe *sp)
 	if (sp)
 		free(sp);
 }
+
 void	free_me(t_shell *s)
 {
 	if (s->input)

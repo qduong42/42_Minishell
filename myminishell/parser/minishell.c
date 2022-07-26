@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 22:42:23 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/26 15:42:03 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/26 19:51:52 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,12 +132,14 @@ char	*find_env(t_shell *s, int i)
 			break ;
 		current = current->next;
 	}
-	free(tmp);
+	if (tmp)
+		free(tmp);
 	if (current->next == NULL)
 		current->content = "" ;
 	e_len = env_len(current->content);
 	tmp = special_join(s->input, &(current->content[e_len]), len, i);
-	free(s->input);
+	if (s->input)
+		free(s->input);
 	return (tmp);
 }
 int digit_len(int a)
@@ -165,8 +167,10 @@ char *replace_d_q(t_shell *s, int i)
 	printf("replaced string2:%s\n", replaced_str);
 	ft_strlcat(replaced_str, &(s->input[i + 1]), i + ft_strlen(&(s->input[i + 1])) + 1 + exit_status_len);
 	printf("replaced string2:%s\n", replaced_str);
-	free(itoa_res);
-	free(s->input);
+	if (itoa_res)
+		free(itoa_res);
+	if (s->env)
+		free(s->input);
 	return (replaced_str);
 }
 
@@ -175,26 +179,22 @@ void	env_solver(t_shell *s)
 	int		i;
 	int		quote;
 	char	*temp;
-	// int end_index;
 
 	i = 0;
 	quote = 0;
 	temp = ft_strtrim(s->input, " \t\n\v\f\r");
-	free(s->input);
+	if (s->input)
+		free(s->input);
 	s->input = temp;
 	while (s->input[i])
 	{
 		if ((!quote || quote == D_Q) && s->input[i] == '$')
 		{
-			printf("STRING%s\n", s->input);
 			if (s->input[i + 1] == '?')
 			{
 				s->input = replace_d_q(s, i + 1);
 				continue ;
 			}
-			printf("STRING%s\n", s->input);
-			//write(1, "found $", 7);
-			// printf("env|_solv:I:%dYO!\n", i);
 			s->input = find_env(s, i + 1);
 			i -= 1;
 		}

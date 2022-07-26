@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 22:23:48 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/26 16:20:58 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/26 19:53:12 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	space_split(t_shell *s)
 		{
 		i++;
 		}
-		free(temp->sub);
+		if (temp->sub)
+			free(temp->sub);
 		temp = temp->next;
 	}
 }
