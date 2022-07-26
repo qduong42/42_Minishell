@@ -51,6 +51,7 @@ int	main(int argc, char **argv, char **envp)
 		remove_quotes(&s);
 		if (!ft_strncmp(s.input, "exit", ft_strlen(s.input)))
 			exit (0);
+		free(s.input);
 		// pipex(s.s_p, &s.env);
 	}
 	return (0);
