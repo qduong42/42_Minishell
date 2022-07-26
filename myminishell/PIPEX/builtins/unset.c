@@ -20,7 +20,10 @@ int	unset(char **args, t_list **env)
 	t_list	*dragging;
 
 	if (!args[1])
+	{
 		error_msg("Unset: invalid number of arguments\n");
+		return (1);
+	}
 	else
 	{
 		i = 1;

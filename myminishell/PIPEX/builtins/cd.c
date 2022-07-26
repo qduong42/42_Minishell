@@ -2,7 +2,7 @@
 
 static char	*get_pwd()
 {
-	char	*cwd;
+	char		*cwd;
 
 	cwd = malloc(sizeof(char) * PATH_MAX);
 	if (getcwd(cwd, PATH_MAX))
@@ -43,17 +43,19 @@ static void	update_env(char *pwd, char *oldpwd, t_list *env)
 	}
 }
 
-int	pwd()
+int	pwd(t_pipe *cmd)
 {
 	char	cwd[PATH_MAX];
 
+	if (cmd->argv[1] != NULL)
+		return (1);
 	if (getcwd(cwd, PATH_MAX))
 	{
 		ft_putstr_fd(cwd, 1);
 		ft_putstr_fd("\n", 1);
 		return (0);
 	}
-	return (1);
+	return (2);
 }
 
 
@@ -123,11 +125,22 @@ int	ft_oldpwd(t_list *env)
 
 int	ft_cd(char **args, t_list *env)
 {
-	int		cd_ret;
-	char	*to_free;
+	int			cd_ret;
+	char		*to_free;
+
+	// struct stat	buf;
+	// static int	i = 0;
 
 	if (!args[1])
 		return (ft_home(env));
+	// to_free = get_pwd();
+	// lstat(to_free, &buf);
+	// if (S_LINK(buf.st_mode))
+	// {
+	// 	ft_strlcpy(sym_stack[i], to_free, ft_strlen(sym_stack[1]));
+	// 	i++;
+	// }
+	// free(to_free);
 	else if (!ft_strncmp(args[1], "-", 2))
 		return (ft_oldpwd(env));
 	else

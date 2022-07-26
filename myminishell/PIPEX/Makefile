@@ -1,7 +1,8 @@
 NAME := pipex.a
 
-SRCS = builtins/cd.c builtins/echo.c builtins/export.c builtins/unset.c builtins/env.c ignore.c pipex.c
-OBJS = cd.o echo.o export.o unset.o ignore.o pipex.o env.o
+SRCS = builtins/cd.c builtins/echo.c builtins/export.c builtins/unset.c builtins/env.c pipex.c from_pipex/else_if.c from_pipex/abstractable.c from_pipex/debugging.c \
+		from_pipex/exec_loop.c
+OBJS = cd.o echo.o export.o unset.o pipex.o env.o else_if.o abstractable.o debugging.o exec_loop.o
 DIRS = libft/libft.a get_next_line/get_next_line.a
 
 #	compilation
@@ -24,6 +25,8 @@ clean:
 	rm -f $(wildcard *.o)
 
 fclean:
+	$(MAKE) fclean -C libft
+	$(MAKE) fclean -C get_next_line
 	rm -f $(wildcard *.o)
 	rm -f pipex.a
 

@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/20 18:29:34 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/25 10:43:04 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,14 @@
 
 typedef struct s_vars
 {
-	int		upper_exclu;
+	int		tmp;
+	int		carry;
 	int		outfile;
-	int		infile;
-	int		temp;
-	int		temp_doc;
-	int		ac;
-	char	**av;
 	char	**env;
 	pid_t	pid;
-	int		i;
-	int		carry[1];
 	int		working[2];
 	char	*path;
-	char	**spliters;
-	int		here_doc;
-	int		last_cmd;
-	int		is_outfile;
+	char	**spliters;// You might need that later for freeing
 }	t_vars;
 
 typedef struct s_path
@@ -60,20 +51,13 @@ typedef struct s_path
 
 typedef struct s_pipe t_pipe;
 
-//			ignore.c
-char	*get_path(char *cmd, char **env);
-void	free_all(char **to_free);
-void	conditions(t_vars *vars);
-void	error_msg(char *msg);
-
 //			pipex.c
-int		pipex(t_pipe *cmd, t_list **env_lst);
-char	**lst_to_strstr(t_list *env);
+void	pipex(t_pipe *cmd, t_list **env_lst);
 
 //			cd.c
 int		ft_cd(char **args, t_list *env);
 int		ft_home(t_list *env);
-int		pwd();
+int		pwd(t_pipe *cmd);
 int		ft_oldpwd(t_list *env);
 
 //			echo.c
@@ -88,6 +72,30 @@ void	print_sorted_ev(t_list *env);
 int		unset(char	**args, t_list **env);
 
 //			env.c
-int		ft_env(t_list *env);
+int		ft_env(t_pipe *cmd, t_list *env);
+
+//			else_if.c
+int		is_buildin(t_pipe *cmd);
+int		exec_buildin(t_pipe *cmd, t_list **env_lst);
+int		is_parent(t_pipe *cmd);
+int		exec_parent(t_pipe *cmd, t_list **env_lst);
+
+//			abstractable.c
+char	**lst_to_strstr(t_list *env);
+int		create_hd(char *delim);
+void	free_all(char **to_free);
+void	error_msg(char *msg);
+char	*get_path(char *cmd, char **env);
+
+//			debugging.c
+void	print_strstr(char **strstr);
+void	print_shit(t_pipe *cmd);
+
+//			exec_loop.c
+int		while_stroke(t_pipe **cmd, t_vars *vars, t_list **env_lst);
+void	assign_outfile(t_vars *vars, t_pipe *cmd);
+void	duping(t_vars *vars, t_pipe *cmd);
+void	aftershave(t_vars *vars, t_pipe **cmd);
+void	close_free(t_vars *vars);
 
 #endif

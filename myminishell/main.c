@@ -56,3 +56,16 @@ int	main(int argc, char **argv, char **envp)
 	}
 	return (0);
 }
+
+// int	main(void)
+// {
+// 	struct stat buf;
+
+// 	lstat("hundemon2", &buf);
+// 	// shift_that(buf->st_mode);
+// 	if (S_ISLNK(buf.st_mode))
+// 		printf("YOU FAGOT IT'S A LINK\n");
+// 	else
+// 		printf("JUST KIDDING\n");
+// 	return (0);
+// }
