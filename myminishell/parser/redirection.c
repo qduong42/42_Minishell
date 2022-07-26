@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:09:37 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/26 11:24:22 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/26 11:28:09 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,8 @@ void	append(t_pipe *sp, char *temp)
 // }
 
 int	iohandler(t_pipe *sp, int i, int id)
+
+
 {
 	char	fn[256];
 	int		y;
