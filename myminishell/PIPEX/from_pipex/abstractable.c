@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:47:12 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/27 11:47:22 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/27 21:22:01 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	create_hd(char *delim)
 
 	while (1)
 	{
-		fd = open("temp_doc", O_CREAT | O_RDWR | O_APPEND, 0777);
+		fd = open(".temp_doc", O_CREAT | O_RDWR | O_APPEND, 0777);
 		ft_putstr_fd("> ", 1);
 		line = get_next_line(0);
 		if (!ft_strncmp(line, delim, ft_strlen(line) - 1))
