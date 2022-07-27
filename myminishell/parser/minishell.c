@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*   By: cthien-h <cthien-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 22:42:23 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/26 19:51:52 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/27 20:03:57 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-//-2 is used because -1 is used for open error 
+//-2 is used because -1 is used for open error
 //but also errno will be set which we can see...
 //s_p = sub_pipes
 void	init_all(t_shell *s)
 {
-	s->s_p = malloc(sizeof(t_pipe));
+	// s->s_p = malloc(sizeof(t_pipe));
 	s->s_p = NULL;
 }
 

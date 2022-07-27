@@ -28,17 +28,25 @@ LIB_LINUX = -lreadline
 
 all: $(NAME)
 
+$(OBJ): $(SRC)
+	$(CC) -g -Wall -Wextra -Werror -c $(SRC)
+
 $(PARSER_OBJ): $(PARSER)
 	$(CC) -g -Wall -Wextra -Werror -c $(PARSER)
 
-$(NAME): $(OBJ) $(PARSER_OBJ)
+$(NAME): $(SRC) $(PARSER)
 ifeq ($(UNAME_S), Darwin)
+	$(CC) -g -Wall -Wextra -Werror -c $(SRC)
+	$(CC) -g -Wall -Wextra -Werror -c $(PARSER)
 
 	$(MAKE) -C PIPEX
-	$(CC) $(CFLAGS) $(DIRS) -o $(NAME) -I $(HOME)/goinfre/.brew/opt/readline/include/ -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline $(OBJ) $(PARSER_OBJ)
+	$(CC) $(CFLAGS) $(DIRS) -o $(NAME) -L $(HOME)/goinfre/.brew/opt/readline/lib/ $(OBJ) $(PARSER_OBJ)
 else
+	$(CC) -g -Wall -Wextra -Werror $(LIB_LINUX) -c $(SRC)
+	$(CC) -g -Wall -Wextra -Werror $(LIB_LINUX) -c $(PARSER)
+
 	$(MAKE) -C PIPEX
-	$(CC) $(CFLAGS) $(DIRS) -o $(NAME) $(LIBS_LINUX) $(OBJ) $(PARSER_OBJ)
+	$(CC) $(CFLAGS) $(DIRS) -o $(NAME) $(LIB_LINUX) $(OBJ) $(PARSER_OBJ)
 
 endif
 
@@ -47,11 +55,11 @@ norm:
 
 clean:
 	$(RM) *.o
-	$(MAKE) clean -C PIPEX/ 
+	$(MAKE) clean -C PIPEX/
 
 fclean: clean
 	$(MAKE) clean -C PIPEX
-	$(MAKE) fclean -C PIPEX/ 
+	$(MAKE) fclean -C PIPEX/
 	$(RM) $(NAME)
 
 re: fclean all

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cthien-h <cthien-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 22:23:48 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/27 13:29:43 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/27 19:46:13 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,11 @@
 void	space_split(t_shell *s)
 {
 	t_pipe	*temp;
-	int		i;
 
 	temp = s->s_p;
 	while (temp)
 	{
-		i = 0;
 		temp->argv = ft_split(temp->sub, ' ');
-		while (temp->argv[i])
-		{
-		i++;
-		}
-		if (temp->sub)
-			free(temp->sub);
 		temp = temp->next;
 	}
 }

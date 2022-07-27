@@ -13,7 +13,7 @@
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# define PATH_MAX 255
+# define FT_PATH_MAX 255
 
 # include "libft/libft.h"
 # include "get_next_line/get_next_line.h"

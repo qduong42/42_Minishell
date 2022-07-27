@@ -4,8 +4,8 @@ static char	*get_pwd()
 {
 	char		*cwd;
 
-	cwd = malloc(sizeof(char) * PATH_MAX);
-	if (getcwd(cwd, PATH_MAX))
+	cwd = malloc(sizeof(char) * FT_PATH_MAX);
+	if (getcwd(cwd, FT_PATH_MAX))
 		return (cwd);
 	return (NULL);
 }
@@ -45,11 +45,11 @@ static void	update_env(char *pwd, char *oldpwd, t_list *env)
 
 int	pwd(t_pipe *cmd)
 {
-	char	cwd[PATH_MAX];
+	char	cwd[FT_PATH_MAX];
 
 	if (cmd->argv[1] != NULL)
 		return (1);
-	if (getcwd(cwd, PATH_MAX))
+	if (getcwd(cwd, FT_PATH_MAX))
 	{
 		ft_putstr_fd(cwd, 1);
 		ft_putstr_fd("\n", 1);

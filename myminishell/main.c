@@ -1,15 +1,15 @@
-#include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: cthien-h <cthien-h@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
+/*   Updated: 2022/07/27 20:22:40 by cthien-h         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int exit_status = 0;
-
-void	show_prompt(int sig)
-{
-	if (sig == SIGINT)
-	{
-		write(1, "\n", 1);
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
 	}
 }
 void	free_env(t_list *env)
@@ -24,31 +24,40 @@ void	free_env(t_list *env)
 	}
 }
 
-void	free_pipes(t_pipe *sp)
+void	free_pipes(t_pipe **sp)
 {
 	t_pipe	*pipe;
+	t_pipe	*tmp;
+	int		i;
 
-	pipe = sp;
+	if (!sp) return;
+	pipe = *sp;
 	while (pipe)
 	{
-		int	i = 0;
+		if (pipe->sub)
+			free(pipe->sub);
+		if (pipe->hd)
+			free(pipe->hd);
+		i = 0;
 		while (pipe->argv[i])
 		{
 			free(pipe->argv[i]);
 			i++;
 		}
-		pipe = pipe->next;
+		free(pipe->argv);
+		tmp = pipe->next;
+		free(pipe);
+		pipe = tmp;
 	}
-	if (sp)
-		free(sp);
 }
 
 void	free_me(t_shell *s)
 {
 	if (s->input)
 		free(s->input);
-	free_env(s->env);
-	free_pipes(s->s_p);
+	ft_lstclear(&s->env, free);
+	// free_env(s->env);
+	free_pipes(&(s->s_p));
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -60,7 +69,8 @@ int	main(int argc, char **argv, char **envp)
 
 	s.env = create_env_list(envp);
 	signal(SIGINT, show_prompt);
-	sigignore(SIGABRT);
+	signal(SIGABRT, SIG_IGN);
+	// sigignore(SIGABRT);
 	init_all(&s);
 	while (69)
 	{
@@ -87,13 +97,14 @@ int	main(int argc, char **argv, char **envp)
 		remove_quotes(&s);
 		if (!ft_strncmp(s.input, "exit", ft_strlen(s.input)))
 			exit (0);
-		// if (s.input)
+		if (s.input)
 			free(s.input);
 		pipex(s.s_p, &s.env);
-		// free_pipes(s.s_p);
+		free_pipes(&(s.s_p));
+		s.s_p = NULL;
 		printf("EXIT STATUS: %d\n", exit_status);
 	}
-	// free_me(&s);
+	free_me(&s);
 	return (0);
 }
 
