@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/27 09:43:27 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/27 10:25:44 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,12 @@ void	pipex(t_pipe *cmd, t_list **env_lst);
 //			cd.c
 int		ft_cd(char **args, t_list *env);
 int		ft_home(t_list *env);
-int		pwd(t_pipe *cmd);
 int		ft_oldpwd(t_list *env);
+
+//			pwd.c
+int		pwd(t_pipe *cmd);
+char	*get_pwd(void);
+void	update_env(char *pwd, char *oldpwd, t_list *env);
 
 //			echo.c
 int		ft_echo(char **args);
