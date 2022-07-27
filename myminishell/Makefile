@@ -36,22 +36,17 @@ $(PARSER_OBJ): $(PARSER)
 
 $(NAME): $(SRC) $(PARSER)
 ifeq ($(UNAME_S), Darwin)
-	$(CC) -g -Wall -Wextra -Werror -c $(SRC)
-	$(CC) -g -Wall -Wextra -Werror -c $(PARSER)
-
+	$(CC) -g -Wall -Wextra -Werror -c $(LIB_MAC) $(SRC)
+	$(CC) -g -Wall -Wextra -Werror -c  $(PARSER)
 	$(MAKE) -C PIPEX
-	$(CC) $(CFLAGS) $(DIRS) -o $(NAME) -L $(HOME)/goinfre/.brew/opt/readline/lib/ $(OBJ) $(PARSER_OBJ)
+	$(CC) $(CFLAGS) $(DIRS) -o $(NAME) -L $(HOME)/goinfre/.brew/opt/readline/lib/ $(LIB_MAC) $(OBJ) $(PARSER_OBJ) -lreadline
 else
 	$(CC) -g -Wall -Wextra -Werror $(LIB_LINUX) -c $(SRC)
 	$(CC) -g -Wall -Wextra -Werror $(LIB_LINUX) -c $(PARSER)
-
 	$(MAKE) -C PIPEX
 	$(CC) $(CFLAGS) $(DIRS) -o $(NAME) $(LIB_LINUX) $(OBJ) $(PARSER_OBJ)
 
 endif
-
-norm:
-	norminette $(INCLUDE) $(SRC) $(PARSER)
 
 clean:
 	$(RM) *.o

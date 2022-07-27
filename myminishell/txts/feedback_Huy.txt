@@ -18,3 +18,32 @@ declare -x DISPLAY="/private/tmp/com.apple.launchd.pSHiUB3UBQ/org.xquartz:0"
 declare -x GIT_ASKPASS="/Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass.sh"
 
 2. env | grep whatever Hangs-> probably because env is given as linked list.. ? feeding into pipe?
+
+3. HEREDOC exits even when limiter is not written after 24 lines.
+Filename string:AA      ID:3
+Filename string:B       ID:3
+END HEREDOC:B   :END FD_IN:-2
+> adawdadwa
+> dw
+> da
+> awd
+> adw
+> wad
+> wda
+> awd
+> aw
+> s
+> d
+> a
+> wda
+> dwa
+> d
+> w
+> dwa
+> s
+> da
+> wd
+> aw
+> d
+> a
+> 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cthien-h <cthien-h@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 22:42:23 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/27 20:03:57 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/07/27 21:35:29 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,17 +142,21 @@ char	*find_env(t_shell *s, int i)
 		free(s->input);
 	return (tmp);
 }
-int digit_len(int a)
+
+int	digit_len(int a)
 {
-	int i = 1;
+	int	i;
+
+	i = 1;
 	while (a)
 	{
 		a /= 10;
 		i++;
 	}
-	return i;
+	return (i);
 }
-char *replace_d_q(t_shell *s, int i)
+
+char	*replace_d_q(t_shell *s, int i)
 {
 	int		exit_status_len;
 	char	*replaced_str;
@@ -165,7 +169,8 @@ char *replace_d_q(t_shell *s, int i)
 	printf("replaced string1:%s\n", replaced_str);
 	ft_strlcat(replaced_str, itoa_res, i + exit_status_len);
 	printf("replaced string2:%s\n", replaced_str);
-	ft_strlcat(replaced_str, &(s->input[i + 1]), i + ft_strlen(&(s->input[i + 1])) + 1 + exit_status_len);
+	ft_strlcat(replaced_str, &(s->input[i + 1]), i + \
+	ft_strlen(&(s->input[i + 1])) + 1 + exit_status_len);
 	printf("replaced string2:%s\n", replaced_str);
 	if (itoa_res)
 		free(itoa_res);
