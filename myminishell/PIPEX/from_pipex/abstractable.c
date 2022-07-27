@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   abstractable.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/27 11:47:12 by ljahn             #+#    #+#             */
+/*   Updated: 2022/07/27 11:47:22 by ljahn            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../pipex.h"
 
 char	*get_path(char *cmd, char **env)
@@ -52,7 +64,7 @@ char	**lst_to_strstr(t_list *env)
 	return (NULL);
 }
 
-int		create_hd(char *delim)
+int	create_hd(char *delim)
 {
 	int		fd;
 	char	*line;

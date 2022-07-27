@@ -1,38 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debugging.c                                        :+:      :+:    :+:   */
+/*   ft_sortstrstr.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/27 11:47:32 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/27 11:47:38 by ljahn            ###   ########.fr       */
+/*   Created: 2022/07/27 12:11:35 by ljahn             #+#    #+#             */
+/*   Updated: 2022/07/27 12:12:15 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "libft.h"
 
-void	print_strstr(char **strstr)
+void	ft_sortstrstr(char **strstr)
 {
-	int	i;
+	char	*tmp;
+	int		i;
+	int		ordered;
 
-	i = 0;
-	while (strstr[i])
+	ordered = 0;
+	while (ordered == 0)
 	{
-		printf("STRSTR: %s\n", strstr[i]);
-		i++;
+		i = 0;
+		ordered = 1;
+		while (strstr[i] && strstr[i + 1])
+		{
+			if (ft_strcmp(strstr[i], strstr[i + 1]) > 0)
+			{
+				tmp = strstr[i];
+				strstr[i] = strstr[i + 1];
+				strstr[i + 1] = tmp;
+				ordered = 0;
+			}
+			i++;
+		}
 	}
-}
-
-void	print_shit(t_pipe *cmd)
-{
-	int	i;
-
-	i = 0;
-	while (cmd->argv[i])
-	{
-		printf("SHIT %s\n", cmd->argv[i]);
-		i++;
-	}
-	printf("ALLAHUABK: %s\n", cmd->hd);
 }

@@ -1,15 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_loop.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/27 11:54:07 by ljahn             #+#    #+#             */
+/*   Updated: 2022/07/27 11:54:32 by ljahn            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../pipex.h"
-#include <sys/wait.h>
 
 int	while_stroke(t_pipe **cmd, t_vars *vars, t_list **env_lst)
 {
-	if (is_parent(*cmd))//BUILDINS IN THE PARENT (cmd, carry, env_lst)
+	if (is_parent(*cmd))
 	{
-		if (vars->carry > 2)// -- carry freed in this stroke, execpt last iteration
+		if (vars->carry > 2)
 			close(vars->carry);
 		exit_status = exec_parent(*cmd, env_lst);
-		*cmd = (*cmd)->next;//PREPARING NEXT ITERATION
-		return (1) ;
+		*cmd = (*cmd)->next;
+		return (1);
 	}
 	return (0);
 }
@@ -19,19 +30,19 @@ void	assign_outfile(t_vars *vars, t_pipe *cmd)
 	if (vars->outfile > 2)
 		close(vars->outfile);
 	pipe(vars->working);
-	if (vars->outfile > 2)// CRUCIAL AFTER PIPE
+	if (vars->outfile > 2)
 		vars->outfile = 1;
 	if (cmd->fd_out > 2)
 		vars->outfile = cmd->fd_out;
-	if (cmd->next) // A pipe has precendence over an outfile.
+	if (cmd->next)
 		vars->outfile = vars->working[1];
-	vars->path = get_path(cmd->argv[0], vars->env);// Impilicit
+	vars->path = get_path(cmd->argv[0], vars->env);
 	vars->pid = fork();
 }
 
 void	duping(t_vars *vars, t_pipe *cmd)
 {
-	dup2(vars->carry, 0); // dupping_and_buildin (vars, cmd);
+	dup2(vars->carry, 0);
 	if (cmd->hd)
 		dup2(create_hd(cmd->hd), 0);
 	dup2(vars->outfile, 1);
@@ -39,15 +50,15 @@ void	duping(t_vars *vars, t_pipe *cmd)
 
 void	aftershave(t_vars *vars, t_pipe **cmd)
 {
-	sigignore(SIGINT); // child_exit(vars, cmd, ) ->local 'local'
+	sigignore(SIGINT);
 	waitpid(vars->pid, &vars->tmp, 0);
 	free(vars->path);
 	signal(SIGINT, show_prompt);
 	exit_status = WEXITSTATUS(vars->tmp);
-	close(vars->working[1]); // CLOSE THE WRITING END OF THE PIPE
-	if ((*cmd)->hd)// DELETE THE HEREDOC
+	close(vars->working[1]);
+	if ((*cmd)->hd)
 		unlink(".temp_doc");
-	if (vars->carry > 2)// pipein_accendence(vars);
+	if (vars->carry > 2)
 		close(vars->carry);
 	if ((*cmd)->fd_in > 2)
 		vars->carry = (*cmd)->fd_in;

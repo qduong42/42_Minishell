@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/27 10:25:44 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/27 11:45:13 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,10 @@ typedef struct s_vars
 	pid_t	pid;
 	int		working[2];
 	char	*path;
-	char	**spliters;// You might need that later for freeing
+	char	**spliters;
 }	t_vars;
 
+//Have you freed your splitters
 typedef struct s_path
 {
 	int			i;
@@ -49,7 +50,7 @@ typedef struct s_path
 	char		**prefix;
 }	t_path;
 
-typedef struct s_pipe t_pipe;
+typedef struct s_pipe	t_pipe;
 
 //			pipex.c
 void	pipex(t_pipe *cmd, t_list **env_lst);

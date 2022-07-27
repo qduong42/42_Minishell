@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/25 10:29:17 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/25 10:31:17 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/27 11:45:57 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_isnum(char *str)
 	if (!str)
 		return (0);
 	i = 0;
-	while(ft_isdigit(str[i]))
+	while (ft_isdigit(str[i]))
 		i++;
 	if (!str[i])
 		return (1);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   unset.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/27 12:24:35 by ljahn             #+#    #+#             */
+/*   Updated: 2022/07/27 12:24:36 by ljahn            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../pipex.h"
 
 static int	env_name(char *name)
@@ -13,11 +25,36 @@ static int	env_name(char *name)
 	}
 	return (1);
 }
-int	unset(char **args, t_list **env)
+
+void	unset_one(t_list **env, char *one)
 {
-	int	i;
 	t_list	*tmp;
 	t_list	*dragging;
+
+	tmp = *env;
+	dragging = NULL;
+	while (1)
+	{
+		if (!tmp)
+			break ;
+		if (!ft_strncmp(tmp->content, one, ft_strlen(one)))
+		{
+			if (!dragging)
+				*env = tmp->next;
+			else
+				dragging->next = tmp->next;
+			free(tmp->content);
+			free(tmp);
+			break ;
+		}
+		dragging = tmp;
+		tmp = tmp->next;
+	}
+}
+
+int	unset(char **args, t_list **env)
+{
+	int		i;
 
 	if (!args[1])
 	{
@@ -34,25 +71,7 @@ int	unset(char **args, t_list **env)
 				error_msg("Unset: invalid env variable name\n");
 				return (1);
 			}
-			tmp = *env;
-			dragging = NULL;
-			while (1)
-			{
-				if (!tmp)
-					break;
-				if (!ft_strncmp(tmp->content, args[i], ft_strlen(args[i])))
-				{
-					if (!dragging)
-						*env = tmp->next;
-					else
-						dragging->next = tmp->next;
-					free(tmp->content);
-					free(tmp);
-					break ;
-				}
-				dragging = tmp;
-				tmp = tmp->next;
-			}
+			unset_one(env, args[i]);
 			i++;
 		}
 	}

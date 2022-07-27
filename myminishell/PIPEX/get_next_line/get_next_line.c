@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 14:01:18 by ekraujin          #+#    #+#             */
-/*   Updated: 2022/07/23 09:22:30 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/27 11:46:33 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,6 @@ char	*get_next_line(int fd)
 		if (rs < 0 || !buf[0])
 		{
 			free(line);
-			printf("THIS FUCKER\n");
-			printf("CAUSE ONE: %d\n", rs);
-			printf("CAUSE TWO: %s\n", buf);
-			perror("read()");
 			return (NULL);
 		}
 		buf[rs] = '\0';

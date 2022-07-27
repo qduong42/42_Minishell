@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/27 12:14:47 by ljahn             #+#    #+#             */
+/*   Updated: 2022/07/27 12:14:48 by ljahn            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../pipex.h"
 
 int	ft_strcmp(const char *s1, const char *s2)
@@ -28,31 +40,6 @@ void	free_splitters(char **splitters)
 	free(splitters);
 }
 
-void	sort_strstr(char **strstr)
-{
-	char	*tmp;
-	int		i;
-	int		ordered;
-
-	ordered = 0;
-	while (ordered == 0)
-	{
-		i = 0;
-		ordered = 1;
-		while (strstr[i] && strstr[i + 1])
-		{
-			if (ft_strcmp(strstr[i], strstr[i + 1]) > 0)
-			{
-				tmp = strstr[i];
-				strstr[i] = strstr[i + 1];
-				strstr[i + 1] = tmp;
-				ordered = 0;
-			}
-			i++;
-		}
-	}
-}
-
 void	print_sorted_ev(t_list *env)
 {
 	char	**splitters;
@@ -60,13 +47,13 @@ void	print_sorted_ev(t_list *env)
 	int		j;
 
 	splitters = lst_to_strstr(env);
-	sort_strstr(splitters);
+	ft_sortstrstr(splitters);
 	i = 0;
 	while (splitters[i])
 	{
 		ft_putstr_fd("declare -x ", 1);
 		j = 0;
-		while(splitters[i][j])
+		while (splitters[i][j])
 		{
 			ft_putchar_fd(splitters[i][j], 1);
 			if (splitters[i][j] == '=')
@@ -76,7 +63,7 @@ void	print_sorted_ev(t_list *env)
 		ft_putstr_fd("\"\n", 1);
 		i++;
 	}
-	free_splitters(splitters);
+	free_all(splitters);
 }
 
 int	valid_env(char *var)

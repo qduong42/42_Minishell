@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   echo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/27 11:55:03 by ljahn             #+#    #+#             */
+/*   Updated: 2022/07/27 11:55:29 by ljahn            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../pipex.h"
 
 static int	strstrlen(char **strstr)
@@ -7,7 +19,7 @@ static int	strstrlen(char **strstr)
 	i = 0;
 	while (strstr[i])
 		i++;
-	return (i); 
+	return (i);
 }
 
 int	ft_echo(char **args)
