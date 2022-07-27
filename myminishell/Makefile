@@ -1,64 +1,39 @@
 NAME = minishell
 
-SRC =  main.c utils/lists.c bool.c error_handling.c
-
-DIRS = PIPEX/libft/libft.a PIPEX/get_next_line/get_next_line.a PIPEX/pipex.a
-
-#Parser files#
-PARSER_SRC = tokenize.c lexer.c minishell.c redirection.c
-PARSER_DIR = parser/
-PARSER = $(addprefix $(PARSER_DIR),$(PARSER_SRC))
-PARSER_OBJ = $(PARSER_SRC:.c=.o)
-
-INCLUDE = minishell.h
-
-OBJ = $(SRC:.c=.o)
-
 CC = gcc
+
+LDFLAGS = -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline
 
 CFLAGS = -Wall -Wextra -Werror -g -I $(HOME)/goinfre/.brew/opt/readline/include/
 
-RM = rm -f
+SRC = main.c utils/lists.c bool.c error_handling.c
 
-UNAME_S := $(shell uname -s)
+OBJ = $(SRC:.c=.o)
 
-LIB_MAC =  -I $(HOME)/goinfre/.brew/opt/readline/include/
+#Parser files#
+PARSER_DIR = parser/
+PARSER_SRC = tokenize.c lexer.c minishell.c redirection.c
+PARSER = $(addprefix $(PARSER_DIR),$(PARSER_SRC))
+PARSER_OBJ = $(PARSER:.c=.o)
 
-LIB_LINUX = -lreadline
+INCLUDE = minishell.h
+
+DIRS = PIPEX/pipex.a PIPEX/get_next_line/get_next_line.a PIPEX/libft/libft.a
 
 all: $(NAME)
 
-$(OBJ): $(SRC)
-	$(CC) -g -Wall -Wextra -Werror -c $(SRC)
-
-$(PARSER_OBJ): $(PARSER)
-	$(CC) -g -Wall -Wextra -Werror -c $(PARSER)
-
-$(NAME): $(SRC) $(PARSER)
-ifeq ($(UNAME_S), Darwin)
-	$(CC) -g -Wall -Wextra -Werror -c $(SRC)
-	$(CC) -g -Wall -Wextra -Werror -c $(PARSER)
-
+$(NAME): $(OBJ) $(PARSER_OBJ)
 	$(MAKE) -C PIPEX
-	$(CC) $(CFLAGS) $(DIRS) -o $(NAME) -L $(HOME)/goinfre/.brew/opt/readline/lib/ $(OBJ) $(PARSER_OBJ)
-else
-	$(CC) -g -Wall -Wextra -Werror $(LIB_LINUX) -c $(SRC)
-	$(CC) -g -Wall -Wextra -Werror $(LIB_LINUX) -c $(PARSER)
-
-	$(MAKE) -C PIPEX
-	$(CC) $(CFLAGS) $(DIRS) -o $(NAME) $(LIB_LINUX) $(OBJ) $(PARSER_OBJ)
-
-endif
+	$(CC) $(CFLAGS) $(OBJ) $(PARSER_OBJ) $(LDFLAGS) $(DIRS) -o $(NAME)
 
 norm:
 	norminette $(INCLUDE) $(SRC) $(PARSER)
 
 clean:
-	$(RM) *.o
 	$(MAKE) clean -C PIPEX/
+	$(RM) $(OBJ) $(PARSER_OBJ)
 
 fclean: clean
-	$(MAKE) clean -C PIPEX
 	$(MAKE) fclean -C PIPEX/
 	$(RM) $(NAME)
 

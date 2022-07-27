@@ -46,7 +46,7 @@ int	valid_name(char *line)
 	i = 0;
 	while(line[i])
 	{
-		if (!special_token(line[i]) && !whitespace(line[i]))
+		if (!special_token(line[i]) && !ft_whitespace(line[i]))
 			return (1);
 		if (special_token(line[i]))
 			return (0);
