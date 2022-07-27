@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 22:42:23 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/27 21:35:29 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/27 21:40:57 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ char	*find_env(t_shell *s, int i)
 	if (current->next == NULL)
 		current->content = "" ;
 	e_len = env_len(current->content);
-	tmp = special_join(s->input, &(current->content[e_len]), len, i);
+	tmp = special_join(s->input, &(((char *)current->content)[e_len]), len, i);
 	if (s->input)
 		free(s->input);
 	return (tmp);

@@ -39,7 +39,8 @@ void	duping(t_vars *vars, t_pipe *cmd)
 
 void	aftershave(t_vars *vars, t_pipe **cmd)
 {
-	sigignore(SIGINT); // child_exit(vars, cmd, ) ->local 'local'
+	// sigignore(SIGINT); // child_exit(vars, cmd, ) ->local 'local'
+	signal(SIGINT, SIG_IGN);
 	waitpid(vars->pid, &vars->tmp, 0);
 	free(vars->path);
 	signal(SIGINT, show_prompt);

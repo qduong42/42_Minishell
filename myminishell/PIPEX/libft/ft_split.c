@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: cthien-h <cthien-h@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:23:44 by ljahn             #+#    #+#             */
-/*   Updated: 2022/05/02 15:32:54 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/27 20:49:06 by cthien-h         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <malloc/malloc.h>
 
 static int	counter(char const *s, char c)
 {
