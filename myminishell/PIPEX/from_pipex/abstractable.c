@@ -5,8 +5,10 @@ char	*get_path(char *cmd, char **env)
 	t_path	path;
 
 	path.i = 0;
-	while (ft_strncmp(env[path.i], "PATH=", 5))
+	while (env[path.i] && ft_strncmp(env[path.i], "PATH=", 5))
 		path.i++;
+	if (!env[path.i])
+		return (cmd);
 	path.prefix = ft_split(env[path.i] + 5, ':');
 	path.i_pre = 0;
 	while (path.prefix[path.i_pre])
