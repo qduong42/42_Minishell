@@ -28,14 +28,17 @@ int	exec_buildin(t_pipe *cmd, t_list **env_lst)
 
 int	is_parent(t_pipe *cmd)
 {
-	if (!ft_strncmp(cmd->argv[0], "cd", ft_strlen(cmd->argv[0])))
-		return(1);
-	else if (!ft_strncmp(cmd->argv[0], "export", ft_strlen(cmd->argv[0])) && cmd->argv[1])
-		return(1);
-	else if (!ft_strncmp(cmd->argv[0], "unset", ft_strlen(cmd->argv[0])))
-		return(1);
-	else if (!ft_strncmp(cmd->argv[0], "exit", ft_strlen(cmd->argv[0])))
-		return(1);
+	if (cmd->argv[0])
+	{
+		if (!ft_strncmp(cmd->argv[0], "cd", ft_strlen(cmd->argv[0])))
+			return(1);
+		else if (!ft_strncmp(cmd->argv[0], "export", ft_strlen(cmd->argv[0])) && cmd->argv[1])
+			return(1);
+		else if (!ft_strncmp(cmd->argv[0], "unset", ft_strlen(cmd->argv[0])))
+			return(1);
+		else if (!ft_strncmp(cmd->argv[0], "exit", ft_strlen(cmd->argv[0])))
+			return(1);
+	}
 	return (0);
 }
 

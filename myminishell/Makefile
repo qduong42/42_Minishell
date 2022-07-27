@@ -29,7 +29,7 @@ LIB_LINUX = -lreadline
 all: $(NAME)
 
 $(PARSER_OBJ): $(PARSER)
-	$(CC) $(FLAGS) -c $(PARSER)
+	$(CC) $(FLAGS) -g -c $(PARSER)
 
 $(NAME): $(OBJ) $(PARSER_OBJ)
 ifeq ($(UNAME_S), Darwin)

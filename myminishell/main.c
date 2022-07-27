@@ -33,6 +33,11 @@ int	main(int argc, char **argv, char **envp)
 			ft_putstr_fd("exit\n", 1);
 			break ;
 		}
+		if (!s.input[0])
+		{
+			free(s.input);
+			continue;
+		}
 		add_history(s.input);
 		if (errors(s.input))
 			continue ;
@@ -49,8 +54,6 @@ int	main(int argc, char **argv, char **envp)
 		// printf("Sub-pipes after red:\n");
 		space_split(&s);
 		remove_quotes(&s);
-		if (!ft_strncmp(s.input, "exit", ft_strlen(s.input)))
-			exit (0);
 		free(s.input);
 		pipex(s.s_p, &s.env);
 	}
