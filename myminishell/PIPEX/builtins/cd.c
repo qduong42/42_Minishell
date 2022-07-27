@@ -128,26 +128,43 @@ int	ft_cd(char **args, t_list *env)
 	int			cd_ret;
 	char		*to_free;
 
-	// struct stat	buf;
-	// static int	i = 0;
-
-	if (!args[1])
+	if (!args[1] || !ft_strncmp(args[1], "~", 2))
 		return (ft_home(env));
-	// to_free = get_pwd();
-	// lstat(to_free, &buf);
-	// if (S_LINK(buf.st_mode))
-	// {
-	// 	ft_strlcpy(sym_stack[i], to_free, ft_strlen(sym_stack[1]));
-	// 	i++;
-	// }
-	// free(to_free);
 	else if (!ft_strncmp(args[1], "-", 2))
 		return (ft_oldpwd(env));
+	else if (args[1][0] == '~')
+	{
+		to_free = malloc(PATH_MAX * sizeof(char));
+		while (env)
+		{
+			if (!ft_strncmp(env->content, "HOME=", 5))
+				ft_strlcpy(to_free, env->content + 5, PATH_MAX);
+			env = env->next;
+		}
+		ft_strlcat(to_free, args[1] + 1, PATH_MAX);
+		args[1] = to_free;
+		to_free = get_pwd();
+		cd_ret = chdir(args[1]);
+		free(args[1]);
+		if (!cd_ret)
+		{
+			update_env(NULL, to_free, env);
+			free(to_free);
+			to_free = get_pwd();
+			update_env(to_free, NULL, env);
+		}
+		else
+		{
+			error_msg("ERROR: the given argument is not a valid directory\n");
+			cd_ret = 1;
+		}
+		free (to_free);
+	}
 	else
 	{
 		to_free = get_pwd();
 		cd_ret = chdir(args[1]);
-		if (!cd_ret)
+		if (!cd_ret)// CAN BE REUSED
 		{
 			update_env(NULL, to_free, env);
 			free(to_free);
