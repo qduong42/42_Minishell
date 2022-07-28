@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 12:14:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/28 12:11:07 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/28 12:44:18 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,13 @@ int	valid_env(char *var)
 	return (1);
 }
 
+/**
+ * @brief duplicates the string till it hits the delimiter
+ * 
+ * @param str 
+ * @param till 
+ * @return char* (allocated)
+ */
 static char	*dup_till(char *str, char till)
 {
 	int		i;
@@ -90,6 +97,13 @@ static char	*dup_till(char *str, char till)
 	return (ret);
 }
 
+/**
+ * @brief checks if arg is valid (setting error), unsets if allready existant, and adds to env
+ * 
+ * @param arg what should be added
+ * @param error error, if the format of arg is invalid
+ * @param env 
+ */
 void	perform_action(char *arg, int *error, t_list **env)
 {
 	char	*to_free;
