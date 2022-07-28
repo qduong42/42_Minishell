@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:07 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/28 10:03:16 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/28 13:18:28 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	while_stroke(t_pipe **cmd, t_vars *vars, t_list **env_lst)
 	{
 		if (vars->carry > 2)
 			close(vars->carry);
-		exit_status = exec_parent(*cmd, env_lst);
+		g_exit_status = exec_parent(*cmd, env_lst);
 		*cmd = (*cmd)->next;
 		return (1);
 	}
@@ -55,7 +55,7 @@ void	aftershave(t_vars *vars, t_pipe **cmd)
 	waitpid(vars->pid, &vars->tmp, 0);
 	free(vars->path);
 	signal(SIGINT, show_prompt);
-	exit_status = WEXITSTATUS(vars->tmp);
+	g_exit_status = WEXITSTATUS(vars->tmp);
 	close(vars->working[1]);
 	if ((*cmd)->hd)
 		unlink(".temp_doc");

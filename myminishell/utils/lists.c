@@ -6,12 +6,17 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 20:39:33 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/26 11:08:51 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/28 12:43:30 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
+/**
+ * modified plstnew function to work with t_pipe lists. initialises nodes  
+ * @param content [void *] subpipe string char *
+ * @param fd_in -2 is used because -1 is used for open error
+ * @return t_pipe* returns node to subpipe
+ */
 t_pipe	*ft_plstnew(void *content)
 {
 	t_pipe	*new;

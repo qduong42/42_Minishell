@@ -1,7 +1,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-extern int exit_status;
+extern int g_exit_status;
 
 /*
 **	INCLUDES
@@ -60,7 +60,7 @@ typedef struct s_shell
 
 t_list *create_env_list(char **envp);
 
-void	env_solver(t_shell* s);
+void	env_solver(t_shell *s, int i);
 
 void	pipe_split(t_shell *s);
 
@@ -90,31 +90,87 @@ void	space_split(t_shell *s);
 
 
 /*
-** LIBFT FUNCTIONS
+** Utils FUNCTIONS
 */
+
+//lists.c
 
 t_pipe	*ft_plstnew(void *content);
 
 void	ft_plstadd_back(t_pipe **lst, t_pipe *new);
 
+//tokenize.c
+
 void	remove_quotes(t_shell*s);
 
 void	print_final_array(t_pipe *list);
+
+//subpipes.c
+
+void	pipe_split(t_shell *s);
+
+//lexer.c
+
+int		in_or_hd(t_pipe *temp, int i);
+
+int		out_or_app(t_pipe *temp, int i);
+
+void	clean_fd_hd(t_pipe *temp);
+
+//utils.c
+
+void	ft_catall(char *dst, const char *src);
+
+char	*del_re(char *sub, int len_fn, int end, int be_r);
+
+int		digit_len(int a);
+
+
+//redir_sub.c
+
+void	input(t_pipe *sp, char *temp);
+
+void	output(t_pipe *sp, char *temp);
+
+void	hd(t_pipe *sp, char *temp);
+
+void	append(t_pipe *sp, char *temp);
+
+// frees.c
+
+void	free_env(t_list *env);
+
+void	free_pipes(t_pipe **sp);
+
+void	free_me(t_shell *s);
+
+// envp_res2.c
+
+int		variable_length(t_shell *s, int i);
+
+char	*special_join(char *final, char *env, int len, int be_do);
+
+char	*variable_name(char const *s1, char s2, int len);
+
+int		env_len(char *env);
+
+
 
 /*
 **  Linus bool.c
 */  
 
 int		special_token(char c);
-int		ft_whitespace(char c);
-int		valid_name(char *line);
-int		unclosed_quotes(char *line);
-void	file_exists(char *filename);
-int		special(char *line);
-int		single_dollar(char *line);
 int		unexpected_newline(char *line);
+int		single_dollar(char *line);
+int		special(char *line);
 int		consecutive_specials(char *line);
 
+//bool2.c
+
+int		unclosed_quotes(char *line);
+int		outside_quotes(char *line, int pos);
+int		ft_whitespace(char c);
 //			error_handeling.c
 int		errors(char *line);
 
