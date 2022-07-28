@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/28 17:52:48 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/28 21:51:56 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	loopyhoopy(t_shell *s)
 		else if (i == 1)
 			continue ;
 		add_history(s->input);
-		if (errors(s->input))
+		if (errors(s->input, &s->env))
 			continue ;
 		parser(s);
 		if (s->input)

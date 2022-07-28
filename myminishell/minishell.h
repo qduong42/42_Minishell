@@ -172,7 +172,7 @@ int		unclosed_quotes(char *line);
 int		outside_quotes(char *line, int pos);
 int		ft_whitespace(char c);
 //			error_handeling.c
-int		errors(char *line);
+int		errors(char *line, t_list **env);
 
 //			utils/ft_strcmp.c
 int		ft_strcmp(const char *s1, const char *s2);
