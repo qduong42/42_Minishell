@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:07 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/28 20:24:57 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/28 21:27:29 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,8 @@ void	aftershave(t_vars *vars, t_pipe **cmd)
 {
 	signal(SIGINT, SIG_IGN);
 	waitpid(vars->pid, &vars->tmp, 0);
-	free(vars->path);
+	if (ft_strncmp(vars->path, (*cmd)->argv[0], ft_strlen(vars->path)))
+		free(vars->path);
 	signal(SIGINT, show_prompt);
 	g_exit_status = WEXITSTATUS(vars->tmp);
 	close(vars->working[1]);
