@@ -6,40 +6,17 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 12:14:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/28 10:38:01 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/28 12:44:18 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i] && s2[i])
-	{
-		if (s1[i] == s2[i])
-			i++;
-		else if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-	}
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-}
-
-void	free_splitters(char **splitters)
-{
-	int	i;
-
-	i = 0;
-	while (splitters[i])
-	{
-		free(splitters[i]);
-		i++;
-	}
-	free(splitters);
-}
-
+/**
+ * @brief fancy print of env variables
+ * 
+ * @param env 
+ */
 void	print_sorted_ev(t_list *env)
 {
 	char	**splitters;
@@ -63,9 +40,15 @@ void	print_sorted_ev(t_list *env)
 		ft_putstr_fd("\"\n", 1);
 		i++;
 	}
-	free_all(splitters);
+	ft_free_all(splitters);
 }
 
+/**
+ * @brief Checks for the format of an env variable
+ * 
+ * @param var the string to test
+ * @return int a boolean (; 1 means is the right format)
+ */
 int	valid_env(char *var)
 {
 	int	i;
@@ -86,6 +69,57 @@ int	valid_env(char *var)
 }
 
 /**
+ * @brief duplicates the string till it hits the delimiter
+ * 
+ * @param str 
+ * @param till 
+ * @return char* (allocated)
+ */
+static char	*dup_till(char *str, char till)
+{
+	int		i;
+	char	*ret;
+	int		j;
+
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (str[i] != till && str[i])
+		i++;
+	ret = malloc(sizeof(char) * (i + 1));
+	j = 0;
+	while (j < i)
+	{
+		ret[j] = str[j];
+		j++;
+	}
+	ret[j] = '\0';
+	return (ret);
+}
+
+/**
+ * @brief checks if arg is valid (setting error), unsets if allready existant, and adds to env
+ * 
+ * @param arg what should be added
+ * @param error error, if the format of arg is invalid
+ * @param env 
+ */
+void	perform_action(char *arg, int *error, t_list **env)
+{
+	char	*to_free;
+
+	if (valid_env(arg))
+	{
+		to_free = dup_till(arg, '=');
+		unset_one(env, to_free);
+		free(to_free);
+		ft_lstadd_back(env, ft_lstnew(ft_strdup(arg)));
+	}
+	else
+		*error = 1;
+}
+
+/**
  * @brief Adds env variables
  * 
  * @param args 
@@ -94,8 +128,8 @@ int	valid_env(char *var)
  */
 int	ft_export(char **args, t_list **env)
 {
-	int	i;
-	int	error;
+	int		i;
+	int		error;
 
 	error = 0;
 	if (!args[1])
@@ -105,10 +139,7 @@ int	ft_export(char **args, t_list **env)
 		i = 1;
 		while (args[i])
 		{
-			if (valid_env(args[i]))
-				ft_lstadd_back(env, ft_lstnew(ft_strdup(args[i])));
-			else
-				error = 1;
+			perform_action(args[i], &error, env);
 			i++;
 		}
 	}

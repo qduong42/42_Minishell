@@ -3,15 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/28 17:39:03 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/28 20:25:08 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+/**
+ * @brief goes to the next cmd if cat-cmd is blocking
+ * 
+ * @param cmd
+ */
 void	fucked_cat(t_pipe **cmd)
 {
 	while ((*cmd))
@@ -28,6 +33,13 @@ void	fucked_cat(t_pipe **cmd)
 	}
 }
 
+/**
+ * @brief the input for the first read (and strstr format for env)
+ * 
+ * @param vars A struct holding all for execution
+ * @param cmd A struct holding all for execution
+ * @param env_lst 
+ */
 void	init_pipex(t_vars *vars, t_pipe *cmd, t_list **env_lst)
 {
 	vars->outfile = 66;
@@ -40,11 +52,16 @@ void	init_pipex(t_vars *vars, t_pipe *cmd, t_list **env_lst)
 	vars->env = lst_to_strstr(*env_lst);
 }
 
+/**
+ * @brief executes cmd with right i/o
+ * 
+ * @param cmd a struct containing args and i/o infos
+ * @param env_lst the env as a lst-data-structure
+ */
 void	pipex(t_pipe *cmd, t_list **env_lst)
 {
 	t_vars		vars;
 
-	// print_shit(cmd);
 	fucked_cat(&cmd);
 	init_pipex(&vars, cmd, env_lst);
 	while (cmd)

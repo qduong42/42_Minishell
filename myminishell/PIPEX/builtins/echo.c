@@ -6,22 +6,18 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:55:03 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/27 11:55:29 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/28 11:05:52 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-static int	strstrlen(char **strstr)
-{
-	int	i;
-
-	i = 0;
-	while (strstr[i])
-		i++;
-	return (i);
-}
-
+/**
+ * @brief prints space separated, either with no-newline option or without
+ * 
+ * @param args the cmd and arguments/options
+ * @return int exit status
+ */
 int	ft_echo(char **args)
 {
 	int	n_option;
@@ -29,7 +25,7 @@ int	ft_echo(char **args)
 
 	i = 1;
 	n_option = 0;
-	if (strstrlen(args) > 1)
+	if (ft_strstrlen(args) > 1)
 	{
 		while (!ft_strncmp(args[i], "-n", 2))
 		{

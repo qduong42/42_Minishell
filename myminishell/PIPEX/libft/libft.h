@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 16:57:29 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/27 12:13:45 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/28 11:38:36 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,7 @@ int		ft_strstrlen(char **strstr);
 int		ft_isnum(char *str);
 void	ft_sortstrstr(char **strstr);
 int		ft_strcmp(const char *s1, const char *s2);
+void	ft_free_all(char **to_free);
+void	ft_print_strstr(char **strstr);
 
 #endif

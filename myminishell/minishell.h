@@ -180,4 +180,7 @@ int		ft_strcmp(const char *s1, const char *s2);
 //			pipex_stuff
 void	show_prompt(int sig);
 
+//			main.c
+void	free_pipes(t_pipe **sp);
+
 #endif

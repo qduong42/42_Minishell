@@ -6,19 +6,19 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:20:30 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/28 10:06:17 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/28 11:02:39 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
 /**
- * @brief can't change env's first element
+ * @brief kepps track of env
  * 
- * @param to 
- * @param error 
+ * @param to relative/absolute path
+ * @param error msg to display if chdir() goes wrong
  * @param env 
- * @return int 
+ * @return int the exit status of chdir()
  */
 int	change_dir(char *to, char *error, t_list *env)
 {
@@ -43,6 +43,12 @@ int	change_dir(char *to, char *error, t_list *env)
 	return (cd_ret);
 }
 
+/**
+ * @brief gets the path to 'home' and calls change_dir() with it
+ * 
+ * @param env to get the home-env-variable
+ * @return int exit status
+ */
 int	ft_home(t_list *env)
 {
 	t_list	*tmp;
@@ -59,6 +65,12 @@ int	ft_home(t_list *env)
 	return (cd_ret);
 }
 
+/**
+ * @brief gets the path to 'oldpwd' and calls change_dir() with it
+ * 
+ * @param env to get the oldpwd-env-variable
+ * @return int exit status
+ */
 int	ft_oldpwd(t_list *env)
 {
 	t_list	*tmp;
@@ -75,6 +87,13 @@ int	ft_oldpwd(t_list *env)
 	return (cd_ret);
 }
 
+/**
+ * @brief a buildin of the parent process, changes it's working directory and env
+ * 
+ * @param args the command and arguments/options
+ * @param env 
+ * @return int exit status
+ */
 int	ft_cd(char **args, t_list *env)
 {
 	int			cd_ret;

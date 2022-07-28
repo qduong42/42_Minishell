@@ -3,15 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   exec_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:07 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/28 13:18:28 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/28 20:24:57 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
+/**
+ * @brief kills all open files, executes non-piping parent buildin
+ * 
+ * @param cmd 
+ * @param vars 
+ * @param env_lst 
+ * @return int 
+ */
 int	while_stroke(t_pipe **cmd, t_vars *vars, t_list **env_lst)
 {
 	if (is_parent(*cmd))
@@ -25,6 +33,12 @@ int	while_stroke(t_pipe **cmd, t_vars *vars, t_list **env_lst)
 	return (0);
 }
 
+/**
+ * @brief assigns vars->outfile, calls pipe(), get_path() and fork()
+ * 
+ * @param vars 
+ * @param cmd 
+ */
 void	assign_outfile(t_vars *vars, t_pipe *cmd)
 {
 	if (vars->outfile > 2)
@@ -40,6 +54,12 @@ void	assign_outfile(t_vars *vars, t_pipe *cmd)
 	vars->pid = fork();
 }
 
+/**
+ * @brief dups vars->carry/heredoc_fd on 0 and vars->outfile on 1
+ * 
+ * @param vars 
+ * @param cmd 
+ */
 void	duping(t_vars *vars, t_pipe *cmd)
 {
 	dup2(vars->carry, 0);
@@ -48,9 +68,14 @@ void	duping(t_vars *vars, t_pipe *cmd)
 	dup2(vars->outfile, 1);
 }
 
+/**
+ * @brief global exit_status, signals during child process, deleting heredoc, reassigning carry
+ * 
+ * @param vars 
+ * @param cmd 
+ */
 void	aftershave(t_vars *vars, t_pipe **cmd)
 {
-	// sigignore(SIGINT); // child_exit(vars, cmd, ) ->local 'local'
 	signal(SIGINT, SIG_IGN);
 	waitpid(vars->pid, &vars->tmp, 0);
 	free(vars->path);
@@ -67,11 +92,16 @@ void	aftershave(t_vars *vars, t_pipe **cmd)
 	*cmd = (*cmd)->next;
 }
 
+/**
+ * @brief closes/frees stuff of the last iteration
+ * 
+ * @param vars 
+ */
 void	close_free(t_vars *vars)
 {
 	if (vars->carry > 2)
 		close(vars->carry);
 	if (vars->outfile > 2)
 		close(vars->outfile);
-	free_all(vars->env);
+	ft_free_all(vars->env);
 }
