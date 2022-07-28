@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:09:37 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/28 12:35:03 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/28 21:11:23 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*fnhandler(t_pipe *sp, int *i, int *z)
 	while (sp->sub[*i] && sp->sub[*i] == ' ')
 	{
 		(*z)++;
-		i++;
+		(*i)++;
 	}
 	while (sp->sub[*i] && sp->sub[*i] != ' ' && \
 	sp->sub[*i] != '<' && sp->sub[*i] != '>')
