@@ -37,7 +37,7 @@ char	*get_path(char *cmd, char **env)
 		path.i_pre++;
 	}
 	free_all(path.prefix);
-	return (cmd);
+	return (ft_strdup(cmd));
 }
 
 char	**lst_to_strstr(t_list *env)

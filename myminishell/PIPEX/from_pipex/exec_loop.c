@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:07 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/27 11:54:32 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/28 10:03:16 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void	duping(t_vars *vars, t_pipe *cmd)
 
 void	aftershave(t_vars *vars, t_pipe **cmd)
 {
-	sigignore(SIGINT);
+	// sigignore(SIGINT); // child_exit(vars, cmd, ) ->local 'local'
+	signal(SIGINT, SIG_IGN);
 	waitpid(vars->pid, &vars->tmp, 0);
 	free(vars->path);
 	signal(SIGINT, show_prompt);

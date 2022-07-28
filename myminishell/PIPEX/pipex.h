@@ -6,14 +6,14 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/27 11:45:13 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/28 10:03:42 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
-# define PATH_MAX 255
+# define FT_PATH_MAX 255
 
 # include "libft/libft.h"
 # include "get_next_line/get_next_line.h"

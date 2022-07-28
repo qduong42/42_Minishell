@@ -1,0 +1,189 @@
+rm -f *.o
+make clean -C PIPEX/
+make[1]: Entering directory '/valgrind/PIPEX'
+rm -f 
+make[1]: Leaving directory '/valgrind/PIPEX'
+make clean -C PIPEX
+make[1]: Entering directory '/valgrind/PIPEX'
+rm -f 
+make[1]: Leaving directory '/valgrind/PIPEX'
+make fclean -C PIPEX/
+make[1]: Entering directory '/valgrind/PIPEX'
+make fclean -C libft
+make[2]: Entering directory '/valgrind/PIPEX/libft'
+rm -f libft.a ft_isalpha.o ft_isdigit.o ft_isalnum.o ft_isascii.o ft_isprint.o ft_strlen.o ft_memset.o ft_bzero.o ft_memcpy.o ft_memmove.o ft_strlcpy.o ft_strlcat.o ft_toupper.o ft_tolower.o ft_strchr.o ft_strrchr.o ft_strncmp.o ft_memchr.o ft_memcmp.o ft_strnstr.o ft_atoi.o ft_calloc.o ft_strdup.o ft_substr.o ft_substr.o ft_strjoin.o ft_strtrim.o ft_split.o ft_itoa.o ft_strmapi.o ft_striteri.o ft_putchar_fd.o ft_putstr_fd.o ft_putendl_fd.o ft_putnbr_fd.o ft_memcpy.o ft_lstnew.o ft_lstadd_front.o ft_lstsize.o ft_lstlast.o ft_lstdelone.o ft_lstclear.o ft_lstadd_back.o ft_lstiter.o ft_lstmap.o ft_strstrlen.o ft_isnum.o
+make[2]: Leaving directory '/valgrind/PIPEX/libft'
+make fclean -C get_next_line
+make[2]: Entering directory '/valgrind/PIPEX/get_next_line'
+rm -f get_next_line.o get_next_line_utils.o get_next_line_bonus_utils.o get_next_line_bonus.o \
+rm -f get_next_line.a
+make[2]: Leaving directory '/valgrind/PIPEX/get_next_line'
+rm -f 
+rm -f pipex.a
+make[1]: Leaving directory '/valgrind/PIPEX'
+rm -f minishell
+gcc -g -Wall -Wextra -Werror -lreadline -c main.c utils/lists.c bool.c error_handling.c
+main.c:13:2: error: expected identifier or '(' before '}' token
+   13 |  }
+      |  ^
+main.c:14:1: error: expected identifier or '(' before '}' token
+   14 | }
+      | ^
+main.c:15:15: error: unknown type name 't_list'
+   15 | void free_env(t_list *env)
+      |               ^~~~~~
+main.c:27:17: error: unknown type name 't_pipe'
+   27 | void free_pipes(t_pipe **sp)
+      |                 ^~~~~~
+main.c:54:14: error: unknown type name 't_shell'
+   54 | void free_me(t_shell *s)
+      |              ^~~~~~~
+main.c: In function 'main':
+main.c:68:2: error: unknown type name 't_shell'
+   68 |  t_shell s;
+      |  ^~~~~~~
+main.c:70:3: error: request for member 'env' in something not a structure or union
+   70 |  s.env = create_env_list(envp);
+      |   ^
+main.c:70:10: error: implicit declaration of function 'create_env_list' [-Werror=implicit-function-declaration]
+   70 |  s.env = create_env_list(envp);
+      |          ^~~~~~~~~~~~~~~
+main.c:71:2: error: implicit declaration of function 'signal' [-Werror=implicit-function-declaration]
+   71 |  signal(SIGINT, show_prompt);
+      |  ^~~~~~
+main.c:71:9: error: 'SIGINT' undeclared (first use in this function)
+   71 |  signal(SIGINT, show_prompt);
+      |         ^~~~~~
+main.c:71:9: note: each undeclared identifier is reported only once for each function it appears in
+main.c:71:17: error: 'show_prompt' undeclared (first use in this function)
+   71 |  signal(SIGINT, show_prompt);
+      |                 ^~~~~~~~~~~
+main.c:72:9: error: 'SIGABRT' undeclared (first use in this function)
+   72 |  signal(SIGABRT, SIG_IGN);
+      |         ^~~~~~~
+main.c:72:18: error: 'SIG_IGN' undeclared (first use in this function)
+   72 |  signal(SIGABRT, SIG_IGN);
+      |                  ^~~~~~~
+main.c:74:2: error: implicit declaration of function 'init_all' [-Werror=implicit-function-declaration]
+   74 |  init_all(&s);
+      |  ^~~~~~~~
+main.c:77:4: error: request for member 'input' in something not a structure or union
+   77 |   s.input = readline(PROMPT);
+      |    ^
+main.c:77:13: error: implicit declaration of function 'readline' [-Werror=implicit-function-declaration]
+   77 |   s.input = readline(PROMPT);
+      |             ^~~~~~~~
+main.c:77:22: error: 'PROMPT' undeclared (first use in this function)
+   77 |   s.input = readline(PROMPT);
+      |                      ^~~~~~
+main.c:78:9: error: request for member 'input' in something not a structure or union
+   78 |   if (!s.input)
+      |         ^
+main.c:80:4: error: implicit declaration of function 'ft_putstr_fd' [-Werror=implicit-function-declaration]
+   80 |    ft_putstr_fd("exit\n", 1);
+      |    ^~~~~~~~~~~~
+main.c:83:3: error: implicit declaration of function 'add_history' [-Werror=implicit-function-declaration]
+   83 |   add_history(s.input);
+      |   ^~~~~~~~~~~
+main.c:83:16: error: request for member 'input' in something not a structure or union
+   83 |   add_history(s.input);
+      |                ^
+main.c:84:7: error: implicit declaration of function 'errors' [-Werror=implicit-function-declaration]
+   84 |   if (errors(s.input))
+      |       ^~~~~~
+main.c:84:15: error: request for member 'input' in something not a structure or union
+   84 |   if (errors(s.input))
+      |               ^
+main.c:86:3: error: implicit declaration of function 'printf' [-Werror=implicit-function-declaration]
+   86 |   printf("Raw Input:%s\n", s.input);
+      |   ^~~~~~
+main.c:86:3: error: incompatible implicit declaration of built-in function 'printf' [-Werror]
+main.c:1:1: note: include '<stdio.h>' or provide a declaration of 'printf'
+  +++ |+#include <stdio.h>
+    1 | /* ************************************************************************** */
+main.c:86:29: error: request for member 'input' in something not a structure or union
+   86 |   printf("Raw Input:%s\n", s.input);
+      |                             ^
+main.c:87:3: error: implicit declaration of function 'write' [-Werror=implicit-function-declaration]
+   87 |   write(1, "\n", 1);
+      |   ^~~~~
+main.c:88:3: error: implicit declaration of function 'env_solver' [-Werror=implicit-function-declaration]
+   88 |   env_solver(&s);
+      |   ^~~~~~~~~~
+main.c:89:34: error: request for member 'input' in something not a structure or union
+   89 |   printf("Expanded Input:%s\n", s.input);
+      |                                  ^
+main.c:91:3: error: implicit declaration of function 'pipe_split' [-Werror=implicit-function-declaration]
+   91 |   pipe_split(&s);
+      |   ^~~~~~~~~~
+main.c:94:3: error: implicit declaration of function 'int_red' [-Werror=implicit-function-declaration]
+   94 |   int_red(&s);
+      |   ^~~~~~~
+main.c:96:3: error: implicit declaration of function 'space_split' [-Werror=implicit-function-declaration]
+   96 |   space_split(&s);
+      |   ^~~~~~~~~~~
+main.c:97:3: error: implicit declaration of function 'remove_quotes' [-Werror=implicit-function-declaration]
+   97 |   remove_quotes(&s);
+      |   ^~~~~~~~~~~~~
+main.c:98:8: error: implicit declaration of function 'ft_strncmp' [-Werror=implicit-function-declaration]
+   98 |   if (!ft_strncmp(s.input, "exit", ft_strlen(s.input)))
+      |        ^~~~~~~~~~
+main.c:98:20: error: request for member 'input' in something not a structure or union
+   98 |   if (!ft_strncmp(s.input, "exit", ft_strlen(s.input)))
+      |                    ^
+main.c:98:36: error: implicit declaration of function 'ft_strlen' [-Werror=implicit-function-declaration]
+   98 |   if (!ft_strncmp(s.input, "exit", ft_strlen(s.input)))
+      |                                    ^~~~~~~~~
+main.c:98:47: error: request for member 'input' in something not a structure or union
+   98 |   if (!ft_strncmp(s.input, "exit", ft_strlen(s.input)))
+      |                                               ^
+main.c:99:4: error: implicit declaration of function 'exit' [-Werror=implicit-function-declaration]
+   99 |    exit (0);
+      |    ^~~~
+main.c:99:4: error: incompatible implicit declaration of built-in function 'exit' [-Werror]
+main.c:1:1: note: include '<stdlib.h>' or provide a declaration of 'exit'
+  +++ |+#include <stdlib.h>
+    1 | /* ************************************************************************** */
+main.c:100:8: error: request for member 'input' in something not a structure or union
+  100 |   if (s.input)
+      |        ^
+main.c:101:4: error: implicit declaration of function 'free' [-Werror=implicit-function-declaration]
+  101 |    free(s.input);
+      |    ^~~~
+main.c:101:4: error: incompatible implicit declaration of built-in function 'free' [-Werror]
+main.c:101:4: note: include '<stdlib.h>' or provide a declaration of 'free'
+main.c:101:10: error: request for member 'input' in something not a structure or union
+  101 |    free(s.input);
+      |          ^
+main.c:102:3: error: implicit declaration of function 'pipex' [-Werror=implicit-function-declaration]
+  102 |   pipex(s.s_p, &s.env);
+      |   ^~~~~
+main.c:102:10: error: request for member 's_p' in something not a structure or union
+  102 |   pipex(s.s_p, &s.env);
+      |          ^
+main.c:102:18: error: request for member 'env' in something not a structure or union
+  102 |   pipex(s.s_p, &s.env);
+      |                  ^
+main.c:103:3: error: implicit declaration of function 'free_pipes' [-Werror=implicit-function-declaration]
+  103 |   free_pipes(&(s.s_p));
+      |   ^~~~~~~~~~
+main.c:103:17: error: request for member 's_p' in something not a structure or union
+  103 |   free_pipes(&(s.s_p));
+      |                 ^
+main.c:104:4: error: request for member 's_p' in something not a structure or union
+  104 |   s.s_p = NULL;
+      |    ^
+main.c:104:11: error: 'NULL' undeclared (first use in this function)
+  104 |   s.s_p = NULL;
+      |           ^~~~
+main.c:1:1: note: 'NULL' is defined in header '<stddef.h>'; did you forget to '#include <stddef.h>'?
+  +++ |+#include <stddef.h>
+    1 | /* ************************************************************************** */
+main.c:105:31: error: 'exit_status' undeclared (first use in this function)
+  105 |   printf("EXIT STATUS: %d\n", exit_status);
+      |                               ^~~~~~~~~~~
+main.c:107:2: error: implicit declaration of function 'free_me' [-Werror=implicit-function-declaration]
+  107 |  free_me(&s);
+      |  ^~~~~~~
+cc1: all warnings being treated as errors
+make: *** [Makefile:45: minishell] Error 1

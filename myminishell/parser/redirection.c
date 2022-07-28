@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:09:37 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/26 18:21:37 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/27 21:14:42 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ char	*del_re(char *sub, int len_fn, int end, int be_r)
 	temp = ft_calloc(1, len - len_fn + 1);
 	ft_strlcpy(temp, sub, be_r);
 	ft_catall(temp, sub + end);
-	free(sub);
+	if (sub)
+		free(sub);
 	return (temp);
 }
 
@@ -62,6 +63,14 @@ void	output(t_pipe *sp, char *temp)
 	sp->fd_out = open(temp, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (sp->fd_out == -1)
 		perror(temp);
+}
+
+void	hd(t_pipe *sp, char *temp)
+{
+	if (sp->hd)
+		free (sp->hd);
+	sp->hd = temp;
+	sp->last = 0;
 }
 
 void	append(t_pipe *sp, char *temp)
@@ -98,24 +107,13 @@ void	append(t_pipe *sp, char *temp)
 // 	return (fn);
 // }
 
-int	iohandler(t_pipe *sp, int i, int id)
-
-
+char	*fnhandler(t_pipe *sp, int i, int z)
 {
 	char	fn[256];
-	int		y;
-	int		z;
-	int		be_r;
 	char	*temp;
+	int		y;
 
 	y = 0;
-	z = 1;
-	i++;
-	be_r = i;
-	if (id == 3 || id == 4)
-		z++;
-	if (id == 3 || id == 4)
-		be_r--;
 	while (sp->sub[i] && sp->sub[i] == ' ')
 	{
 		z++;
@@ -130,25 +128,31 @@ int	iohandler(t_pipe *sp, int i, int id)
 		y++;
 	}
 	fn[y] = '\0';
-	// char	*fn;
-	// fn = filename(sp, &i, &z);
 	temp = ft_strtrim(fn, "\"'");
-	// free (fn);
-	// printf("error handling:%p\n", temp);
+	return (temp);
+}
+
+int	iohandler(t_pipe *sp, int i, int id)
+{
+	int		z;
+	int		be_r;
+	char	*temp;
+
+	z = 1;
+	i++;
+	be_r = i;
+	if (id == 3 || id == 4)
+		z++;
+	if (id == 3 || id == 4)
+		be_r--;
+	temp = fnhandler(sp, i, z);
 	printf("Filename string:%s\tID:%d\n", temp, id);
 	if (id == 1)
-	{
 		input(sp, temp);
-		printf("FD IN:%d\n", sp->fd_in);
-	}
 	if (id == 2)
 		output(sp, temp);
 	if (id == 3)
-	{
-		sp->hd = temp;
-		sp->last = 0;
-		printf("HEREDOC:%s\n", sp->hd);
-	}
+		hd(sp, temp);
 	if (id == 4)
 		append(sp, temp);
 	sp->sub = del_re(sp->sub, z, i, be_r);

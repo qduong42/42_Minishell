@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 22:19:42 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/26 11:28:40 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/26 19:49:48 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ void	pipe_handle(t_shell *s, int *start, int i)
 
 	token = ft_substr(s->input, *start, i - *start);
 	temp = ft_strtrim(token, " ");
-	free(token);
+	if (token)
+		free(token);
 	token = temp;
 	ft_plstadd_back(&(s->s_p), ft_plstnew(token));
 	*start = i + 1;

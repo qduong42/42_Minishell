@@ -18,7 +18,7 @@ int	ft_env(t_pipe *cmd, t_list *env)
 		return (127);
 	while (env)
 	{
-		printf("%s\n", env->content);
+		// printf("%s\n", env->content);
 		env = env->next;
 	}
 	return (0);

@@ -19,3 +19,8 @@ int	fucked_cat(t_pipe *cmd)
 	}
 	return (0);
 }
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>HUY FEEDBACK<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+cd /goinfre doesnt work
+pwd doesnt work
+double pwd invalid free
