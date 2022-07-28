@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/28 11:39:33 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/28 11:55:03 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ char	**lst_to_strstr(t_list *env);
 void	print_sorted_ev(t_list *env);
 
 //			unset.c
-int		unset(char	**args, t_list **env);
+int		ft_unset(char	**args, t_list **env);
+void	unset_one(t_list **env, char *one);
 
 //			env.c
 int		ft_env(t_pipe *cmd, t_list *env);

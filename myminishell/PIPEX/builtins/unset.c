@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 12:24:35 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/28 11:17:04 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/28 11:53:29 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	unset_one(t_list **env, char *one)
  * @param env 
  * @return int 
  */
-int	unset(char **args, t_list **env)
+int	ft_unset(char **args, t_list **env)
 {
 	int		i;
 

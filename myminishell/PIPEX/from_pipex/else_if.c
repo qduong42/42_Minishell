@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:47:46 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/28 11:50:45 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/28 11:53:59 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int	exec_parent(t_pipe *cmd, t_list **env_lst)
 	else if (!ft_strncmp(cmd->argv[0], "export", size) && cmd->argv[1])
 		return (ft_export(cmd->argv, env_lst));
 	else if (!ft_strncmp(cmd->argv[0], "unset", size))
-		return (unset(cmd->argv, env_lst));
+		return (ft_unset(cmd->argv, env_lst));
 	else if (!ft_strncmp(cmd->argv[0], "exit", size))
 		return (ft_exit(cmd));
 	return (187);

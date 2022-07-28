@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 12:14:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/28 11:36:39 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/28 12:11:07 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,43 @@ int	valid_env(char *var)
 	return (1);
 }
 
+static char	*dup_till(char *str, char till)
+{
+	int		i;
+	char	*ret;
+	int		j;
+
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (str[i] != till && str[i])
+		i++;
+	ret = malloc(sizeof(char) * (i + 1));
+	j = 0;
+	while (j < i)
+	{
+		ret[j] = str[j];
+		j++;
+	}
+	ret[j] = '\0';
+	return (ret);
+}
+
+void	perform_action(char *arg, int *error, t_list **env)
+{
+	char	*to_free;
+
+	if (valid_env(arg))
+	{
+		to_free = dup_till(arg, '=');
+		unset_one(env, to_free);
+		free(to_free);
+		ft_lstadd_back(env, ft_lstnew(ft_strdup(arg)));
+	}
+	else
+		*error = 1;
+}
+
 /**
  * @brief Adds env variables
  * 
@@ -77,8 +114,8 @@ int	valid_env(char *var)
  */
 int	ft_export(char **args, t_list **env)
 {
-	int	i;
-	int	error;
+	int		i;
+	int		error;
 
 	error = 0;
 	if (!args[1])
@@ -88,10 +125,7 @@ int	ft_export(char **args, t_list **env)
 		i = 1;
 		while (args[i])
 		{
-			if (valid_env(args[i]))
-				ft_lstadd_back(env, ft_lstnew(ft_strdup(args[i])));
-			else
-				error = 1;
+			perform_action(args[i], &error, env);
 			i++;
 		}
 	}
