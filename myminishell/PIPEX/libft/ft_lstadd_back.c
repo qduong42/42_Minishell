@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 13:51:59 by ljahn             #+#    #+#             */
-/*   Updated: 2022/05/03 16:49:57 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/28 10:22:06 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	{
 		while (moving_head->next != NULL)
 			moving_head = moving_head->next;
+		printf("LAST NODES CONTENT: %s\n", moving_head->content);
 		moving_head->next = new;
 	}
 }

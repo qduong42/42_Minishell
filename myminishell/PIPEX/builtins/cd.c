@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:20:30 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/28 10:02:55 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/28 10:06:17 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,14 @@ int	ft_cd(char **args, t_list *env)
 		return (ft_oldpwd(env));
 	else if (args[1][0] == '~')
 	{
-		to_free = malloc(PATH_MAX * sizeof(char));
+		to_free = malloc(FT_PATH_MAX * sizeof(char));
 		while (env)
 		{
 			if (!ft_strncmp(env->content, "HOME=", 5))
-				ft_strlcpy(to_free, env->content + 5, PATH_MAX);
+				ft_strlcpy(to_free, env->content + 5, FT_PATH_MAX);
 			env = env->next;
 		}
-		ft_strlcat(to_free, args[1] + 1, PATH_MAX);
+		ft_strlcat(to_free, args[1] + 1, FT_PATH_MAX);
 		cd_ret = change_dir(to_free, \
 		"ERROR: the given argument is not a valid directory\n", env);
 		free(to_free);

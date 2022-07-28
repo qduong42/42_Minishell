@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 12:14:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/27 12:14:48 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/28 10:38:01 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	ft_export(char **args, t_list **env)
 		while (args[i])
 		{
 			if (valid_env(args[i]))
-				ft_lstadd_front(env, ft_lstnew(args[i]));
+				ft_lstadd_back(env, ft_lstnew(ft_strdup(args[i])));
 			else
 				error = 1;
 			i++;

@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:23:29 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/27 10:25:37 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/28 10:06:37 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	pwd(t_pipe *cmd)
 {
-	char	cwd[PATH_MAX];
+	char	cwd[FT_PATH_MAX];
 
 	if (cmd->argv[1] != NULL)
 		return (1);
-	if (getcwd(cwd, PATH_MAX))
+	if (getcwd(cwd, FT_PATH_MAX))
 	{
 		ft_putstr_fd(cwd, 1);
 		ft_putstr_fd("\n", 1);
@@ -31,8 +31,8 @@ char	*get_pwd(void)
 {
 	char		*cwd;
 
-	cwd = malloc(sizeof(char) * PATH_MAX);
-	if (getcwd(cwd, PATH_MAX))
+	cwd = malloc(sizeof(char) * FT_PATH_MAX);
+	if (getcwd(cwd, FT_PATH_MAX))
 		return (cwd);
 	return (NULL);
 }

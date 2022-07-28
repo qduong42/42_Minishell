@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:55:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/27 11:55:48 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/28 10:09:36 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_env(t_pipe *cmd, t_list *env)
 		return (127);
 	while (env)
 	{
-		// printf("%s\n", env->content);
+		printf("%s\n", (char *)env->content);
 		env = env->next;
 	}
 	return (0);

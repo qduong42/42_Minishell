@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/27 11:43:44 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/28 10:24:34 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	pipex(t_pipe *cmd, t_list **env_lst)
 {
 	t_vars		vars;
 
+	// print_shit(cmd);
 	fucked_cat(&cmd);
 	init_pipex(&vars, cmd, env_lst);
 	while (cmd)
