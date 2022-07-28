@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/28 10:03:42 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/28 11:39:33 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,8 @@ int		exec_parent(t_pipe *cmd, t_list **env_lst);
 //			abstractable.c
 char	**lst_to_strstr(t_list *env);
 int		create_hd(char *delim);
-void	free_all(char **to_free);
 void	error_msg(char *msg);
 char	*get_path(char *cmd, char **env);
-
-//			debugging.c
-void	print_strstr(char **strstr);
-void	print_shit(t_pipe *cmd);
 
 //			exec_loop.c
 int		while_stroke(t_pipe **cmd, t_vars *vars, t_list **env_lst);

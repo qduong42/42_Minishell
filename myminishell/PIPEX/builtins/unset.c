@@ -6,12 +6,18 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 12:24:35 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/27 12:24:36 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/28 11:17:04 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
+/**
+ * @brief Tests if it is a valid variable name for the env
+ * 
+ * @param name the string to test
+ * @return int a boolean (1 means valid name)
+ */
 static int	env_name(char *name)
 {
 	int	i;
@@ -26,6 +32,12 @@ static int	env_name(char *name)
 	return (1);
 }
 
+/**
+ * @brief Unsets the node with the content matching 'one'
+ * 
+ * @param env 
+ * @param one 
+ */
 void	unset_one(t_list **env, char *one)
 {
 	t_list	*tmp;
@@ -52,6 +64,13 @@ void	unset_one(t_list **env, char *one)
 	}
 }
 
+/**
+ * @brief 
+ * 
+ * @param args 
+ * @param env 
+ * @return int 
+ */
 int	unset(char **args, t_list **env)
 {
 	int		i;

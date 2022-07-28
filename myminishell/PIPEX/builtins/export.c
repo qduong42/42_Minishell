@@ -6,40 +6,17 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 12:14:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/28 10:38:01 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/28 11:36:39 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
-int	ft_strcmp(const char *s1, const char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i] && s2[i])
-	{
-		if (s1[i] == s2[i])
-			i++;
-		else if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-	}
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-}
-
-void	free_splitters(char **splitters)
-{
-	int	i;
-
-	i = 0;
-	while (splitters[i])
-	{
-		free(splitters[i]);
-		i++;
-	}
-	free(splitters);
-}
-
+/**
+ * @brief fancy print of env variables
+ * 
+ * @param env 
+ */
 void	print_sorted_ev(t_list *env)
 {
 	char	**splitters;
@@ -63,9 +40,15 @@ void	print_sorted_ev(t_list *env)
 		ft_putstr_fd("\"\n", 1);
 		i++;
 	}
-	free_all(splitters);
+	ft_free_all(splitters);
 }
 
+/**
+ * @brief Checks for the format of an env variable
+ * 
+ * @param var the string to test
+ * @return int a boolean (; 1 means is the right format)
+ */
 int	valid_env(char *var)
 {
 	int	i;

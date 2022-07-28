@@ -6,12 +6,19 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:47:12 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/27 21:22:01 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/28 11:35:57 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
+/**
+ * @brief name contained in PATH -> absolute path
+ * 
+ * @param cmd the name (contained/not contained) in path
+ * @param env the env-lst for PATH
+ * @return char* the allocated absolute path
+ */
 char	*get_path(char *cmd, char **env)
 {
 	t_path	path;
@@ -30,16 +37,22 @@ char	*get_path(char *cmd, char **env)
 		free(path.temp);
 		if (!access(path.joined, F_OK))
 		{
-			free_all(path.prefix);
+			ft_free_all(path.prefix);
 			return (path.joined);
 		}
 		free(path.joined);
 		path.i_pre++;
 	}
-	free_all(path.prefix);
+	ft_free_all(path.prefix);
 	return (ft_strdup(cmd));
 }
 
+/**
+ * @brief lst->strstr
+ * 
+ * @param env 
+ * @return char** (allocated)
+ */
 char	**lst_to_strstr(t_list *env)
 {
 	char	**ret;
@@ -64,6 +77,12 @@ char	**lst_to_strstr(t_list *env)
 	return (NULL);
 }
 
+/**
+ * @brief open a heredoc file and write to it
+ * 
+ * @param delim the input at which writing is stopped
+ * @return int the fildescriptor of the heredoc
+ */
 int	create_hd(char *delim)
 {
 	int		fd;
@@ -86,19 +105,11 @@ int	create_hd(char *delim)
 	return (fd);
 }
 
-void	free_all(char **to_free)
-{
-	int	i;
-
-	i = 0;
-	while (to_free[i])
-	{
-		free(to_free[i]);
-		i++;
-	}
-	free(to_free);
-}
-
+/**
+ * @brief put string to stderr
+ * 
+ * @param msg 
+ */
 void	error_msg(char *msg)
 {
 	ft_putstr_fd(msg, 2);
