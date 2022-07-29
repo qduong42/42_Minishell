@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:07 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/29 12:20:28 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/29 12:56:37 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,7 @@ void	aftershave(t_vars *vars, t_pipe **cmd)
 {
 	signal(SIGINT, SIG_IGN);
 	waitpid(vars->pid, &vars->tmp, 0);
-	if (ft_strncmp(vars->path, (*cmd)->argv[0], ft_strlen(vars->path)))
-		free(vars->path);
+	free(vars->path);
 	signal(SIGINT, show_prompt);
 	g_exit_status = WEXITSTATUS(vars->tmp);
 	close(vars->working[1]);

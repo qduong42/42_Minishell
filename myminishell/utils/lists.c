@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 20:39:33 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/28 12:43:30 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/29 12:31:28 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
  * @param fd_in -2 is used because -1 is used for open error
  * @return t_pipe* returns node to subpipe
  */
-t_pipe	*ft_plstnew(void *content)
+t_pipe	*ft_plstnew(void *content, t_shell *s)
 {
 	t_pipe	*new;
 
@@ -31,6 +31,7 @@ t_pipe	*ft_plstnew(void *content)
 	new->hd = NULL;
 	new->next = NULL;
 	new->last = 0;
+	new->main = s;
 	return (new);
 }
 

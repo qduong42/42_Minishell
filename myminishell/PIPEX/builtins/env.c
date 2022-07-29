@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:55:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/29 09:49:30 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/29 12:54:21 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	ft_env(t_pipe *cmd, t_list *env)
 		return (127);
 	while (env)
 	{
+		printf("%s\n", (char *)env->content);
 		env = env->next;
 	}
 	return (0);

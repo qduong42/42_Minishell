@@ -28,6 +28,7 @@ $(NAME): $(OBJ) $(PARSER_OBJ)
 
 clean:
 	$(MAKE) clean -C PIPEX/
+	$(RM) 
 	$(RM) $(OBJ) $(PARSER_OBJ)
 
 fclean: clean

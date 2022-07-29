@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   else_if.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:47:46 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/29 09:18:16 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/29 12:37:18 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,23 @@
 int	ft_exit(t_pipe *cmd)
 {
 	if (!cmd->argv[1])
+	{
+		free_me(cmd->main);
 		exit (0);
+	}
 	else if (ft_strstrlen(cmd->argv) > 2)
 	{
 		error_msg("minishell: exit: too many arguments\n");
 		return (1);
 	}
 	else if (ft_isnum(cmd->argv[1]))
+	{
+		free_me(cmd->main);
 		exit(ft_atoi(cmd->argv[1]));
+	}
 	else
 	{
+		free_me(cmd->main);
 		error_msg("minishell: exit: numeric argument required\n");
 		exit (-1);
 	}

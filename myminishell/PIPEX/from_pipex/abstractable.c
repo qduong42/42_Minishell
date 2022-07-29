@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:47:12 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/29 12:16:04 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/29 12:50:03 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*get_path(char *cmd, char **env)
 	while (env[path.i] && ft_strncmp(env[path.i], "PATH=", 5))
 		path.i++;
 	if (!env[path.i])
-		return (cmd);
+		return (ft_strdup(cmd));
 	path.prefix = ft_split(env[path.i] + 5, ':');
 	path.i_pre = 0;
 	while (path.prefix[path.i_pre])

@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 10:17:02 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/28 10:21:25 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/29 12:30:56 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	pipe_handle(t_shell *s, int *start, int i)
 	if (token)
 		free(token);
 	token = temp;
-	ft_plstadd_back(&(s->s_p), ft_plstnew(token));
+	ft_plstadd_back(&(s->s_p), ft_plstnew(token, s));
 	*start = i + 1;
 }
 

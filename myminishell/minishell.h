@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 08:46:06 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/29 09:11:39 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/29 12:31:07 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,13 @@ typedef int	(*t_reaction) (void *);
 //last signifies if HD last or INPUT last, it takes last input 
 //source and cleans HD or fd
 //1 for input and 0 for HD
+typedef struct s_shell
+{
+	struct s_list	*env;
+	struct s_pipe	*s_p;
+	char			*input;
+}	t_shell;
+
 typedef struct s_pipe
 {
 	char			*sub;
@@ -62,14 +69,8 @@ typedef struct s_pipe
 	char			*hd;
 	int				last;
 	struct s_pipe	*next;
+	struct s_shell	*main;
 }					t_pipe;
-
-typedef struct s_shell
-{
-	struct s_list	*env;
-	struct s_pipe	*s_p;
-	char			*input;
-}	t_shell;
 
 t_list	*create_env_list(char **envp);
 
@@ -107,7 +108,7 @@ void	space_split(t_shell *s);
 
 //lists.c
 
-t_pipe	*ft_plstnew(void *content);
+t_pipe	*ft_plstnew(void *content, t_shell *s);
 
 void	ft_plstadd_back(t_pipe **lst, t_pipe *new);
 
