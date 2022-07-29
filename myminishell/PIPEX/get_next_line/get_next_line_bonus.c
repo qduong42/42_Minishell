@@ -5,74 +5,91 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/13 14:01:18 by ekraujin          #+#    #+#             */
-/*   Updated: 2022/07/29 09:49:13 by qduong           ###   ########.fr       */
+/*   Created: 2021/09/29 16:21:09 by qduong            #+#    #+#             */
+/*   Updated: 2022/04/17 14:43:35 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-char	*ft_strchr(const char *s, int c)
+static void	*ft_calloc(size_t nmemb, size_t size)
 {
-	while (*s && *s != (char)c)
-		s++;
-	if (*s == (char )c)
-		return ((char *)s);
-	return (0);
+	void	*pch;
+
+	pch = malloc((size * nmemb));
+	if (!pch)
+		return (NULL);
+	ft_bzero (pch, nmemb * size);
+	return (pch);
 }
 
-char	*lbs(char *line, char *buf)
+static char	*ft_bufnchecksplit(char	*returnline, char	*buf)
 {
-	int		len;
+	int		index;
 	char	*temp;
-	char	*end;
+	int		len;
 
 	len = 0;
-	while (buf[len] != '\n')
-		len++;
-	end = ft_substr(buf, 0, len + 1);
-	temp = ft_strjoin(line, end);
-	free(line);
-	line = temp;
-	ft_memmove(buf, ft_strchr(buf, '\n') + 1, BUFFER_SIZE - len);
-	free(end);
-	return (line);
+	index = 0;
+	index = ft_gnl_strrchr (buf, '\n');
+	if (index != 0)
+	{
+		temp = ft_strjoin(returnline, buf);
+		free (returnline);
+		returnline = temp;
+		while (buf[len])
+			len++;
+		ft_memmove(buf, buf + index, len - index);
+		ft_bzero(buf + len - index, 1);
+	}
+	return (returnline);
 }
 
-char	*jaf(char *line, char *buf)
+static char	*ft_bufjoin(char *returnline, char *buf)
 {
 	char	*temp;
 
-	temp = ft_strjoin(line, buf);
-	free(line);
-	line = temp;
-	return (line);
+	temp = ft_strjoin(returnline, buf);
+	free (returnline);
+	returnline = temp;
+	ft_bzero(buf, BUFFER_SIZE);
+	return (returnline);
+}
+
+static char	*freeme(int bytes_read, char *returnline)
+{
+	if (bytes_read <= 0 && !(*returnline))
+	{
+		free(returnline);
+		return (NULL);
+	}
+	return (returnline);
 }
 
 char	*get_next_line(int fd)
 {
-	int			rs;
 	static char	buf[MAX_FD][BUFFER_SIZE + 1];
-	char		*line;
+	char		*returnline;
+	int			bytes_read;
 
-	if (fd < 0)
+	if (fd < 0 || fd > MAX_FD || BUFFER_SIZE < 1)
 		return (NULL);
-	line = ft_calloc(1, sizeof(char));
-	while (!ft_strchr(buf[fd], '\n'))
+	returnline = ft_calloc(1, sizeof(*returnline));
+	while (!ft_gnl_strrchr(buf[fd], '\n'))
 	{
 		if (*buf[fd])
-			line = jaf(line, buf[fd]);
-		rs = read(fd, buf[fd], BUFFER_SIZE);
-		if (rs < 0 || !buf[fd][0])
+			returnline = ft_bufjoin(returnline, buf[fd]);
+		bytes_read = read(fd, buf[fd], BUFFER_SIZE);
+		buf[fd][bytes_read] = '\0';
+		returnline = freeme(bytes_read, returnline);
+		if (bytes_read < BUFFER_SIZE && !ft_gnl_strrchr(buf[fd], '\n'))
 		{
-			free(line);
-			return (NULL);
+			returnline = ft_bufjoin(returnline, buf[fd]);
+			return (returnline);
 		}
-		buf[fd][rs] = '\0';
-		if (rs < BUFFER_SIZE && !(ft_strchr(buf[fd], '\n'))
-			&& line[0] && !buf[fd][0])
-			return (line = jaf(line, buf[fd]));
 	}
-	line = lbs(line, buf[fd]);
-	return (line);
+	returnline = ft_bufnchecksplit(returnline, buf[fd]);
+	return (returnline);
 }
+//accounting for case where buf contains \n
+//52-62 put in sub-function by passing buf and returnline

@@ -5,83 +5,42 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/13 14:01:16 by ekraujin          #+#    #+#             */
-/*   Updated: 2022/07/29 09:58:02 by qduong           ###   ########.fr       */
+/*   Created: 2021/09/29 16:21:22 by qduong            #+#    #+#             */
+/*   Updated: 2022/04/18 14:07:54 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+void	ft_bzero(void *s, size_t n)
 {
-	unsigned int	i;
-	unsigned int	s_len;
-	char			*substr;
+	char	*a;
+	size_t	i;
 
-	if (!s)
-		return (0);
+	a = (char *)s;
 	i = 0;
-	s_len = ft_strlen(s);
-	if (start >= s_len)
-		return ("");
-	substr = malloc((len + 1) * sizeof(char));
-	if (!substr)
-		return (0);
-	while (s[i] && i < len && (start + i) < s_len)
+	while (i < n)
 	{
-		substr[i] = s[start + i];
+		a[i] = 0;
 		i++;
 	}
-	substr[i] = '\0';
-	return (substr);
 }
 
-void	*ft_calloc(size_t nmemb, size_t size)
+int	ft_gnl_strrchr(const char *s, int c)
 {
-	void	*p;
-	char	*s;
-	int		total;
+	int		i;
 
-	total = nmemb * size;
-	p = malloc(nmemb * size);
-	if (!p)
-		return (0);
-	s = p;
-	while (total--)
-	{
-		*s = '\0';
-		s++;
-	}
-	return (p);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	unsigned int	i;
-	unsigned int	j;
-	size_t			s1_len;
-	char			*strjoin;
-
-	if (!s1 || !s2)
-		return (0);
 	i = 0;
-	j = 0;
-	s1_len = (ft_strlen(s1) + ft_strlen(s2));
-	strjoin = (char *)malloc(s1_len + 1);
-	if (strjoin == 0)
-		return (0);
-	while (s1[i])
+	while (s[i])
 	{
-		strjoin[i] = s1[i];
+		if (s[i] == (unsigned char) c)
+		{
+			i++;
+			return (i);
+		}
 		i++;
 	}
-	while (s2[j])
-	{
-		strjoin[i + j] = s2[j];
-		j++;
-	}
-	strjoin[i + j] = '\0';
-	return (strjoin);
+	return (0);
 }
 
 size_t	ft_strlen(const char *s)
@@ -89,37 +48,63 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
-	if (!s)
-		return (0);
 	while (s[i] != '\0')
+	{
+		if (s[i] == '\n')
+		{
+			i++;
+			return (i);
+		}
 		i++;
+	}
 	return (i);
+}
+
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*newstring;
+	size_t	i;
+	size_t	j;
+
+	j = 0;
+	i = 0;
+	if (!s1 || !s2)
+		return (NULL);
+	newstring = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!newstring)
+		return (NULL);
+	while (s1[i] != '\0')
+	{
+		newstring[i] = s1[i];
+		i++;
+	}
+	while (s2[j] != '\0' && s2[j] != '\n')
+	{
+		newstring[i++] = s2[j];
+		j++;
+	}
+	if (s2[j] == '\n')
+		newstring[i++] = s2[j];
+	newstring[i] = '\0';
+	return (newstring);
 }
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	unsigned int	i;
-	unsigned int	k;
-	char			*s1;
-	char			*s2;
+	unsigned char	*s;
+	unsigned char	*d;
+	size_t			i;
 
-	if (!src && !dest)
-		return (0);
+	s = (unsigned char *)src;
+	d = (unsigned char *)dest;
 	i = 0;
-	k = 0;
-	s1 = (char *)dest;
-	s2 = (char *)src;
-	if (src < dest)
 	{
-		i = n - 1;
-		k = n - 1;
-		while (n--)
-			s1[i--] = s2[k--];
+		while (n)
+		{
+			d[i] = s[i];
+			i++;
+			n--;
+		}
 	}
-	else if (src >= dest)
-	{
-		while (n--)
-			s1[i++] = s2[k++];
-	}
-	return (s1);
+	return (dest);
 }
