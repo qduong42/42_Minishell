@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:47:46 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/29 12:37:18 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/29 14:26:45 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
  */
 int	ft_exit(t_pipe *cmd)
 {
+	int	i;
+
 	if (!cmd->argv[1])
 	{
 		free_me(cmd->main);
@@ -33,8 +35,9 @@ int	ft_exit(t_pipe *cmd)
 	}
 	else if (ft_isnum(cmd->argv[1]))
 	{
+		i = ft_atoi(cmd->argv[1]);
 		free_me(cmd->main);
-		exit(ft_atoi(cmd->argv[1]));
+		exit(i);
 	}
 	else
 	{
