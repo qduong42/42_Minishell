@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 16:21:30 by qduong            #+#    #+#             */
-/*   Updated: 2022/04/17 14:44:15 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/29 14:13:40 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,9 @@ char	*get_next_line(int fd)
 {
 	static char	buf[BUFFER_SIZE + 1];
 	char		*returnline;
-	char		*temp;
 	int			bytes_read;
 
 	returnline = ft_calloc(1, sizeof(char));
-	temp = "";
 	while (!ft_gnl_strrchr(buf, '\n'))
 	{
 		if (*buf)
