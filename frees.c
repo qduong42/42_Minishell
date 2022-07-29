@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 13:15:01 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/28 13:15:44 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/29 15:43:19 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ void	free_pipes(t_pipe **sp)
 
 void	free_me(t_shell *s)
 {
-	if (s->input)
-		free (s->input);
 	ft_lstclear(&s->env, free);
 	free_pipes(&(s->s_p));
 }
