@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 22:42:23 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/29 09:48:12 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/29 15:03:29 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ t_list	*create_env_list(char **envp)
 	i = 1;
 	while (envp[i])
 	{
+		if (!ft_strncmp(envp[i], "OLDPWD=", 7))
+		{
+			i++;
+			continue ;
+		}
 		ft_lstadd_back(&a, ft_lstnew(copy_envp(envp[i])));
 		i++;
 	}
