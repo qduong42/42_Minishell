@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   abstractable.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:47:12 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/28 11:35:57 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/29 11:33:05 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	create_hd(char *delim)
 		fd = open(".temp_doc", O_CREAT | O_RDWR | O_APPEND, 0777);
 		ft_putstr_fd("> ", 1);
 		line = get_next_line(0);
-		if (!ft_strncmp(line, delim, ft_strlen(line) - 1))
+		if (ft_strlen(line) >= 2 && (!ft_strncmp(line, delim, ft_strlen(line) - 1)))
 		{
 			free(line);
 			break ;
