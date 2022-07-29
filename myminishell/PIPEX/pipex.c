@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/29 09:48:25 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/29 14:32:31 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ void	pipex(t_pipe *cmd, t_list **env_lst)
 			duping(&vars, cmd);
 			if (is_buildin(cmd))
 				exit(exec_buildin(cmd, env_lst));
+			else if (react_if_ncontained(path_error, "PATH=", env_lst))
+				exit (1);
 			else if (execve(vars.path, cmd->argv, vars.env))
 			{
 				perror("execve()");

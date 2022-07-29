@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 13:16:58 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/29 09:16:29 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/29 14:30:44 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,6 @@ int	react_if_ncontained(t_reaction reaction, char *contained, t_list **env)
 
 int	env_errors(t_list **env)
 {
-	if (react_if_ncontained(path_error, "PATH=", env))
-		return (1);
 	if (react_if_ncontained(fix_pwd, "PWD=", env))
 		return (1);
 	return (0);

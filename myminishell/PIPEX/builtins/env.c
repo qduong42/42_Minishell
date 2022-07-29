@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:55:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/29 12:54:21 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/29 14:42:20 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ int	ft_env(t_pipe *cmd, t_list *env)
 		return (127);
 	while (env)
 	{
-		printf("%s\n", (char *)env->content);
+		if (valid_env(env->content))
+			printf("%s\n", (char *)env->content);
 		env = env->next;
 	}
 	return (0);
