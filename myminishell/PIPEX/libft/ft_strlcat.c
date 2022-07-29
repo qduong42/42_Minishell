@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:24:08 by ljahn             #+#    #+#             */
-/*   Updated: 2022/05/02 10:24:09 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/29 09:51:59 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,3 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 	dst[i] = 0;
 	return (dstlen + srclen);
 }
-
-// int	main(void)
-// {
-// 	char	*buff;
-
-// 	buff = malloc(15 * sizeof(char));
-// 	memset(buff, 'r', 15);
-// 	strlcat(buff, "This has more than 20 chars.", 5);
-// 	printf("%s", buff);
-// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:22:55 by ljahn             #+#    #+#             */
-/*   Updated: 2022/05/02 10:22:56 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/29 09:51:30 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,3 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	}
 	return (0);
 }
-
-// int	main(void)
-// {
-// 	char	*str;
-
-// 	str = ft_memchr("Daggi bi", 'b', 8);
-// 	printf("%s", str);
-// }

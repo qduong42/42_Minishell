@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 13:51:59 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/28 10:41:18 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/29 09:49:46 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,3 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		moving_head->next = new;
 	}
 }
-
-// int	main(void)
-// {
-// 	t_list	*head;
-
-// 	head = NULL;
-// 	ft_lstadd_back(&head, ft_lstnew("Alloah"));
-// 	printf("%s", (char *)head->content);
-// }

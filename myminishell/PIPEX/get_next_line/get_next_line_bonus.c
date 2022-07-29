@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ekraujin <ekraujin@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/13 14:01:18 by ekraujin          #+#    #+#             */
-/*   Updated: 2022/01/10 21:57:12 by ekraujin         ###   ########.fr       */
+/*   Updated: 2022/07/29 09:49:13 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,22 +76,3 @@ char	*get_next_line(int fd)
 	line = lbs(line, buf[fd]);
 	return (line);
 }
-
-// # include <fcntl.h>
-// int main(void)
-// {
-//     int    fd;
-//     char *res;
-//     int i;
-
-//     fd = open("text.txt", O_RDONLY);
-//     printf("Fd: %i\n",fd);
-//     i = 1;
-// 	res = get_next_line(fd);
-//     while (res)
-//     {
-//         printf("line %i: %s",i, res);
-//         i++;
-// 		res = get_next_line(fd);
-// 	}
-// }

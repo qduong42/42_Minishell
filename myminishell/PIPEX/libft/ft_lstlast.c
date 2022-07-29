@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 13:52:30 by ljahn             #+#    #+#             */
-/*   Updated: 2022/05/03 13:52:31 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/29 09:49:52 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,3 @@ t_list	*ft_lstlast(t_list *lst)
 		lst = lst->next;
 	}
 }
-
-// int	main(void)
-// {
-// 	t_list	*head;
-
-// 	head = NULL;
-// 	ft_lstadd_front(&head, ft_lstnew("hey"));
-// 	ft_lstadd_front(&head, ft_lstnew("la"));
-// 	printf("%s", ft_lstlast(head)->content);
-// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:22:19 by ljahn             #+#    #+#             */
-/*   Updated: 2022/05/02 10:46:00 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/29 09:51:44 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,3 @@ void	*ft_calloc(size_t count, size_t size)
 	ft_bzero(ptr, count * size);
 	return (ptr);
 }
-
-// int	main(void)
-// {
-// 	void	*ret;
-
-// 	ret = ft_calloc(SIZE_MAX, SIZE_MAX);
-// 	if (!ret)
-// 		printf("You can't allocate that much");
-// }

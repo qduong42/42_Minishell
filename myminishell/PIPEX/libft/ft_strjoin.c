@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:24:02 by ljahn             #+#    #+#             */
-/*   Updated: 2022/05/02 10:26:24 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/29 09:50:54 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,3 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	joined[i] = 0;
 	return (joined);
 }
-
-// int	main(void)
-// {
-//         char *s1 = "my favorite animal is";
-//         char *s2 = " ";
-//         char *s3 = "the nyancat";
-//         char *res = ft_strjoin(ft_strjoin(s1, s2), s3);
-// 		printf("%s", res);
-// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:24:33 by ljahn             #+#    #+#             */
-/*   Updated: 2022/05/02 10:24:34 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/29 09:50:21 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,3 @@ char	*ft_strrchr(const char *s, int c)
 		return ((char *)s);
 	return (temp);
 }
-
-// int	main(void)
-// {
-// 	char str[7] = "Helelo";
-
-// 	printf("%s", ft_strrchr(str, 'e'));
-// }

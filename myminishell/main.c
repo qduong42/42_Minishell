@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/28 21:51:56 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/29 09:53:00 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	loopyhoopy(t_shell *s)
 		parser(s);
 		if (s->input)
 			free(s->input);
-		print_final_array(s->s_p);
 		pipex(s->s_p, &s->env);
 		free_pipes(&s->s_p);
 	}

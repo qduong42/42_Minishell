@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/28 21:26:14 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/29 09:48:25 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,6 @@ void	fucked_cat(t_pipe **cmd)
 {
 	while ((*cmd))
 	{
-		printf("FD_IN: %d\n", (*cmd)->fd_in);
-		printf("HD: %s\n", (*cmd)->hd);
-		printf("CMD: %s\n", (*cmd)->argv[0]);
 		if ((*cmd)->fd_in <= 2 && !(*cmd)->hd && \
 		!ft_strncmp((*cmd)->argv[0], "cat", 4) && \
 		!(*cmd)->argv[1])

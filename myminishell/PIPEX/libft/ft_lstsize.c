@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/03 13:52:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/05/03 13:52:48 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/29 09:51:34 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,3 @@ int	ft_lstsize(t_list *lst)
 	}
 	return (res);
 }
-
-// int	main(void)
-// {
-// 	t_list	*head;
-
-// 	head = NULL;
-// 	ft_lstadd_front(&head, ft_lstnew("hey"));
-// 	ft_lstadd_front(&head, ft_lstnew("la"));
-// 	printf("%d", ft_lstsize(head));
-// }

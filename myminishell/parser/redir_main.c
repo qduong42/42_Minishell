@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_main.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:09:37 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/28 21:11:23 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/29 09:48:33 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ int	iohandler(t_pipe *sp, int i, int id)
 	if (id == 3 || id == 4)
 		be_r--;
 	temp = fnhandler(sp, &i, &z);
-	printf("Filename string:%s\tID:%d\n", temp, id);
 	if (id == 1)
 		input(sp, temp);
 	if (id == 2)

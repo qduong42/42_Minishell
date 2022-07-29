@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:22:50 by ljahn             #+#    #+#             */
-/*   Updated: 2022/05/02 10:22:51 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/29 09:49:39 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,3 @@ char	*ft_itoa(int n)
 	digiter(res, holder, sign);
 	return (ft_strrev(res));
 }
-
-// int	main(void)
-// {
-// 	// printf("%d\n", sizer(100));
-// 	printf("%s\n", ft_itoa(0));
-// 	return (-0);
-// }

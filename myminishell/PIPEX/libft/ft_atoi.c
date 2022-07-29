@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:22:02 by ljahn             #+#    #+#             */
-/*   Updated: 2022/05/02 10:22:03 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/29 09:50:27 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,3 @@ int	ft_atoi(const char *str)
 	}
 	return (result * sign);
 }
-
-// int main(void)
-// {
-// 	char str[10] = " 	465dah5";
-// 	printf("%d\n", ft_atoi(str));
-// 	printf("%d", atoi(str));
-// }

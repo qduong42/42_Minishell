@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:24:21 by ljahn             #+#    #+#             */
-/*   Updated: 2022/05/03 17:51:09 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/29 09:51:06 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,3 @@ char	*ft_strmapi(const char *s, char (*f) (unsigned int, char))
 	res[run] = 0;
 	return (res);
 }
-
-// char	add_one(char c)
-// {
-// 	return (c +1);
-// }
-
-// int	main(void)
-// {
-// 	printf("%s", ft_strmapi("Here we go!", &add_one));
-// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cthien-h <cthien-h@student.42.fr>          +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:23:44 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/27 20:49:06 by cthien-h         ###   ########.fr       */
+/*   Updated: 2022/07/29 09:51:55 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,18 +92,3 @@ char	**ft_split(char const *s, char c)
 	res = get_res(s, c, res, malloc_count);
 	return (res);
 }
-
-// int	main(void)
-// {
-// 	int		i;
-// 	char	**ret;
-
-// 	printf("%d",counter(" Tripouille ", ' '));
-// 	i = 0;
-// 	while (ret[i])
-// 	{
-// 		printf("%s", ret[i]);
-// 		printf("executed");
-// 		i++;
-// 	}
-// }

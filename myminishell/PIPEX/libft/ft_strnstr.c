@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:24:29 by ljahn             #+#    #+#             */
-/*   Updated: 2022/05/02 10:24:30 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/29 09:50:59 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,3 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	}
 	return (0);
 }
-
-// int	main(void)
-// {
-// 	char	needle[5] = "";
-// 	char	haystack[43] = "I can't say a fucking sentence without it.";
-
-// 	printf("%s\n", ft_strnstr(haystack, needle, 0));
-// 	printf("%s", strnstr(haystack, needle, 0));
-// }
