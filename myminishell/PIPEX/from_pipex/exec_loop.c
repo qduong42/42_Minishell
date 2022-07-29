@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:07 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/28 21:27:29 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/29 09:18:44 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ void	duping(t_vars *vars, t_pipe *cmd)
 }
 
 /**
- * @brief global exit_status, signals during child process, deleting heredoc, reassigning carry
+ * @brief global exit_status, signals during child
+ * process, deleting heredoc, reassigning carry
  * 
  * @param vars 
  * @param cmd 

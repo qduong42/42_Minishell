@@ -1,7 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/07/29 08:46:06 by ljahn             #+#    #+#             */
+/*   Updated: 2022/07/29 09:11:39 by ljahn            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
-
-extern int g_exit_status;
 
 /*
 **	INCLUDES
@@ -26,7 +36,8 @@ extern int g_exit_status;
 # include <sys/stat.h>
 # include "PIPEX/pipex.h"
 // # include <termios.h> // tcsetattr, tcgetattr -> not used
-// # include <curses.h> // tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs -> not used
+
+extern int	g_exit_status;
 
 # define PROMPT "\e[44m小さいshell \e[42mv0.42\e[0m $ "
 # define PIPE '|'
@@ -36,6 +47,8 @@ extern int g_exit_status;
 # define OUT '>'
 # define AP ">>"
 # define HD "<<"
+
+typedef int	(*t_reaction) (void *);
 
 //last signifies if HD last or INPUT last, it takes last input 
 //source and cleans HD or fd
@@ -48,7 +61,7 @@ typedef struct s_pipe
 	int				fd_out;
 	char			*hd;
 	int				last;
-	struct s_pipe 	*next;
+	struct s_pipe	*next;
 }					t_pipe;
 
 typedef struct s_shell
@@ -58,7 +71,7 @@ typedef struct s_shell
 	char			*input;
 }	t_shell;
 
-t_list *create_env_list(char **envp);
+t_list	*create_env_list(char **envp);
 
 void	env_solver(t_shell *s, int i);
 
@@ -87,7 +100,6 @@ void	space_split(t_shell *s);
 // void	append(t_pipe *sp, char *temp);
 
 // char	*iohandler(t_pipe *sp, int i, int id, int in);
-
 
 /*
 ** Utils FUNCTIONS
@@ -125,7 +137,6 @@ char	*del_re(char *sub, int len_fn, int end, int be_r);
 
 int		digit_len(int a);
 
-
 //redir_sub.c
 
 void	input(t_pipe *sp, char *temp);
@@ -154,11 +165,9 @@ char	*variable_name(char const *s1, char s2, int len);
 
 int		env_len(char *env);
 
-
-
 /*
 **  Linus bool.c
-*/  
+*/
 
 int		special_token(char c);
 int		unexpected_newline(char *line);

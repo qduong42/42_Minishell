@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 12:14:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/28 12:44:18 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/29 09:17:55 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ static char	*dup_till(char *str, char till)
 }
 
 /**
- * @brief checks if arg is valid (setting error), unsets if allready existant, and adds to env
+ * @brief checks if arg is valid (setting error),
+ * unsets if allready existant, and adds to env
  * 
  * @param arg what should be added
  * @param error error, if the format of arg is invalid

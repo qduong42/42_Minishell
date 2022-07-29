@@ -6,25 +6,35 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 13:16:58 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/28 22:01:53 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/29 09:16:29 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	fix_pwd(t_list **env)
+int	fix_pwd(void *data)
 {
+	t_list	**env;
 	char	*to_free;
 	char	*new_content;
 
+	env = (t_list **)data;
 	to_free = get_pwd();
 	new_content = malloc(sizeof(char) * (ft_strlen(to_free) + 5));
 	ft_strlcpy(new_content, "PWD=", ft_strlen(to_free) + 5);
 	ft_strlcat(new_content, to_free, ft_strlen(to_free) + 5);
 	ft_lstadd_back(env, ft_lstnew(new_content));
+	return (0);
 }
 
-int	env_errors(t_list **env)
+int	path_error(void *data)
+{
+	(void)data;
+	error_msg("Error: define a PATH!\n");
+	return (1);
+}
+
+int	react_if_ncontained(t_reaction reaction, char *contained, t_list **env)
 {
 	t_list	*tmp;
 
@@ -33,24 +43,26 @@ int	env_errors(t_list **env)
 	{
 		if (!tmp)
 		{
-			error_msg("Error: set a PATH!\n");
-			return (1);
+			if (reaction(env))
+			{
+				g_exit_status = 9000;
+				return (1);
+			}
+			break ;
 		}
-		if (!ft_strncmp(tmp->content, "PATH=", 5))
+		if (!ft_strncmp(tmp->content, contained, 4))
 			break ;
 		tmp = tmp->next;
 	}
-	while (1)
-	{
-		if (!tmp)
-		{
-			fix_pwd(env);
-			break ;
-		}
-		if (!ft_strncmp(tmp->content, "PWD=", 4))
-			break ;
-		tmp = tmp->next;
-	}
+	return (0);
+}
+
+int	env_errors(t_list **env)
+{
+	if (react_if_ncontained(path_error, "PATH=", env))
+		return (1);
+	if (react_if_ncontained(fix_pwd, "PWD=", env))
+		return (1);
 	return (0);
 }
 
@@ -80,9 +92,7 @@ int	errors(char *line, t_list **env)
 		g_exit_status = 69;
 		return (1);
 	}
-	if (env_errors(env))
-		return (1);
-	return (0);
+	return (env_errors(env));
 }
 
 // int	main(void)

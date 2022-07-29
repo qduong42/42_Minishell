@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bool.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 13:16:03 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/28 18:01:58 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/29 08:51:15 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	single_dollar(char *line)
 	}
 	return (0);
 }
+
 int	special(char *line)
 {
 	if (line[0])

@@ -6,14 +6,15 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:47:46 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/28 12:33:11 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/29 09:18:16 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
 
 /**
- * @brief exiting the process with the given argument as exitcode (still needs to free)
+ * @brief exiting the process with the given 
+ * argument as exitcode (still needs to free)
  * 
  * @param cmd 
  * @return int exit status (on invalid arguments)
