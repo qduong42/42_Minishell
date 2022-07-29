@@ -29,3 +29,5 @@ temp_doc
 ../bash_playground/
 
 rkaufman-ms-tester
+
+utils/testing_utils.c

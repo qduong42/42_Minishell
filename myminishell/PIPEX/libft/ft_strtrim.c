@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/02 10:24:39 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/29 09:50:09 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/29 10:05:23 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,3 @@ char	*ft_strtrim(char const *s1, char const *set)
 	res[k] = 0;
 	return (res);
 }
-

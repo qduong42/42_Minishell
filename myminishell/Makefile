@@ -6,7 +6,7 @@ LDFLAGS = -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline
 
 CFLAGS = -Wall -Wextra -Werror -g -I $(HOME)/goinfre/.brew/opt/readline/include/
 
-SRC = main.c utils/lists.c utils/testing_utils.c frees.c utils/utils.c
+SRC = main.c utils/lists.c frees.c utils/utils.c
 
 OBJ = $(SRC:.c=.o)
 
