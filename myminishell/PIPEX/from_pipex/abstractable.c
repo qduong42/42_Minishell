@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:47:12 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/29 11:33:05 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/29 11:39:18 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,10 @@ char	**lst_to_strstr(t_list *env)
 
 /**
  * @brief open a heredoc file and write to it
- * 
+ * -> added strlen check for line to allow empty newline input to not stop HD
  * @param delim the input at which writing is stopped
- * @return int the fildescriptor of the heredoc
+ * @return int the filedescriptor of the heredoc
+ * 
  */
 int	create_hd(char *delim)
 {

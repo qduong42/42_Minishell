@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:07 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/29 09:18:44 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/29 11:47:14 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,14 @@ void	assign_outfile(t_vars *vars, t_pipe *cmd)
  */
 void	duping(t_vars *vars, t_pipe *cmd)
 {
+	int	fd;
 	dup2(vars->carry, 0);
 	if (cmd->hd)
-		dup2(create_hd(cmd->hd), 0);
+	{
+		fd = create_hd(cmd->hd);
+		dup2(fd, 0);
+		close(fd);
+	}
 	dup2(vars->outfile, 1);
 }
 
