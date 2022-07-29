@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   else_if.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:47:46 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/29 12:37:18 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/29 15:33:05 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,13 @@ int	ft_exit(t_pipe *cmd)
  */
 int	is_buildin(t_pipe *cmd)
 {
-	int	size;
-
-	size = ft_strlen(cmd->argv[0]);
-	if (!ft_strncmp(cmd->argv[0], "echo", size))
+	if (!ft_strncmp(cmd->argv[0], "echo", 5))
 		return (1);
-	else if (!ft_strncmp(cmd->argv[0], "pwd", size))
+	else if (!ft_strncmp(cmd->argv[0], "pwd", 4))
 		return (1);
-	else if (!ft_strncmp(cmd->argv[0], "env", size))
+	else if (!ft_strncmp(cmd->argv[0], "env", 4))
 		return (1);
-	else if (!ft_strncmp(cmd->argv[0], "export", size) && !cmd->argv[1])
+	else if (!ft_strncmp(cmd->argv[0], "export", 7) && !cmd->argv[1])
 		return (1);
 	return (0);
 }
@@ -79,14 +76,14 @@ int	exec_buildin(t_pipe *cmd, t_list **env_lst)
 	int	size;
 
 	size = ft_strlen(cmd->argv[0]);
-	if (!ft_strncmp(cmd->argv[0], "echo", size))
+	if (!ft_strncmp(cmd->argv[0], "echo", 5))
 		return (ft_echo(cmd->argv));
-	else if (!ft_strncmp(cmd->argv[0], "pwd", size))
+	else if (!ft_strncmp(cmd->argv[0], "pwd", 4))
 		return (pwd(cmd));
-	else if (!ft_strncmp(cmd->argv[0], "export", size) && !cmd->argv[1])
-		return (ft_export(cmd->argv, env_lst));
-	else if (!ft_strncmp(cmd->argv[0], "env", size))
+	else if (!ft_strncmp(cmd->argv[0], "env", 4))
 		return (ft_env(cmd, *env_lst));
+	else if (!ft_strncmp(cmd->argv[0], "export", 7) && !cmd->argv[1])
+		return (ft_export(cmd->argv, env_lst));
 	return (187);
 }
 
@@ -98,16 +95,13 @@ int	exec_buildin(t_pipe *cmd, t_list **env_lst)
  */
 int	is_parent(t_pipe *cmd)
 {
-	int	size;
-
-	size = ft_strlen(cmd->argv[0]);
-	if (!ft_strncmp(cmd->argv[0], "cd", size))
+	if (!ft_strncmp(cmd->argv[0], "cd", 3))
 		return (1);
-	else if (!ft_strncmp(cmd->argv[0], "export", size) && cmd->argv[1])
+	else if (!ft_strncmp(cmd->argv[0], "export", 7) && cmd->argv[1])
 		return (1);
-	else if (!ft_strncmp(cmd->argv[0], "unset", size))
+	else if (!ft_strncmp(cmd->argv[0], "unset", 6))
 		return (1);
-	else if (!ft_strncmp(cmd->argv[0], "exit", size))
+	else if (!ft_strncmp(cmd->argv[0], "exit", 5))
 		return (1);
 	return (0);
 }
@@ -121,16 +115,13 @@ int	is_parent(t_pipe *cmd)
  */
 int	exec_parent(t_pipe *cmd, t_list **env_lst)
 {
-	int	size;
-
-	size = ft_strlen(cmd->argv[0]);
-	if (!ft_strncmp(cmd->argv[0], "cd", size))
+	if (!ft_strncmp(cmd->argv[0], "cd", 3))
 		return (ft_cd(cmd->argv, *env_lst));
-	else if (!ft_strncmp(cmd->argv[0], "export", size) && cmd->argv[1])
+	else if (!ft_strncmp(cmd->argv[0], "export", 7) && cmd->argv[1])
 		return (ft_export(cmd->argv, env_lst));
-	else if (!ft_strncmp(cmd->argv[0], "unset", size))
+	else if (!ft_strncmp(cmd->argv[0], "unset", 6))
 		return (ft_unset(cmd->argv, env_lst));
-	else if (!ft_strncmp(cmd->argv[0], "exit", size))
+	else if (!ft_strncmp(cmd->argv[0], "exit", 5))
 		return (ft_exit(cmd));
 	return (187);
 }
