@@ -23,11 +23,13 @@ all:	$(NAME)
 
 clean:
 	rm -f $(wildcard *.o)
+	rm -f */*.o
 
 fclean:
 	$(MAKE) fclean -C libft
 	$(MAKE) fclean -C get_next_line
 	rm -f $(wildcard *.o)
+	rm -f */*.o
 	rm -f pipex.a
 
 re:	fclean all
