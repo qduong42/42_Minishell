@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:47:46 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/29 15:44:33 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/29 15:47:40 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,6 @@ int	is_buildin(t_pipe *cmd)
  */
 int	exec_buildin(t_pipe *cmd, t_list **env_lst)
 {
-	int	size;
-
-	size = ft_strlen(cmd->argv[0]);
 	if (!ft_strncmp(cmd->argv[0], "echo", 5))
 		return (ft_echo(cmd->argv));
 	else if (!ft_strncmp(cmd->argv[0], "pwd", 4))
