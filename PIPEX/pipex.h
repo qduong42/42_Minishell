@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/28 11:55:03 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/29 14:48:38 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,6 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include "../minishell.h"
-
-# define FIRST_NOT_HERE_DOC 2
-# define FIRST_HERE_DOC 3
 
 typedef struct s_vars
 {
@@ -52,6 +49,8 @@ typedef struct s_path
 
 typedef struct s_pipe	t_pipe;
 
+typedef int				(*t_reaction) (void *);
+
 //			pipex.c
 void	pipex(t_pipe *cmd, t_list **env_lst);
 
@@ -72,6 +71,7 @@ int		ft_echo(char **args);
 int		ft_export(char **args, t_list **env);
 char	**lst_to_strstr(t_list *env);
 void	print_sorted_ev(t_list *env);
+int		valid_env(char *var);
 
 //			unset.c
 int		ft_unset(char	**args, t_list **env);
@@ -98,5 +98,9 @@ void	assign_outfile(t_vars *vars, t_pipe *cmd);
 void	duping(t_vars *vars, t_pipe *cmd);
 void	aftershave(t_vars *vars, t_pipe **cmd);
 void	close_free(t_vars *vars);
+
+//			error_handeling.c
+int		react_if_ncontained(t_reaction reaction, char *contained, t_list **env);
+int		path_error(void *data);
 
 #endif

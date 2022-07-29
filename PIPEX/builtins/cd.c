@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:20:30 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/28 11:02:39 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/29 14:24:14 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,20 @@ int	ft_home(t_list *env)
 	int		cd_ret;
 
 	tmp = env;
-	while (tmp)
+	while (1)
 	{
+		if (!tmp)
+		{
+			error_msg("Home is not set\n");
+			cd_ret = 1;
+			break ;
+		}
 		if (!ft_strncmp(tmp->content, "HOME=", 5))
+		{
 			cd_ret = change_dir(tmp->content + 5, \
 			"ERROR: the home env variable is not properly defined\n", env);
+			break ;
+		}
 		tmp = tmp->next;
 	}
 	return (cd_ret);
@@ -77,11 +86,20 @@ int	ft_oldpwd(t_list *env)
 	int		cd_ret;
 
 	tmp = env;
-	while (tmp)
+	while (1)
 	{
+		if (!tmp)
+		{
+			error_msg("OLDPWD is not set\n");
+			cd_ret = 1;
+			break ;
+		}
 		if (!ft_strncmp(tmp->content, "OLDPWD=", 7))
+		{
 			cd_ret = change_dir(tmp->content + 7, \
 			"ERROR: the OLPWD is corrupted\n", env);
+			break ;
+		}
 		tmp = tmp->next;
 	}
 	return (cd_ret);

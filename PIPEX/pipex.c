@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/29 09:48:25 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/29 15:27:05 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,15 @@ void	fucked_cat(t_pipe **cmd)
  * @param cmd A struct holding all for execution
  * @param env_lst 
  */
-void	init_pipex(t_vars *vars, t_pipe *cmd, t_list **env_lst)
+void	init_pipex(t_vars *vars, t_pipe **cmd, t_list **env_lst)
 {
+	fucked_cat(cmd);
 	vars->outfile = 66;
 	vars->carry = 0;
-	if (cmd)
+	if (*cmd)
 	{
-		if (cmd->fd_in > 2)
-			vars->carry = cmd->fd_in;
+		if ((*cmd)->fd_in > 2)
+			vars->carry = (*cmd)->fd_in;
 	}
 	vars->env = lst_to_strstr(*env_lst);
 }
@@ -59,8 +60,7 @@ void	pipex(t_pipe *cmd, t_list **env_lst)
 {
 	t_vars		vars;
 
-	fucked_cat(&cmd);
-	init_pipex(&vars, cmd, env_lst);
+	init_pipex(&vars, &cmd, env_lst);
 	while (cmd)
 	{
 		if (while_stroke(&cmd, &vars, env_lst))
@@ -71,6 +71,9 @@ void	pipex(t_pipe *cmd, t_list **env_lst)
 			duping(&vars, cmd);
 			if (is_buildin(cmd))
 				exit(exec_buildin(cmd, env_lst));
+			else if (access(cmd->argv[0], F_OK) && \
+				react_if_ncontained(path_error, "PATH=", env_lst))
+				exit (1);
 			else if (execve(vars.path, cmd->argv, vars.env))
 			{
 				perror("execve()");

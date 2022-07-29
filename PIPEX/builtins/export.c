@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 12:14:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/29 09:17:55 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/29 14:46:56 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ void	print_sorted_ev(t_list *env)
 				ft_putchar_fd('\"', 1);
 			j++;
 		}
-		ft_putstr_fd("\"\n", 1);
+		if (valid_env(splitters[i]))
+			ft_putchar_fd('\"', 1);
+		ft_putchar_fd('\n', 1);
 		i++;
 	}
 	ft_free_all(splitters);
@@ -109,7 +111,7 @@ void	perform_action(char *arg, int *error, t_list **env)
 {
 	char	*to_free;
 
-	if (valid_env(arg))
+	if (arg)
 	{
 		to_free = dup_till(arg, '=');
 		unset_one(env, to_free);
