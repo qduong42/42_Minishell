@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:07 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/29 12:56:37 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/30 12:57:49 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,13 @@ void	aftershave(t_vars *vars, t_pipe **cmd)
  * 
  * @param vars 
  */
-void	close_free(t_vars *vars)
+void	close_free(t_vars *vars, t_pipe *cmd)
 {
+	if (cmd && cmd->hd)
+	{
+		create_hd(cmd->hd);
+		unlink(".temp_doc");
+	}
 	if (vars->carry > 2)
 		close(vars->carry);
 	if (vars->outfile > 2)

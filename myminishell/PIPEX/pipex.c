@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/29 09:48:25 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/30 12:57:21 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	pipex(t_pipe *cmd, t_list **env_lst)
 
 	fucked_cat(&cmd);
 	init_pipex(&vars, cmd, env_lst);
-	while (cmd)
+	while (cmd && cmd->argv[0])
 	{
 		if (while_stroke(&cmd, &vars, env_lst))
 			continue ;
@@ -79,5 +79,5 @@ void	pipex(t_pipe *cmd, t_list **env_lst)
 		}
 		aftershave(&vars, &cmd);
 	}
-	close_free(&vars);
+	close_free(&vars, cmd);
 }
