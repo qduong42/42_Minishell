@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/30 13:04:41 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/07/30 13:26:51 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,10 @@ void	assign_outfile(t_vars *vars, t_pipe *cmd);
 void	duping(t_vars *vars, t_pipe *cmd);
 void	aftershave(t_vars *vars, t_pipe **cmd);
 void	close_free(t_vars *vars, t_pipe *cmd);
+
+//			error_handeling.c
+int		react_if_ncontained(t_reaction reaction, char *contained, t_list **env);
+int		path_error(void *data);
 
 //			error_handeling.c
 int		react_if_ncontained(t_reaction reaction, char *contained, t_list **env);
