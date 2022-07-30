@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   red_int.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 22:19:42 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/29 09:48:29 by qduong           ###   ########.fr       */
+/*   Updated: 2022/07/30 13:13:51 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,10 @@ void	int_red(t_shell *s)
 		quote = 0;
 		while (temp->sub[i])
 		{
-			if (!quote && temp->sub[i] == IN)
+			if (outside_quotes(temp->sub, i) && temp->sub[i] == IN)
 				i = in_or_hd(temp, i);
-			else if (!quote && temp->sub[i] == OUT)
+			else if (outside_quotes(temp->sub, i) && temp->sub[i] == OUT)
 				i = out_or_app(temp, i);
-			else if (temp->sub[i] == S_Q || temp->sub[i] == D_Q)
-				quote = temp->sub[i];
-			else if (quote && (!temp->sub[i] || temp->sub[i] == quote))
-				quote = 0;
 			i++;
 		}
 		clean_fd_hd(temp);
