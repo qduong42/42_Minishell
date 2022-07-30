@@ -29,11 +29,15 @@ $(NAME): $(OBJ) $(PARSER_OBJ)
 clean:
 	$(MAKE) clean -C PIPEX/
 	$(RM) */*.o
+	$(RM) */*/*.o
+	$(RM) */*/*/*.o
 	$(RM) $(OBJ) $(PARSER_OBJ)
 
 fclean: clean
 	$(MAKE) fclean -C PIPEX/
 	$(RM) */*.o
+	$(RM) */*/*.o
+	$(RM) */*/*/*.o
 	$(RM) $(NAME)
 
 re: fclean all
