@@ -1,3 +1,0 @@
-Optimized printing commit works to print multiple list.
-
-Problem --> implementation of rem quotes and trim spaces?
