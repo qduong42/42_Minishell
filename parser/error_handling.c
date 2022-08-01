@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 13:16:58 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/29 14:30:44 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/01 18:48:39 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	fix_pwd(void *data)
 	ft_strlcpy(new_content, "PWD=", ft_strlen(to_free) + 5);
 	ft_strlcat(new_content, to_free, ft_strlen(to_free) + 5);
 	ft_lstadd_back(env, ft_lstnew(new_content));
+	free(to_free);
 	return (0);
 }
 
