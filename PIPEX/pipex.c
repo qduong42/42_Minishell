@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/30 13:26:44 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/01 21:03:38 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ void	fucked_cat(t_pipe **cmd)
 {
 	while ((*cmd))
 	{
-		if ((*cmd)->fd_in <= 2 && !(*cmd)->hd && \
-		(*cmd)->argv[0] && \
-		!ft_strncmp((*cmd)->argv[0], "cat", 4) && \
-		!(*cmd)->argv[1])
+		if (((*cmd)->fd_in == -1 && !(*cmd)->hd && (*cmd)->argv[0] \
+		&& !ft_strncmp((*cmd)->argv[0], "cat", 4)))
 			(*cmd) = (*cmd)->next;
 		else
 			break ;
@@ -61,7 +59,6 @@ void	pipex(t_pipe *cmd, t_list **env_lst)
 {
 	t_vars		vars;
 
-	fucked_cat(&cmd);
 	init_pipex(&vars, &cmd, env_lst);
 	while (cmd && cmd->argv[0])
 	{
@@ -74,7 +71,7 @@ void	pipex(t_pipe *cmd, t_list **env_lst)
 			if (is_buildin(cmd))
 				exit(exec_buildin(cmd, env_lst));
 			else if (access(cmd->argv[0], F_OK) && \
-				react_if_ncontained(path_error, "PATH=", env_lst))
+			react_if_ncontained(path_error, "PATH=", env_lst))
 				exit (1);
 			else if (execve(vars.path, cmd->argv, vars.env))
 			{
