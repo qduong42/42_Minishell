@@ -6,11 +6,31 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:55:03 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/28 11:05:52 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/02 12:03:08 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
+
+/**
+ * @brief checks the edge case of mixed options (flags)
+ * 
+ * @param flag 
+ * @return int (bool)
+ */
+int	mixed_flag(char *flag)
+{
+	int	i;
+
+	i = 0;
+	while (flag[i])
+	{
+		if (flag[i] != '-' && flag[i] != 'n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
 
 /**
  * @brief prints space separated, either with no-newline option or without
@@ -27,7 +47,7 @@ int	ft_echo(char **args)
 	n_option = 0;
 	if (ft_strstrlen(args) > 1)
 	{
-		while (!ft_strncmp(args[i], "-n", 2))
+		while (!ft_strncmp(args[i], "-n", 2) && !mixed_flag(args[i]))
 		{
 			n_option = 1;
 			i++;
