@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:23:29 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/28 11:14:34 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/02 12:10:25 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ int	pwd(t_pipe *cmd)
 {
 	char	cwd[FT_PATH_MAX];
 
-	if (cmd->argv[1] != NULL)
-		return (1);
 	if (getcwd(cwd, FT_PATH_MAX))
 	{
 		ft_putstr_fd(cwd, 1);
