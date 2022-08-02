@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/01 21:03:38 by qduong           ###   ########.fr       */
+/*   Updated: 2022/08/02 12:19:42 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+/**
+ * @brief for exiting the heredoc with ctrl+c
+ * 
+ * @param sig 
+ */
+void	exit_one(int sig)
+{
+	if (sig == SIGINT)
+		exit(1);
+}
 
 /**
  * @brief goes to the next cmd if cat-cmd is blocking
@@ -67,6 +78,7 @@ void	pipex(t_pipe *cmd, t_list **env_lst)
 		assign_outfile(&vars, cmd);
 		if (!vars.pid)
 		{
+			signal(SIGINT, exit_one);
 			duping(&vars, cmd);
 			if (is_buildin(cmd))
 				exit(exec_buildin(cmd, env_lst));

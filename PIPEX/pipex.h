@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/30 13:26:51 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/02 12:16:20 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int		ft_home(t_list *env);
 int		ft_oldpwd(t_list *env);
 
 //			pwd.c
-int		pwd(t_pipe *cmd);
+int		pwd();
 char	*get_pwd(void);
 void	update_env(char *pwd, char *oldpwd, t_list *env);
 

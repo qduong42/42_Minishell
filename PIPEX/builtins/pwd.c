@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:23:29 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/02 12:10:25 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/02 12:16:14 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @param cmd 
  * @return int exit status
  */
-int	pwd(t_pipe *cmd)
+int	pwd()
 {
 	char	cwd[FT_PATH_MAX];
 
