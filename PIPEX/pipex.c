@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/01 21:03:38 by qduong           ###   ########.fr       */
+/*   Updated: 2022/08/03 18:03:16 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	fucked_cat(t_pipe **cmd)
 void	init_pipex(t_vars *vars, t_pipe **cmd, t_list **env_lst)
 {
 	fucked_cat(cmd);
+	vars->pid = 1;
 	vars->outfile = 66;
 	vars->carry = 0;
 	if (*cmd)
@@ -81,5 +82,5 @@ void	pipex(t_pipe *cmd, t_list **env_lst)
 		}
 		aftershave(&vars, &cmd);
 	}
-	close_free(&vars, cmd);
+	close_free(&vars);
 }

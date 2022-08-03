@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:59:03 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/28 12:59:09 by qduong           ###   ########.fr       */
+/*   Updated: 2022/08/03 09:51:05 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ char	*special_join(char *final, char *env, int len, int be_do)
 	env_len = ft_strlen(env);
 	new_final = ft_calloc(1, ft_strlen(final) - len + env_len);
 	ft_strlcpy(new_final, final, be_do);
-	ft_strlcat(new_final, env, be_do + env_len);
+	if (env)
+		ft_strlcat(new_final, env, be_do + env_len);
 	ft_strlcat(new_final, final + be_do + len, \
 	ft_strlen(final) - len + env_len + 1);
 	return (new_final);

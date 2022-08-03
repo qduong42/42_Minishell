@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:20:30 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/29 14:24:14 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/03 14:25:30 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int	change_dir(char *to, char *error, t_list *env)
 		error_msg(error);
 		cd_ret = 1;
 	}
-	free (to_free);
+	if (to_free)
+		free (to_free);
 	return (cd_ret);
 }
 

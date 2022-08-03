@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/30 13:26:51 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/03 18:29:17 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int		ft_home(t_list *env);
 int		ft_oldpwd(t_list *env);
 
 //			pwd.c
-int		pwd(t_pipe *cmd);
+int		pwd(void);
 char	*get_pwd(void);
 void	update_env(char *pwd, char *oldpwd, t_list *env);
 
@@ -97,7 +97,7 @@ int		while_stroke(t_pipe **cmd, t_vars *vars, t_list **env_lst);
 void	assign_outfile(t_vars *vars, t_pipe *cmd);
 void	duping(t_vars *vars, t_pipe *cmd);
 void	aftershave(t_vars *vars, t_pipe **cmd);
-void	close_free(t_vars *vars, t_pipe *cmd);
+void	close_free(t_vars *vars);
 
 //			error_handeling.c
 int		react_if_ncontained(t_reaction reaction, char *contained, t_list **env);

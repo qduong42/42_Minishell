@@ -12,7 +12,8 @@ OBJ = $(SRC:.c=.o)
 
 #Parser files#
 PARSER_DIR = parser/
-PARSER_SRC = bool.c bool2.c envp_res1.c envp_res2.c error_handling.c red_int.c redir_main.c redir_sub.c subpipes.c tokenize.c
+PARSER_SRC = bool.c bool2.c envp_res1.c envp_res2.c error_handling.c \
+red_int.c redir_main.c redir_sub.c subpipes.c tokenize.c space_split.c
 PARSER = $(addprefix $(PARSER_DIR),$(PARSER_SRC))
 PARSER_OBJ = $(PARSER:.c=.o)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   else_if.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:47:46 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/29 15:47:40 by qduong           ###   ########.fr       */
+/*   Updated: 2022/08/02 13:09:47 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	exec_buildin(t_pipe *cmd, t_list **env_lst)
 	if (!ft_strncmp(cmd->argv[0], "echo", 5))
 		return (ft_echo(cmd->argv));
 	else if (!ft_strncmp(cmd->argv[0], "pwd", 4))
-		return (pwd(cmd));
+		return (pwd());
 	else if (!ft_strncmp(cmd->argv[0], "env", 4))
 		return (ft_env(cmd, *env_lst));
 	else if (!ft_strncmp(cmd->argv[0], "export", 7) && !cmd->argv[1])

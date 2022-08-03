@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:07 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/30 13:26:56 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/03 18:27:48 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ int	while_stroke(t_pipe **cmd, t_vars *vars, t_list **env_lst)
 		if (vars->carry > 2)
 			close(vars->carry);
 		g_exit_status = exec_parent(*cmd, env_lst);
+		pipe(vars->working);
+		close(vars->working[1]);
+		vars->carry = vars->working[0];
 		*cmd = (*cmd)->next;
 		return (1);
 	}
@@ -44,8 +47,7 @@ void	assign_outfile(t_vars *vars, t_pipe *cmd)
 	if (vars->outfile > 2)
 		close(vars->outfile);
 	pipe(vars->working);
-	if (vars->outfile > 2)
-		vars->outfile = 1;
+	vars->outfile = 1;
 	if (cmd->fd_out > 2)
 		vars->outfile = cmd->fd_out;
 	if (cmd->next)
@@ -62,15 +64,18 @@ void	assign_outfile(t_vars *vars, t_pipe *cmd)
  */
 void	duping(t_vars *vars, t_pipe *cmd)
 {
-	int	fd;
-
 	dup2(vars->carry, 0);
+	if (vars->carry > 2)
+		close(vars->carry);
 	if (cmd->hd)
 	{
-		fd = create_hd(cmd->hd);
-		dup2(fd, 0);
+		dup2(cmd->hd_fd, 0);
+		if (cmd->hd_fd > 2)
+			close(cmd->hd_fd);
 	}
 	dup2(vars->outfile, 1);
+	if (vars->outfile > 2)
+		close(vars->outfile);
 }
 
 /**
@@ -83,10 +88,7 @@ void	duping(t_vars *vars, t_pipe *cmd)
 void	aftershave(t_vars *vars, t_pipe **cmd)
 {
 	signal(SIGINT, SIG_IGN);
-	waitpid(vars->pid, &vars->tmp, 0);
 	free(vars->path);
-	signal(SIGINT, show_prompt);
-	g_exit_status = WEXITSTATUS(vars->tmp);
 	close(vars->working[1]);
 	if ((*cmd)->hd)
 		unlink(".temp_doc");
@@ -103,16 +105,15 @@ void	aftershave(t_vars *vars, t_pipe **cmd)
  * 
  * @param vars 
  */
-void	close_free(t_vars *vars, t_pipe *cmd)
+void	close_free(t_vars *vars)
 {
-	if (cmd && cmd->hd)
-	{
-		create_hd(cmd->hd);
-		unlink(".temp_doc");
-	}
 	if (vars->carry > 2)
 		close(vars->carry);
 	if (vars->outfile > 2)
 		close(vars->outfile);
 	ft_free_all(vars->env);
+	while (vars->pid > 0)
+		vars->pid = wait(&vars->tmp);
+	g_exit_status = WEXITSTATUS(vars->tmp);
+	signal(SIGINT, show_prompt);
 }
