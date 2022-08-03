@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:47:12 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/03 12:01:35 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/03 13:19:30 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ int	create_hd(char *delim)
 	int		fd;
 	char	*line;
 
+	fd = open(".temp_doc", O_TRUNC | O_RDWR | O_CREAT, 0777);
+	close(fd);
 	while (1)
 	{
 		fd = open(".temp_doc", O_CREAT | O_RDWR | O_APPEND, 0777);

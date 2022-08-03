@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:07 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/03 12:10:45 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/03 15:58:41 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,13 @@ void	assign_outfile(t_vars *vars, t_pipe *cmd)
 	vars->pid = fork();
 }
 
-void	fk_hd(int sig)
-{
-	if (sig == SIGINT)
-		exit(1);
-}
 /**
  * @brief dups vars->carry/heredoc_fd on 0 and vars->outfile on 1
  * 
  * @param vars 
  * @param cmd 
  */
-void	duping(t_vars *vars, t_pipe *cmd)
+void	duping(t_vars *vars)
 {
 	dup2(vars->carry, 0);
 	if (vars->carry > 2)
@@ -76,9 +71,6 @@ void	duping(t_vars *vars, t_pipe *cmd)
 	dup2(vars->outfile, 1);
 	if (vars->outfile > 2)
 		close(vars->outfile);
-	signal(SIGINT, fk_hd);
-	if (cmd->hd)
-		vars->carry = create_hd(cmd->hd);
 }
 
 /**
@@ -108,13 +100,8 @@ void	aftershave(t_vars *vars, t_pipe **cmd)
  * 
  * @param vars 
  */
-void	close_free(t_vars *vars, t_pipe *cmd)
+void	close_free(t_vars *vars)
 {
-	if (cmd && cmd->hd)
-	{
-		create_hd(cmd->hd);
-		unlink(".temp_doc");
-	}
 	if (vars->carry > 2)
 		close(vars->carry);
 	if (vars->outfile > 2)
