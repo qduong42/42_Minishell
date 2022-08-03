@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 22:42:23 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/29 15:03:29 by qduong           ###   ########.fr       */
+/*   Updated: 2022/08/03 09:49:07 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,21 @@ int	find_env(t_shell *s, int i)
 	len = variable_length(s, i);
 	tmp = variable_name(&s->input[i], '=', len);
 	current = (s->env);
-	while (current->next != NULL)
+	while (current)
 	{
 		if (ft_strncmp(tmp, current->content, len + 1) == 0)
 			break ;
 		current = current->next;
 	}
-	if (tmp)
-		free(tmp);
-	if (current->next == NULL)
-		current->content = "" ;
+	free(tmp);
+	if (current != NULL)
+	{
 	e_len = env_len(current->content);
 	tmp = special_join(s->input, &(((char *)current->content)[e_len]), len, i);
-	if (s->input)
-		free(s->input);
+	}
+	else
+		tmp = special_join(s->input, NULL, len, i);
+	free(s->input);
 	s->input = tmp;
 	return (i - 2);
 }
