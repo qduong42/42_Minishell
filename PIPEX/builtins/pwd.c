@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:23:29 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/03 16:53:34 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/03 18:28:46 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @param cmd 
  * @return int exit status
  */
-int	pwd()
+int	pwd(void)
 {
 	char	cwd[FT_PATH_MAX];
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:07 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/03 18:03:03 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/03 18:27:48 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ void	assign_outfile(t_vars *vars, t_pipe *cmd)
 {
 	if (vars->outfile > 2)
 		close(vars->outfile);
-	pipe(vars->working);//protect against error
-	// if (vars->outfile > 2)
+	pipe(vars->working);
 	vars->outfile = 1;
 	if (cmd->fd_out > 2)
 		vars->outfile = cmd->fd_out;

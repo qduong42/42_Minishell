@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 08:46:06 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/03 16:53:50 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/03 18:20:24 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 # include <dirent.h> // readdir
 # include <stdio.h> // perror
 # include <string.h> // strerror
-# include </Users/ljahn/goinfre/.brew/opt/readline/include/readline/readline.h>
-# include </Users/ljahn/goinfre/.brew/opt/readline/include/readline/history.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include <errno.h>
 # include <sys/stat.h>
 # include "PIPEX/pipex.h"
