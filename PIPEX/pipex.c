@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/03 18:03:16 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/03 18:46:04 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ void	init_pipex(t_vars *vars, t_pipe **cmd, t_list **env_lst)
 	{
 		if ((*cmd)->fd_in > 2)
 			vars->carry = (*cmd)->fd_in;
+		if ((*cmd)->hd)
+		{
+			printf("EXECUTED: %d\n", (*cmd)->hd_fd);
+			vars->carry = (*cmd)->hd_fd;
+		}
 	}
 	vars->env = lst_to_strstr(*env_lst);
 }
