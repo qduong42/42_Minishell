@@ -6,23 +6,11 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 22:23:48 by qduong            #+#    #+#             */
-/*   Updated: 2022/08/01 20:58:06 by qduong           ###   ########.fr       */
+/*   Updated: 2022/08/03 11:52:50 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	space_split(t_shell *s)
-{
-	t_pipe	*temp;
-
-	temp = s->s_p;
-	while (temp)
-	{
-		temp->argv = ft_split(temp->sub, ' ');
-		temp = temp->next;
-	}
-}
 
 int	get_len(char *str)
 {
