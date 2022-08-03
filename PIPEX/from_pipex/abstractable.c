@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:47:12 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/03 16:21:35 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/03 20:36:56 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ int	create_hd(char *delim)
 			ft_putstr_fd(line, _pipe[1]);
 			free (line);
 		}
+		close(_pipe[1]);
 		exit(0);
 	}
 	waitpid(pid, NULL, 0);
