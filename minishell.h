@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 08:46:06 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/03 19:38:09 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/03 20:21:30 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,9 +179,8 @@ int		consecutive_specials(char *line);
 
 //bool2.c
 
+int		delete_quote(char *str, int i, char quote);
 int		unclosed_quotes(char *line);
-int		inside_diff(char *line, int pos, char quote);
-int		inside_same(char *line, int pos, char quote);
 int		outside_quotes(char *line, int pos);
 int		ft_whitespace(char c);
 
