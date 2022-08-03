@@ -6,22 +6,11 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/02 12:19:42 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/03 11:46:28 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
-
-/**
- * @brief for exiting the heredoc with ctrl+c
- * 
- * @param sig 
- */
-void	exit_one(int sig)
-{
-	if (sig == SIGINT)
-		exit(1);
-}
 
 /**
  * @brief goes to the next cmd if cat-cmd is blocking
@@ -73,13 +62,14 @@ void	pipex(t_pipe *cmd, t_list **env_lst)
 	init_pipex(&vars, &cmd, env_lst);
 	while (cmd && cmd->argv[0])
 	{
+		if (cmd->hd)
+			vars.carry = create_hd(cmd->hd);
 		if (while_stroke(&cmd, &vars, env_lst))
 			continue ;
 		assign_outfile(&vars, cmd);
 		if (!vars.pid)
 		{
-			signal(SIGINT, exit_one);
-			duping(&vars, cmd);
+			duping(&vars);
 			if (is_buildin(cmd))
 				exit(exec_buildin(cmd, env_lst));
 			else if (access(cmd->argv[0], F_OK) && \

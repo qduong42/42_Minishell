@@ -30,8 +30,8 @@
 # include <dirent.h> // readdir
 # include <stdio.h> // perror
 # include <string.h> // strerror
-# include <readline/readline.h>
-# include <readline/history.h>
+# include </Users/ljahn/goinfre/.brew/opt/readline/include/readline/readline.h>
+# include </Users/ljahn/goinfre/.brew/opt/readline/include/readline/history.h>
 # include <errno.h>
 # include <sys/stat.h>
 # include "PIPEX/pipex.h"
