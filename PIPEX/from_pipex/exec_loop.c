@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:07 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/03 15:58:41 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/03 16:30:10 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,17 @@ void	assign_outfile(t_vars *vars, t_pipe *cmd)
  * @param vars 
  * @param cmd 
  */
-void	duping(t_vars *vars)
+void	duping(t_vars *vars, t_pipe *cmd)
 {
 	dup2(vars->carry, 0);
 	if (vars->carry > 2)
 		close(vars->carry);
+	if (cmd->hd)
+	{
+		dup2(cmd->hd_fd, 0);
+		if (cmd->hd_fd > 2)
+			close(cmd->hd_fd);
+	}
 	dup2(vars->outfile, 1);
 	if (vars->outfile > 2)
 		close(vars->outfile);

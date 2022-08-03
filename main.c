@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/02 12:28:45 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/03 16:35:16 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,21 @@ int	ft_prompt(t_shell *s)
 	return (0);
 }
 
+/**
+ * @brief gives hd fds to the struct (need to be closed later)
+ * 
+ * @param cmd 
+ */
+void	here_fuck(t_pipe *cmd)
+{
+	while (cmd)
+	{
+		if (cmd->hd)
+			cmd->hd_fd = create_hd(cmd->hd);
+		cmd = cmd->next;
+	}
+}
+
 void	loopyhoopy(t_shell *s)
 {
 	int	i;
@@ -68,6 +83,7 @@ void	loopyhoopy(t_shell *s)
 			continue ;
 		parser(s);
 		free(s->input);
+		here_fuck(s->s_p);
 		pipex(s->s_p, &s->env);
 		free_pipes(&s->s_p);
 	}

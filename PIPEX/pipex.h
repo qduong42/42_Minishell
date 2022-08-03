@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/03 15:59:06 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/03 16:29:42 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char	*get_path(char *cmd, char **env);
 //			exec_loop.c
 int		while_stroke(t_pipe **cmd, t_vars *vars, t_list **env_lst);
 void	assign_outfile(t_vars *vars, t_pipe *cmd);
-void	duping(t_vars *vars);
+void	duping(t_vars *vars, t_pipe *cmd);
 void	aftershave(t_vars *vars, t_pipe **cmd);
 void	close_free(t_vars *vars);
 
