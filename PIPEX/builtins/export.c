@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 12:14:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/30 13:27:04 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/02 12:07:47 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void	perform_action(char *arg, int *error, t_list **env)
 {
 	char	*to_free;
 
-	if (arg)
+	if (valid_env(arg))
 	{
 		to_free = dup_till(arg, '=');
 		unset_one(env, to_free);

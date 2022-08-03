@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:23:29 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/03 14:24:59 by qduong           ###   ########.fr       */
+/*   Updated: 2022/08/03 16:53:34 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,10 @@
  * @param cmd 
  * @return int exit status
  */
-int	pwd(t_pipe *cmd)
+int	pwd()
 {
 	char	cwd[FT_PATH_MAX];
 
-	if (cmd->argv[1] != NULL)
-		return (1);
 	if (getcwd(cwd, FT_PATH_MAX))
 	{
 		ft_putstr_fd(cwd, 1);

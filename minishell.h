@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 08:46:06 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/03 13:56:26 by qduong           ###   ########.fr       */
+/*   Updated: 2022/08/03 16:53:50 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 # include <dirent.h> // readdir
 # include <stdio.h> // perror
 # include <string.h> // strerror
-# include <readline/readline.h>
-# include <readline/history.h>
+# include </Users/ljahn/goinfre/.brew/opt/readline/include/readline/readline.h>
+# include </Users/ljahn/goinfre/.brew/opt/readline/include/readline/history.h>
 # include <errno.h>
 # include <sys/stat.h>
 # include "PIPEX/pipex.h"
@@ -67,6 +67,7 @@ typedef struct s_pipe
 	int				fd_in;
 	int				fd_out;
 	char			*hd;
+	int				hd_fd;
 	int				last;
 	struct s_pipe	*next;
 	struct s_shell	*main;

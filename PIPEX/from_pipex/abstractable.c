@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   abstractable.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:47:12 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/29 12:50:03 by qduong           ###   ########.fr       */
+/*   Updated: 2022/08/03 16:21:35 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,24 +86,32 @@ char	**lst_to_strstr(t_list *env)
  */
 int	create_hd(char *delim)
 {
-	int		fd;
+	int		pid;
+	int		_pipe[2];
 	char	*line;
 
-	while (1)
+	pipe(_pipe);
+	pid = fork();
+	if (!pid)
 	{
-		fd = open(".temp_doc", O_CREAT | O_RDWR | O_APPEND, 0777);
-		ft_putstr_fd("> ", 1);
-		line = get_next_line(0);
-		if (!ft_strncmp(line, delim, ft_strlen(delim)))
+		close(_pipe[0]);
+		while (1)
 		{
-			free(line);
-			break ;
+			ft_putstr_fd("> ", 2);
+			line = get_next_line(0);
+			if (!ft_strncmp(line, delim, ft_strlen(delim)))
+			{
+				free(line);
+				break ;
+			}
+			ft_putstr_fd(line, _pipe[1]);
+			free (line);
 		}
-		ft_putstr_fd(line, fd);
-		free(line);
-		close(fd);
+		exit(0);
 	}
-	return (fd);
+	waitpid(pid, NULL, 0);
+	close(_pipe[1]);
+	return (_pipe[0]);
 }
 
 /**
