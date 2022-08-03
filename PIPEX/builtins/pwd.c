@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:23:29 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/28 11:14:34 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/03 14:24:59 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ char	*get_pwd(void)
 	cwd = malloc(sizeof(char) * FT_PATH_MAX);
 	if (getcwd(cwd, FT_PATH_MAX))
 		return (cwd);
+	else
+		free(cwd);
 	return (NULL);
 }
 

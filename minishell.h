@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 08:46:06 by ljahn             #+#    #+#             */
-/*   Updated: 2022/07/29 12:31:07 by qduong           ###   ########.fr       */
+/*   Updated: 2022/08/03 13:56:26 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@
 
 extern int	g_exit_status;
 
-# define PROMPT "\e[44m小さいshell \e[42mv0.42\e[0m $ "
+# define PROMPT "小さいshell v2.42 $ "
 # define PIPE '|'
 # define S_Q '\''
 # define D_Q '\"'
