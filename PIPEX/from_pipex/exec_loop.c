@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:07 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/03 16:30:10 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/03 18:00:33 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
  */
 int	while_stroke(t_pipe **cmd, t_vars *vars, t_list **env_lst)
 {
+	vars->pid = 1;
 	if (is_parent(*cmd))
 	{
 		if (vars->carry > 2)
