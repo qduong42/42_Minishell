@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/03 11:46:28 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/03 12:03:15 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,12 @@ void	pipex(t_pipe *cmd, t_list **env_lst)
 	init_pipex(&vars, &cmd, env_lst);
 	while (cmd && cmd->argv[0])
 	{
-		if (cmd->hd)
-			vars.carry = create_hd(cmd->hd);
 		if (while_stroke(&cmd, &vars, env_lst))
 			continue ;
 		assign_outfile(&vars, cmd);
 		if (!vars.pid)
 		{
-			duping(&vars);
+			duping(&vars, cmd);
 			if (is_buildin(cmd))
 				exit(exec_buildin(cmd, env_lst));
 			else if (access(cmd->argv[0], F_OK) && \

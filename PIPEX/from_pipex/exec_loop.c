@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:07 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/03 11:51:05 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/03 12:10:45 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,18 @@ void	assign_outfile(t_vars *vars, t_pipe *cmd)
 	vars->pid = fork();
 }
 
+void	fk_hd(int sig)
+{
+	if (sig == SIGINT)
+		exit(1);
+}
 /**
  * @brief dups vars->carry/heredoc_fd on 0 and vars->outfile on 1
  * 
  * @param vars 
  * @param cmd 
  */
-void	duping(t_vars *vars)
+void	duping(t_vars *vars, t_pipe *cmd)
 {
 	dup2(vars->carry, 0);
 	if (vars->carry > 2)
@@ -71,6 +76,9 @@ void	duping(t_vars *vars)
 	dup2(vars->outfile, 1);
 	if (vars->outfile > 2)
 		close(vars->outfile);
+	signal(SIGINT, fk_hd);
+	if (cmd->hd)
+		vars->carry = create_hd(cmd->hd);
 }
 
 /**
@@ -83,10 +91,7 @@ void	duping(t_vars *vars)
 void	aftershave(t_vars *vars, t_pipe **cmd)
 {
 	signal(SIGINT, SIG_IGN);
-	// waitpid(vars->pid, &vars->tmp, 0);
 	free(vars->path);
-	signal(SIGINT, show_prompt);
-	// g_exit_status = WEXITSTATUS(vars->tmp);
 	close(vars->working[1]);
 	if ((*cmd)->hd)
 		unlink(".temp_doc");
@@ -105,12 +110,11 @@ void	aftershave(t_vars *vars, t_pipe **cmd)
  */
 void	close_free(t_vars *vars, t_pipe *cmd)
 {
-	void(cmd);
-	// if (cmd && cmd->hd)
-	// {
-	// 	create_hd(cmd->hd);
-	// 	unlink(".temp_doc");
-	// }
+	if (cmd && cmd->hd)
+	{
+		create_hd(cmd->hd);
+		unlink(".temp_doc");
+	}
 	if (vars->carry > 2)
 		close(vars->carry);
 	if (vars->outfile > 2)
@@ -119,4 +123,5 @@ void	close_free(t_vars *vars, t_pipe *cmd)
 	while (vars->pid > 0)
 		vars->pid = wait(&vars->tmp);
 	g_exit_status = WEXITSTATUS(vars->tmp);
+	signal(SIGINT, show_prompt);
 }
