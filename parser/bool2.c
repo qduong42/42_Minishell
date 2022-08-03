@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 17:57:28 by qduong            #+#    #+#             */
-/*   Updated: 2022/08/03 19:32:30 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/03 19:42:57 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,32 @@ int	outside_quotes(char *line, int pos)
 	return (1);
 }
 
-int	inside_SQ(char *line, int pos)
+int	inside_diff(char *line, int pos, char quote)
 {
-	int	q_num;
-	int	i;
+	int		num;
+	int		i;
+	char	negative;
 
+	if (quote == '\'')
+		negative = '"';
+	else if (quote == '"')
+		negative = '\'';
+	else
+		return (0);
 	i = 0;
-	q_num = 0;
+	num = 0;
 	while (i < pos)
 	{
-		if (line[i] == '\'')
-			q_num++;
+		if (line[i] == negative)
+			num++;
+		i++;
 	}
-	if (q_num % 2 == 1)
+	if (num % 2 == 1)
 		return (1);
 	return (0);
 }
 
-int	inside_DQ(char *line, int pos)
+int	inside_same(char *line, int pos, char quote)
 {
 	int	qq_num;
 	int	i;
@@ -66,8 +74,9 @@ int	inside_DQ(char *line, int pos)
 	qq_num = 0;
 	while (i < pos)
 	{
-		if (line[i] == '"')
+		if (line[i] == quote)
 			qq_num++;
+		i++;
 	}
 	if (qq_num % 2 == 1)
 		return (1);
