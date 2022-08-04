@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/04 15:28:17 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/04 19:35:26 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int		ft_env(t_pipe *cmd, t_list *env);
 
 //			else_if.c
 int		is_buildin(t_pipe *cmd);
-int		exec_buildin(t_pipe *cmd, t_list **env_lst);
+int		exec_buildin(t_pipe *cmd, t_list **env_lst, t_vars *vars);
 int		is_parent(t_pipe *cmd);
 int		exec_parent(t_pipe *cmd, t_list **env_lst);
 

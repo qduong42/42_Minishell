@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   else_if.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:47:46 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/04 12:11:51 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/04 19:34:54 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,9 @@ int	is_buildin(t_pipe *cmd)
  * @param env_lst 
  * @return int exit status
  */
-int	exec_buildin(t_pipe *cmd, t_list **env_lst)
+int	exec_buildin(t_pipe *cmd, t_list **env_lst, t_vars *vars)
 {
+	close(vars->carry);
 	if (!ft_strncmp(cmd->argv[0], "echo", 5))
 		return (ft_echo(cmd->argv));
 	else if (!ft_strncmp(cmd->argv[0], "pwd", 4))

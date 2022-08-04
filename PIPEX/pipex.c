@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/04 18:55:11 by qduong           ###   ########.fr       */
+/*   Updated: 2022/08/04 19:34:12 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	pipex(t_pipe *cmd, t_list **env_lst)
 		{
 			duping(&vars, cmd);
 			if (is_buildin(cmd))
-				exit_s(exec_buildin(cmd, env_lst));
+				exit_s(exec_buildin(cmd, env_lst, &vars));
 			else if (access(cmd->argv[0], F_OK) && \
 			react_if_ncontained(path_error, "PATH=", env_lst))
 				exit_s(1);

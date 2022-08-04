@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:07 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/04 19:15:46 by qduong           ###   ########.fr       */
+/*   Updated: 2022/08/04 19:28:54 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,15 +90,15 @@ void	aftershave(t_vars *vars, t_pipe **cmd)
 {
 	signal(SIGINT, SIG_IGN);
 	free(vars->path);
+	if (vars->carry > 2)
+		close(vars->carry);
+	if ((*cmd)->fd_in > 2)
+		vars->carry = (*cmd)->fd_in;
 	if ((*cmd)->next)
 	{
 		close(vars->working[1]);
 		vars->carry = vars->working[0];
 	}
-	if (vars->carry > 2)
-		close(vars->carry);
-	if ((*cmd)->fd_in > 2)
-		vars->carry = (*cmd)->fd_in;
 	*cmd = (*cmd)->next;
 }
 
