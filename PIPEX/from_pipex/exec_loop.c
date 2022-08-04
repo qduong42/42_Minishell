@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:07 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/04 13:30:05 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/04 14:12:30 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,6 @@ void	close_free(t_vars *vars)
 {
 	if (vars->carry > 2)
 	{
-		printf("CLOSED: %d\n", vars->carry);
 		close(vars->carry);
 	}
 	if (vars->outfile > 2)
