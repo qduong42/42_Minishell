@@ -1,12 +1,15 @@
 NAME := pipex.a
 
 SRCS = builtins/cd.c builtins/echo.c builtins/export.c builtins/unset.c builtins/env.c pipex.c from_pipex/else_if.c from_pipex/abstractable.c \
-		from_pipex/exec_loop.c builtins/pwd.c
-OBJS = cd.o echo.o export.o unset.o pipex.o env.o else_if.o abstractable.o exec_loop.o pwd.o
+		from_pipex/exec_loop.c from_pipex/here_doc.c builtins/pwd.c
+OBJS = cd.o echo.o export.o unset.o pipex.o env.o else_if.o abstractable.o exec_loop.o pwd.o here_doc.o
 DIRS = libft/libft.a get_next_line/get_next_line.a
 
-#	compilation
-CFLAGS = -Werror -Wextra -Wall -g
+ifeq ($(UNAME), Darwin)
+	CFLAGS = -D MAX_FDS=4096 -Wall -Wextra -Werror -g
+else
+	CFLAGS = -D MAX_FDS=1024 -Wall -Wextra -Werror -g
+endif
 CC = gcc
 DEPS = pipex.h # only direct dependency
 

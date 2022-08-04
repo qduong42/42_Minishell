@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:23:29 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/03 16:53:34 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/04 12:32:12 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * @param cmd 
  * @return int exit status
  */
-int	pwd()
+int	pwd(void)
 {
 	char	cwd[FT_PATH_MAX];
 

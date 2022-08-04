@@ -4,11 +4,18 @@ CC = gcc
 
 LDFLAGS = -L $(HOME)/goinfre/.brew/opt/readline/lib/ -lreadline
 
-CFLAGS = -Wall -Wextra -Werror -g -I $(HOME)/goinfre/.brew/opt/readline/include/
+UNAME = $(shell uname)
+
+ifeq ($(UNAME), Darwin)
+	CFLAGS = -D MAX_FDS=4096 -Wall -Wextra -Werror -g -I $(HOME)/goinfre/.brew/opt/readline/include/
+else
+	CFLAGS = -D MAX_FDS=1024 -Wall -Wextra -Werror -g -I $(HOME)/goinfre/.brew/opt/readline/include/
+endif
 
 SRC = main.c utils/lists.c frees.c utils/utils.c
 
 OBJ = $(SRC:.c=.o)
+
 
 #Parser files#
 PARSER_DIR = parser/
@@ -21,7 +28,7 @@ INCLUDE = minishell.h
 
 DIRS = PIPEX/pipex.a PIPEX/get_next_line/get_next_line.a PIPEX/libft/libft.a
 
-all: $(NAME)
+all:	$(NAME)
 
 $(NAME): $(OBJ) $(PARSER_OBJ)
 	$(MAKE) -C PIPEX

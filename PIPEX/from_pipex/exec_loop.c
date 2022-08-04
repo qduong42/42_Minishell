@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:07 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/04 10:40:31 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/04 12:33:03 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ void	assign_outfile(t_vars *vars, t_pipe *cmd)
 {
 	if (vars->outfile > 2)
 		close(vars->outfile);
-	pipe(vars->working);//protect against error
-	// if (vars->outfile > 2)
+	pipe(vars->working);
 	vars->outfile = 1;
 	if (cmd->fd_out > 2)
 		vars->outfile = cmd->fd_out;
@@ -114,6 +113,7 @@ void	close_free(t_vars *vars)
 	if (vars->outfile > 2)
 		close(vars->outfile);
 	ft_free_all(vars->env);
+	close_all();
 	while (vars->pid > 0)
 		vars->pid = wait(&vars->tmp);
 	g_exit_status = WEXITSTATUS(vars->tmp);

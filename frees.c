@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
+/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 13:15:01 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/29 15:43:19 by qduong           ###   ########.fr       */
+/*   Updated: 2022/08/04 12:11:12 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	free_pipes(t_pipe **sp)
 
 void	free_me(t_shell *s)
 {
+	close_all();
 	ft_lstclear(&s->env, free);
 	free_pipes(&(s->s_p));
 }

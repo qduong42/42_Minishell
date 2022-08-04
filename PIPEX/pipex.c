@@ -6,11 +6,22 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/04 10:39:51 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/04 12:31:20 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
+
+/**
+ * @brief a saver exit
+ * 
+ * @param i 
+ */
+void	exit_s(int i)
+{
+	close_all();
+	exit(i);
+}
 
 /**
  * @brief goes to the next cmd if cat-cmd is blocking
@@ -75,14 +86,14 @@ void	pipex(t_pipe *cmd, t_list **env_lst)
 		{
 			duping(&vars, cmd);
 			if (is_buildin(cmd))
-				exit(exec_buildin(cmd, env_lst));
+				exit_s(exec_buildin(cmd, env_lst));
 			else if (access(cmd->argv[0], F_OK) && \
 			react_if_ncontained(path_error, "PATH=", env_lst))
-				exit (1);
+				exit_s(1);
 			else if (execve(vars.path, cmd->argv, vars.env))
 			{
 				perror("execve()");
-				exit(127);
+				exit_s(127);
 			}
 		}
 		aftershave(&vars, &cmd);

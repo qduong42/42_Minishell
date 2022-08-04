@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/04 10:38:35 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/04 12:40:35 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,20 @@ typedef struct s_path
 	char		**prefix;
 }	t_path;
 
+typedef struct s_loc
+{
+	int		pid;
+	int		_pipe[2];
+	char	*line;
+}	t_loc;
+
 typedef struct s_pipe	t_pipe;
 
 typedef int				(*t_reaction) (void *);
 
 //			pipex.c
 void	pipex(t_pipe *cmd, t_list **env_lst);
+void	exit_s(int i);
 
 //			cd.c
 int		ft_cd(char **args, t_list *env);
@@ -60,7 +68,7 @@ int		ft_home(t_list *env);
 int		ft_oldpwd(t_list *env);
 
 //			pwd.c
-int		pwd();
+int		pwd(void);
 char	*get_pwd(void);
 void	update_env(char *pwd, char *oldpwd, t_list *env);
 
@@ -88,9 +96,13 @@ int		exec_parent(t_pipe *cmd, t_list **env_lst);
 
 //			abstractable.c
 char	**lst_to_strstr(t_list *env);
-void	create_hd(char *delim, t_pipe *cmd);
 void	error_msg(char *msg);
 char	*get_path(char *cmd, char **env);
+void	close_all(void);
+
+//			here_doc.c
+void	create_hd(char *delim, t_pipe *cmd);
+void	here_fuck(t_pipe *cmd);
 
 //			exec_loop.c
 int		while_stroke(t_pipe **cmd, t_vars *vars, t_list **env_lst);

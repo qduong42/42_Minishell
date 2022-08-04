@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/04 10:39:05 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/04 12:24:07 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	show_prompt(int sig)
 		rl_on_new_line();
 		rl_redisplay();
 		g_exit_status = 1;
+		close_all();
 	}
 }
 
@@ -50,21 +51,6 @@ int	ft_prompt(t_shell *s)
 		return (1);
 	}
 	return (0);
-}
-
-/**
- * @brief gives hd fds to the struct (need to be closed later)
- * 
- * @param cmd 
- */
-void	here_fuck(t_pipe *cmd)
-{
-	while (cmd)
-	{
-		if (cmd->hd)
-			create_hd(cmd->hd, cmd);
-		cmd = cmd->next;
-	}
 }
 
 void	loopyhoopy(t_shell *s)

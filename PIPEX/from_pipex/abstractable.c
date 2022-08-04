@@ -6,11 +6,27 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:47:12 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/04 10:21:10 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/04 12:23:38 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../pipex.h"
+
+/**
+ * @brief closes all fds execept the standards
+ * 
+ */
+void	close_all(void)
+{
+	int	i;
+
+	i = 3;
+	while (i < MAX_FDS)
+	{
+		close(i);
+		i++;
+	}
+}
 
 /**
  * @brief name contained in PATH -> absolute path
@@ -75,44 +91,6 @@ char	**lst_to_strstr(t_list *env)
 		tmp = tmp->next;
 	}
 	return (NULL);
-}
-
-/**
- * @brief open a heredoc file and write to it
- * -> added strlen check for line to allow empty newline input to not stop HD
- * @param delim the input at which writing is stopped
- * @return int the filedescriptor of the heredoc
- * 
- */
-void	create_hd(char *delim, t_pipe *cmd)
-{
-	int		pid;
-	int		_pipe[2];
-	char	*line;
-
-	pipe(_pipe);
-	pid = fork();
-	if (!pid)
-	{
-		close(_pipe[0]);
-		while (1)
-		{
-			ft_putstr_fd("> ", 2);
-			line = get_next_line(0);
-			if (!ft_strncmp(line, delim, ft_strlen(delim)))
-			{
-				free(line);
-				break ;
-			}
-			ft_putstr_fd(line, _pipe[1]);
-			free (line);
-		}
-		close(_pipe[1]);
-		exit(0);
-	}
-	waitpid(pid, NULL, 0);
-	close(_pipe[1]);
-	cmd->hd_fd = _pipe[0];
 }
 
 /**
