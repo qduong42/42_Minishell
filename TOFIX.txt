@@ -1,0 +1,9 @@
+1.	Fix ENVP SOLVER -> Done
+2.	fixed echo "hello        a" vs echo hello      a -> Done
+3.	Implement Quote solver ->
+
+小さいshell v2.42 $ echo ''""'hello''""''"'hell''''""''"'''""''"""
+hello"""hell'''''
+
+c2s18d110:minishell qduong$ echo ''""'hello''""''"'hell''''""''"'''""''"""
+hello"""hell'''''
