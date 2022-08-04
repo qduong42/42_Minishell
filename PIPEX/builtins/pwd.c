@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:23:29 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/04 13:30:14 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/04 20:28:32 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,13 +84,23 @@ void	update_env(char *pwd, char *oldpwd, t_list *env)
 		if (pwd)
 		{
 			if (!ft_strncmp(tmp->content, "PWD=", 4))
+			{
 				replace_content(tmp, "PWD=", pwd);
+				return ;
+			}
 		}
 		if (oldpwd)
 		{
 			if (!ft_strncmp(tmp->content, "OLDPWD=", 7))
+			{
 				replace_content(tmp, "OLDPWD=", oldpwd);
+				return ;
+			}
 		}
 		tmp = tmp->next;
+	}
+	if (oldpwd)
+	{
+		ft_lstadd_back(&env, ft_lstnew(ft_strjoin("OLDPWD=", oldpwd)));
 	}
 }
