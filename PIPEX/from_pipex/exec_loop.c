@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:07 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/04 16:19:09 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/04 19:15:46 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ void	assign_outfile(t_vars *vars, t_pipe *cmd)
 {
 	if (vars->outfile > 2)
 		close(vars->outfile);
-	pipe(vars->working);
+	if (cmd->next)
+		pipe(vars->working);
 	vars->outfile = 1;
 	if (cmd->fd_out > 2)
 		vars->outfile = cmd->fd_out;
@@ -89,12 +90,15 @@ void	aftershave(t_vars *vars, t_pipe **cmd)
 {
 	signal(SIGINT, SIG_IGN);
 	free(vars->path);
-	close(vars->working[1]);
+	if ((*cmd)->next)
+	{
+		close(vars->working[1]);
+		vars->carry = vars->working[0];
+	}
 	if (vars->carry > 2)
 		close(vars->carry);
 	if ((*cmd)->fd_in > 2)
 		vars->carry = (*cmd)->fd_in;
-	vars->carry = vars->working[0];
 	*cmd = (*cmd)->next;
 }
 
