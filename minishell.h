@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 08:46:06 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/04 13:30:29 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/04 14:48:40 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_shell
 	struct s_list	*env;
 	struct s_pipe	*s_p;
 	char			*input;
+	int				inv_fd_in;
 }	t_shell;
 
 typedef struct s_pipe
@@ -70,7 +71,6 @@ typedef struct s_pipe
 	int				hd_fd;
 	int				last;
 	struct s_pipe	*next;
-	// struct s_pipe	*top;
 	struct s_shell	*main;
 }					t_pipe;
 

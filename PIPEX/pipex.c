@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/04 16:07:03 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/04 16:18:29 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ void	fucked_cat(t_pipe **cmd)
 {
 	while ((*cmd))
 	{
-		if (((*cmd)->fd_in == -1 && !(*cmd)->hd && (*cmd)->argv[0] \
+		if (((*cmd)->main->inv_fd_in == 1 && !(*cmd)->hd && (*cmd)->argv[0] \
 		&& !ft_strncmp((*cmd)->argv[0], "cat", 4)))
+		{
 			(*cmd) = (*cmd)->next;
+		}
 		else
 			break ;
 	}

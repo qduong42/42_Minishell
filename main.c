@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/04 16:04:52 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/04 16:18:20 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	show_prompt(int sig)
 
 void	parser(t_shell *s)
 {
+	s->inv_fd_in = 0;
 	env_solver(s, 0);
 	pipe_split(s);
 	int_red(s);
