@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   red_int.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 22:19:42 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/30 13:13:51 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/04 11:25:25 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,11 @@ void	int_red(t_shell *s)
 {
 	t_pipe			*temp;
 	int				i;
-	int				quote;
 
 	temp = s->s_p;
 	while (temp)
 	{
 		i = 0;
-		quote = 0;
 		while (temp->sub[i])
 		{
 			if (outside_quotes(temp->sub, i) && temp->sub[i] == IN)
