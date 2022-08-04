@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:25:47 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/04 12:31:20 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/04 16:07:03 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	fucked_cat(t_pipe **cmd)
 void	init_pipex(t_vars *vars, t_pipe **cmd, t_list **env_lst)
 {
 	fucked_cat(cmd);
-	vars->pid = 1;
+	vars->pid = -1;
 	vars->outfile = 66;
 	vars->carry = 0;
 	if (*cmd)
@@ -58,10 +58,7 @@ void	init_pipex(t_vars *vars, t_pipe **cmd, t_list **env_lst)
 		if ((*cmd)->fd_in > 2)
 			vars->carry = (*cmd)->fd_in;
 		if ((*cmd)->hd)
-		{
-			printf("EXECUTED: %d\n", (*cmd)->hd_fd);
 			vars->carry = (*cmd)->hd_fd;
-		}
 	}
 	vars->env = lst_to_strstr(*env_lst);
 }

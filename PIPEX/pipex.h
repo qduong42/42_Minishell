@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/04 13:30:24 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/04 15:28:17 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_loc
 	int		pid;
 	int		_pipe[2];
 	char	*line;
+	int		local;
 }	t_loc;
 
 typedef struct s_pipe	t_pipe;

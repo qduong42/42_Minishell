@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:07 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/04 13:30:05 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/04 16:04:34 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,16 +106,16 @@ void	aftershave(t_vars *vars, t_pipe **cmd)
 void	close_free(t_vars *vars)
 {
 	if (vars->carry > 2)
-	{
-		printf("CLOSED: %d\n", vars->carry);
 		close(vars->carry);
-	}
 	if (vars->outfile > 2)
 		close(vars->outfile);
 	ft_free_all(vars->env);
 	close_all();
-	while (vars->pid > 0)
-		vars->pid = wait(&vars->tmp);
-	g_exit_status = WEXITSTATUS(vars->tmp);
+	if (vars->pid != -1)
+	{
+		while (vars->pid > 0)
+			vars->pid = wait(&vars->tmp);
+		g_exit_status = WEXITSTATUS(vars->tmp);
+	}
 	signal(SIGINT, show_prompt);
 }
