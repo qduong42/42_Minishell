@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:07 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/03 19:11:49 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/04 10:40:31 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,6 @@ void	aftershave(t_vars *vars, t_pipe **cmd)
 	signal(SIGINT, SIG_IGN);
 	free(vars->path);
 	close(vars->working[1]);
-	if ((*cmd)->hd)
-		unlink(".temp_doc");
 	if (vars->carry > 2)
 		close(vars->carry);
 	if ((*cmd)->fd_in > 2)

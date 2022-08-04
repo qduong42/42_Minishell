@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/03 20:35:21 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/04 10:39:05 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,7 @@ void	here_fuck(t_pipe *cmd)
 	while (cmd)
 	{
 		if (cmd->hd)
-		{
-			cmd->hd_fd = create_hd(cmd->hd);
-			printf("Inital value: %d \n", cmd->hd_fd);
-		}
+			create_hd(cmd->hd, cmd);
 		cmd = cmd->next;
 	}
 }

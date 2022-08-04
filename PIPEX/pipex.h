@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:27:05 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/03 16:29:42 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/04 10:38:35 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int		exec_parent(t_pipe *cmd, t_list **env_lst);
 
 //			abstractable.c
 char	**lst_to_strstr(t_list *env);
-int		create_hd(char *delim);
+void	create_hd(char *delim, t_pipe *cmd);
 void	error_msg(char *msg);
 char	*get_path(char *cmd, char **env);
 

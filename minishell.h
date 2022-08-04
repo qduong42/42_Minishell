@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 08:46:06 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/03 20:21:30 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/04 10:29:18 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 # include <dirent.h> // readdir
 # include <stdio.h> // perror
 # include <string.h> // strerror
-# include </Users/ljahn/goinfre/.brew/opt/readline/include/readline/readline.h>
-# include </Users/ljahn/goinfre/.brew/opt/readline/include/readline/history.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include <errno.h>
 # include <sys/stat.h>
 # include "PIPEX/pipex.h"

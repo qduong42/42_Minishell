@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:47:12 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/03 20:36:56 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/04 10:21:10 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	**lst_to_strstr(t_list *env)
  * @return int the filedescriptor of the heredoc
  * 
  */
-int	create_hd(char *delim)
+void	create_hd(char *delim, t_pipe *cmd)
 {
 	int		pid;
 	int		_pipe[2];
@@ -112,7 +112,7 @@ int	create_hd(char *delim)
 	}
 	waitpid(pid, NULL, 0);
 	close(_pipe[1]);
-	return (_pipe[0]);
+	cmd->hd_fd = _pipe[0];
 }
 
 /**
