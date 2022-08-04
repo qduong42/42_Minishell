@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 22:23:48 by qduong            #+#    #+#             */
-/*   Updated: 2022/08/03 20:32:39 by qduong           ###   ########.fr       */
+/*   Updated: 2022/08/04 14:26:55 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,23 @@ int	get_len(char *str)
 {
 	int	len;
 	int	i;
+	int	quote;
 
+	quote = 0;
 	len = 0;
 	i = 0;
 	while (str[i])
 	{
 		if (str[i] == S_Q || str[i] == D_Q)
 		{
-			i++;
+			quote = str[i];
+			if (delete_quote(str, i, quote))
+				i++;
+			else
+			{
+				i++;
+				len++;
+			}
 		}
 		else
 		{
