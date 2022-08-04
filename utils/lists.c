@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/08 20:39:33 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/29 12:31:28 by qduong           ###   ########.fr       */
+/*   Updated: 2022/08/04 11:06:09 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,26 @@
 t_pipe	*ft_plstnew(void *content, t_shell *s)
 {
 	t_pipe	*new;
+	// static t_pipe	*first = NULL;
+	// static int		top = 1;
 
 	new = malloc(sizeof(t_pipe));
 	if (!new)
 		return (NULL);
-	new->argv = NULL;
+	// if (top)
+	// 	first = new;
 	new->sub = content;
+	new->argv = NULL;
 	new->fd_in = -2;
 	new->fd_out = -2;
 	new->hd = NULL;
-	new->next = NULL;
+	new->hd_fd = -2;
 	new->last = 0;
+	new->next = NULL;
 	new->main = s;
+	// new->top = first;
+	// top = 0;
+	// printf("TOP:%p\n", new->top);
 	return (new);
 }
 

@@ -6,7 +6,7 @@
 /*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 08:46:06 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/04 11:23:10 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/04 13:19:50 by ljahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_pipe
 	int				hd_fd;
 	int				last;
 	struct s_pipe	*next;
+	// struct s_pipe	*top;
 	struct s_shell	*main;
 }					t_pipe;
 
@@ -183,6 +184,7 @@ int		delete_quote(char *str, int i, char quote);
 int		unclosed_quotes(char *line);
 int		outside_quotes(char *line, int pos);
 int		ft_whitespace(char c);
+int		quote_we_count(char *str, int i, char search);
 
 //			error_handeling.c
 int		errors(char *line, t_list **env);
