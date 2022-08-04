@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 22:23:48 by qduong            #+#    #+#             */
-/*   Updated: 2022/08/03 11:52:50 by qduong           ###   ########.fr       */
+/*   Updated: 2022/08/03 20:32:39 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,26 @@ char	*strcpywithout(char	*src, int len)
 	char	*temp2;
 	int		i;
 	int		y;
+	int		quote;
 
+	quote = 0;
 	i = 0;
 	y = 0;
 	temp2 = ft_calloc(1, len + 1);
 	while (src[i])
 	{
 		if (src[i] == S_Q || src[i] == D_Q)
-			i++;
+		{
+			quote = src[i];
+			if (delete_quote(src, i, quote))
+				i++;
+			else
+			{
+				temp2[y] = src[i];
+				y++;
+				i++;
+			}
+		}
 		else
 		{
 			temp2[y] = src[i];

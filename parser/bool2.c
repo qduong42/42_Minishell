@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bool2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 17:57:28 by qduong            #+#    #+#             */
-/*   Updated: 2022/08/03 19:42:57 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/03 20:45:01 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	inside_diff(char *line, int pos, char quote)
 	num = 0;
 	while (i < pos)
 	{
-		if (line[i] == negative)
+		if (quote_we_count(line, i, negative))
 			num++;
 		i++;
 	}
@@ -74,13 +74,31 @@ int	inside_same(char *line, int pos, char quote)
 	qq_num = 0;
 	while (i < pos)
 	{
-		if (line[i] == quote)
+		if (quote_we_count(line, i, quote))
 			qq_num++;
 		i++;
 	}
 	if (qq_num % 2 == 1)
 		return (1);
 	return (0);
+}
+
+int	quote_we_count(char *str, int i, char search)
+{
+	if (str[i] == search)
+	{
+		if (!(inside_diff(str, i, str[i]) && !inside_same(str, i, str[i])))
+			return (1);
+	}
+	return (0);
+}
+
+int	delete_quote(char *str, int i, char quote)
+{
+	if (inside_diff(str, i, quote) && !inside_same(str, i,quote))
+		return (0);
+	else
+		return (1);
 }
 
 int	unclosed_quotes(char *line)

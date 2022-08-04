@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ljahn <ljahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 08:46:06 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/03 20:21:30 by ljahn            ###   ########.fr       */
+/*   Updated: 2022/08/04 10:59:46 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 # include <dirent.h> // readdir
 # include <stdio.h> // perror
 # include <string.h> // strerror
-# include </Users/ljahn/goinfre/.brew/opt/readline/include/readline/readline.h>
-# include </Users/ljahn/goinfre/.brew/opt/readline/include/readline/history.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 # include <errno.h>
 # include <sys/stat.h>
 # include "PIPEX/pipex.h"
@@ -70,6 +70,7 @@ typedef struct s_pipe
 	int				hd_fd;
 	int				last;
 	struct s_pipe	*next;
+	// struct s_pipe	*top;
 	struct s_shell	*main;
 }					t_pipe;
 
@@ -183,6 +184,7 @@ int		delete_quote(char *str, int i, char quote);
 int		unclosed_quotes(char *line);
 int		outside_quotes(char *line, int pos);
 int		ft_whitespace(char c);
+int		quote_we_count(char *str, int i, char search);
 
 //			error_handeling.c
 int		errors(char *line, t_list **env);
