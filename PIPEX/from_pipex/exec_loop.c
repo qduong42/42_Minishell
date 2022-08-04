@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 11:54:07 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/04 19:28:54 by qduong           ###   ########.fr       */
+/*   Updated: 2022/08/04 20:52:46 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ void	assign_outfile(t_vars *vars, t_pipe *cmd)
 {
 	if (vars->outfile > 2)
 		close(vars->outfile);
+	vars->outfile = 1;
 	if (cmd->next)
 		pipe(vars->working);
-	vars->outfile = 1;
-	if (cmd->fd_out > 2)
-		vars->outfile = cmd->fd_out;
 	if (cmd->next)
 		vars->outfile = vars->working[1];
+	if (cmd->fd_out > 2)
+		vars->outfile = cmd->fd_out;
 	vars->path = get_path(cmd->argv[0], vars->env);
 	vars->pid = fork();
 }
