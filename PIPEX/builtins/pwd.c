@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 10:23:29 by ljahn             #+#    #+#             */
-/*   Updated: 2022/08/04 20:28:32 by qduong           ###   ########.fr       */
+/*   Updated: 2022/08/04 21:16:54 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,5 @@ void	update_env(char *pwd, char *oldpwd, t_list *env)
 		tmp = tmp->next;
 	}
 	if (oldpwd)
-	{
 		ft_lstadd_back(&env, ft_lstnew(ft_strjoin("OLDPWD=", oldpwd)));
-	}
 }
