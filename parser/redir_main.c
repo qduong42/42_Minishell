@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 13:09:37 by qduong            #+#    #+#             */
-/*   Updated: 2022/07/29 09:48:33 by qduong           ###   ########.fr       */
+/*   Updated: 2022/08/04 20:41:15 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ int	iohandler(t_pipe *sp, int i, int id)
 	char	*temp;
 
 	z = 1;
-	be_r = i;
 	i++;
+	be_r = i;
 	if (id == 3 || id == 4)
 		z++;
 	if (id == 3 || id == 4)
