@@ -55,9 +55,8 @@ to the error output
     - exit
 - Must have a Makefile to build the program
 - The binary file must be named `minishell`
-- Can use [Libft][libft-url]
+- Can use Libft
 - Handle program interruption (Ctrl + D)
-- [Click here][1] for the rest
 
 ### Bonuses
 
