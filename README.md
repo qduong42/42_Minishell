@@ -37,7 +37,7 @@ After running make, execute `./minishell` from the project root.
 ### Mandatory
 
 - Only use C
-- Must respect the 42 imposed coding style ([The Norme][norme-pdf])
+- Must respect the 42 imposed coding style The Norminator
 - No memory leaks
 - Implement a series of builtins: `echo`, `cd`, `setenv`, `unsetenv`, `env`, `exit`
 - Manage the errors without using `errno`, by displaying a message adapted
