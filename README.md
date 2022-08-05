@@ -1,4 +1,4 @@
-# Minishell - @42Born2Code
+# Minishell - @42Wolfsburg
 
 As beautiful as a shell
 
