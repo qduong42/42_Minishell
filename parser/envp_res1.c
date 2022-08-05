@@ -6,7 +6,7 @@
 /*   By: qduong <qduong@students.42wolfsburg.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/21 22:42:23 by qduong            #+#    #+#             */
-/*   Updated: 2022/08/03 09:49:07 by qduong           ###   ########.fr       */
+/*   Updated: 2022/08/05 12:06:27 by qduong           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	*replace_d_q(t_shell *s, int i)
 
 	itoa_res = ft_itoa(g_exit_status);
 	g_exit_status_len = digit_len(g_exit_status);
-	replaced_str = ft_calloc(1, g_exit_status_len + ft_strlen(s->input) - 2);
+	replaced_str = ft_calloc(1, g_exit_status_len + ft_strlen(s->input) - 1);
 	ft_strlcpy(replaced_str, s->input, i);
 	ft_strlcat(replaced_str, itoa_res, i + g_exit_status_len);
 	ft_strlcat(replaced_str, &(s->input[i + 1]), i + \
