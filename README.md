@@ -40,7 +40,7 @@ After running make, execute `./minishell` from the project root.
 - Must respect the 42 imposed coding style The Norminator
 - No memory leaks
 - Implement a series of builtins: `echo`, `cd`, `setenv`, `unsetenv`, `env`, `exit`
-- Manage the errors without using `errno`, by displaying a message adapted
+- Manage the errors using perror or custom suitable error message
 to the error output
 - Can only use these standard library functions:
     - malloc, free
