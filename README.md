@@ -22,7 +22,7 @@ Those versions are the ones used during development.
 
 1. Download/Clone this repo
 
-        git clone https://github.com/qduong42/minishell.git
+        git clone https://github.com/qduong42/42_Minishell.git
 2. `cd` into the root directory and run `make`
 
         cd minishell
