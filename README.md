@@ -5,7 +5,7 @@ As beautiful as a shell
 ## About
 
 Minishell is one of 3 projects about Unix in 3rd Circle at 42.
-It's a minimum viable version of a real shell.
+It's a working, viable version of a real shell.
 The main goal is to have a good understanding of input parsing, tokenization, process creation and
 synchronisation using the C programmming language.
 
